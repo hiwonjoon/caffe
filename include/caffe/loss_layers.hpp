@@ -765,6 +765,59 @@ class SoftmaxWithLossLayer : public LossLayer<Dtype> {
   int softmax_axis_, outer_num_, inner_num_;
 };
 
+/**
+ * @brief Taks a feature vector and regularize.
+ */
+template <typename Dtype>
+class RegularizeLayer : public LossLayer<Dtype> {
+ public:
+  explicit RegularizeLayer(const LayerParameter& param)
+      : LossLayer<Dtype>(param) {}
+  virtual void LayerSetUp(
+      const vector<Blob<Dtype>*>& bottom, const vector<Blob<Dtype>*>& top);
+  virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+
+  virtual inline int ExactNumTopBlobs() const { return 1; }
+  virtual inline const char* type() const { return "RegularizeLayer"; }
+  virtual inline int ExactNumBottomBlobs() const { return 1; }
+
+ protected:
+  virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+  //virtual void Forward_gpu(const vector<Blob<Dtype>*>& bottom,
+  //    const vector<Blob<Dtype>*>& top);
+  virtual void Backward_cpu(const vector<Blob<Dtype>*>& top,
+      const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
+  //virtual void Backward_gpu(const vector<Blob<Dtype>*>& top,
+  //    const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
+
+  //const vector<Blob<Dtype>*>& bottom_; //bottom layer sharing.
+  Blob<Dtype> tree_map_;// Tree matrix representation in form of matrix
+  Blob<Dtype> gv_map_;	// sigma of square terms of bottom layer
+  Blob<Dtype> g_agg_;	// aggregated coefficient.
+  
+  int K_;
+  int N_;
+  int internal_node_;
+  vector<int> internal_nodes_;
+  int node_;
+
+ private :
+  void analyze_tree();
+  int count_internal_node(const RegularizeParameter::TreeScheme * root);
+  int count_node(const RegularizeParameter::TreeScheme * root);
+  
+  void make_tree_map();
+  void mapping(Dtype* map, const RegularizeParameter::TreeScheme * root, int current_node, bool flag);
+  
+  void make_g_agg();
+  Dtype make_g_agg_rec(const RegularizeParameter::TreeScheme * root, int current_node);
+
+  void make_diff_g(Blob<Dtype>& diff_g);
+  Dtype make_diff_g_rec(const RegularizeParameter::TreeScheme * root, int diff_node, int current_node, bool flag);
+};
+
 }  // namespace caffe
 
 #endif  // CAFFE_LOSS_LAYERS_HPP_

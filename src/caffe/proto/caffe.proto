@@ -332,6 +332,7 @@ message LayerParameter {
   optional TanHParameter tanh_param = 127;
   optional ThresholdParameter threshold_param = 128;
   optional WindowDataParameter window_data_param = 129;
+  optional RegularizeParameter regularize_param = 132;
 }
 
 // Message that stores parameters used to apply transformation
@@ -766,6 +767,22 @@ message WindowDataParameter {
   optional bool cache_images = 12 [default = false];
   // append root_folder to locate images
   optional string root_folder = 13 [default = ""];
+}
+
+message RegularizeParameter {
+  message TreeScheme {
+	  required uint32 node_num = 1;
+	  required uint32 output_index = 2 [default = 0];
+	  repeated TreeScheme children = 3;
+  }
+  optional TreeScheme root = 1;
+  enum Engine {
+    DEFAULT = 0;
+    CAFFE = 1;
+    CUDNN = 2;
+  }
+  optional FillerParameter weight_filler = 2; // The filler for the weight
+  optional Engine engine = 3 [default = DEFAULT];
 }
 
 // DEPRECATED: use LayerParameter.
