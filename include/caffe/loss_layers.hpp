@@ -779,7 +779,7 @@ class RegularizeLayer : public LossLayer<Dtype> {
       const vector<Blob<Dtype>*>& top);
 
   virtual inline int ExactNumTopBlobs() const { return 1; }
-  virtual inline const char* type() const { return "RegularizeLayer"; }
+  virtual inline const char* type() const { return "Regularize"; }
   virtual inline int ExactNumBottomBlobs() const { return 1; }
 
  protected:

@@ -82,18 +82,24 @@ void RegularizeLayer<Dtype>::make_g_agg()
 
 template <typename Dtype>
 Dtype RegularizeLayer<Dtype>::make_g_agg_rec(const RegularizeParameter::TreeScheme * root, int current_node) {
-	if( root->children_size() == 0 )
-		return 1;
+	if( root->children_size() == 0 && current_node != root->node_num() )
+		return 0;
 
 	if( current_node == root->node_num() )
-		return (this->blobs_[0]->cpu_data())[current_node-1];
+	{
+		if( root->children_size() == 0 )
+			return 1;
+		else
+			return (this->blobs_[0]->cpu_data())[current_node-1];
+	}
 
-	Dtype agg = 1.;
 	for( int i = 0; i < root->children_size(); i++)
 	{
-		agg *= make_g_agg_rec(&root->children(i),current_node);
+		Dtype agg = make_g_agg_rec(&root->children(i),current_node);
+		if( agg != 0 )
+			return agg * (1 - (this->blobs_[0]->cpu_data())[root->node_num()-1]);
 	}
-	return agg * (1 - (this->blobs_[0]->cpu_data())[root->node_num()-1]);
+	return 0;
 }
 
 template <typename Dtype>
@@ -131,13 +137,17 @@ Dtype RegularizeLayer<Dtype>::make_diff_g_rec(const RegularizeParameter::TreeSch
 	}
 	else
 	{
-		if( root->children_size() == 0 )
+		if( root->children_size() == 0 && current_node != root->node_num())
+			return 0;
+
+		if( current_node == root->node_num() && flag )
 		{
-			if( current_node == root->node_num() && flag )
-				return 1.;
+			if( root->children_size() == 0 )
+				return 1;
 			else
-				return 0.;
+				return this->blobs_[0]->cpu_data()[root->node_num()-1];
 		}
+		
 		for( int i = 0; i < root->children_size(); i++)
 		{
 			Dtype result = make_diff_g_rec(&root->children(i),diff_node,current_node,flag);
