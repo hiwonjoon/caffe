@@ -6,7 +6,7 @@ let a=0
 let lines=0
 for dir in "${arr[@]}"
 do
-	path=/storage/datasets/awa/JPEGImages/$dir/*
+	path=~/testsets/awa/JPEGImages/$dir/*
 	for f in $path
 	do
 		echo $f $a
@@ -16,7 +16,7 @@ do
 done > all.txt
 cat all.txt | shuf | tee /dev/stdout > shuffle.txt 
 #test/train set ratio
-z=$((lines * 90 / 100))
+z=$((lines * 50 / 100))
 split -l $z shuffle.txt
 mv xaa train.txt
 mv xab test.txt

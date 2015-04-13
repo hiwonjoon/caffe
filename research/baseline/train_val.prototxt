@@ -10,10 +10,10 @@ layer {
   transform_param {
     mirror: true
     crop_size: 227
-    mean_file: "../data/ilsvrc12/imagenet_mean.binaryproto"
+    mean_file: "../../data/ilsvrc12/imagenet_mean.binaryproto"
   }
   image_data_param {
-    source: "./train.txt"
+    source: "../train.txt"
     batch_size: 50
     new_height: 256
     new_width: 256
@@ -30,10 +30,10 @@ layer {
   transform_param {
     mirror: false
     crop_size: 227
-    mean_file: "../data/ilsvrc12/imagenet_mean.binaryproto"
+    mean_file: "../../data/ilsvrc12/imagenet_mean.binaryproto"
   }
   image_data_param {
-    source: "./test.txt"
+    source: "../test.txt"
     batch_size: 50
     new_height: 256
     new_width: 256

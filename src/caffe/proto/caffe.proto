@@ -772,7 +772,7 @@ message WindowDataParameter {
 message RegularizeParameter {
   message TreeScheme {
 	  required uint32 node_num = 1;
-	  required uint32 output_index = 2 [default = 0];
+	  optional uint32 output_index = 2 [default = 0];
 	  repeated TreeScheme children = 3;
   }
   optional TreeScheme root = 1;
