@@ -186,6 +186,8 @@ void RegularizeLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& bottom, cons
 	g_agg_.Reshape(node_,1,1,1);
 
 	make_tree_map();
+
+	this->param_propagate_down_.resize(this->blobs_.size(), true);
 }
 
 template <typename Dtype>
@@ -319,8 +321,13 @@ void RegularizeLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
 		//}
 		
 		//TODO : use weight sharing?, (Dtype)1.0 or 0.0? 
-		caffe_cpu_gemm<Dtype>(CblasTrans, CblasNoTrans, N_, K_, node_, *top_diff, temp_data, gv_map_data, (Dtype)0., bottom[0]->mutable_cpu_diff());
-		caffe_mul(bottom[0]->count(), bottom[0]->cpu_data(), bottom[0]->cpu_diff(), bottom[0]->mutable_cpu_diff());
+		std::vector<int> shape;
+		shape.push_back(N_);
+		shape.push_back(K_);
+		temp2.Reshape(shape);
+		caffe_cpu_gemm<Dtype>(CblasTrans, CblasNoTrans, N_, K_, node_, *top_diff, temp_data, gv_map_data, (Dtype)0., temp2.mutable_cpu_diff());
+		caffe_mul(temp2.count(), bottom[0]->cpu_data(), temp2.cpu_diff(), temp2.mutable_cpu_diff());
+		caffe_add(temp2.count(), bottom[0]->cpu_diff(), temp2.cpu_diff(), bottom[0]->mutable_cpu_diff());
 	}
 
 }
