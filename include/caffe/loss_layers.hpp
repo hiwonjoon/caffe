@@ -15,6 +15,7 @@ namespace caffe {
 
 const float kLOG_THRESHOLD = 1e-20;
 
+template <typename Dtype> class InnerProductWithRegularizeLayer;
 /**
  * @brief Computes the classification accuracy for a one-of-many
  *        classification task.
@@ -765,6 +766,32 @@ class SoftmaxWithLossLayer : public LossLayer<Dtype> {
   int softmax_axis_, outer_num_, inner_num_;
 };
 
+template <typename Dtype>
+class RegularizeResultLayer : public LossLayer<Dtype> {
+ public:
+  explicit RegularizeResultLayer(const LayerParameter& param)
+      : LossLayer<Dtype>(param) {}
+  virtual void LayerSetUp(
+      const vector<Blob<Dtype>*>& bottom, const vector<Blob<Dtype>*>& top);
+  virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+
+  virtual inline int ExactNumTopBlobs() const { return 1; }
+  virtual inline const char* type() const { return "RegularizeResult"; }
+  virtual inline int ExactNumBottomBlobs() const { return 1; }
+
+ protected:
+  virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+  //virtual void Forward_gpu(const vector<Blob<Dtype>*>& bottom,
+  //    const vector<Blob<Dtype>*>& top);
+  virtual void Backward_cpu(const vector<Blob<Dtype>*>& top,
+      const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
+  //virtual void Backward_gpu(const vector<Blob<Dtype>*>& top,
+  //    const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
+	
+};
+
 /**
  * @brief Taks a feature vector and regularize.
  */
@@ -816,7 +843,10 @@ class RegularizeLayer : public LossLayer<Dtype> {
 
   void make_diff_g(Blob<Dtype>& diff_g);
   Dtype make_diff_g_rec(const RegularizeParameter::TreeScheme * root, int diff_node, int current_node, bool flag);
+
+  friend class InnerProductWithRegularizeLayer<Dtype>;
 };
+
 
 }  // namespace caffe
 

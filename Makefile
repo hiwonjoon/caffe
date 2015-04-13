@@ -422,8 +422,8 @@ $(LINT_OUTPUTS): $(LINT_OUTPUT_DIR)/%.lint.txt : % $(LINT_SCRIPT) | $(LINT_OUTPU
 
 test: $(TEST_ALL_BIN) $(TEST_ALL_DYNLINK_BIN) $(TEST_BINS)
 
-runmine: $(TEST_ALL_BIN)
-	$(TOOL_BUILD_DIR)/caffe
+runmine: $(TEST_BINS)
+	$(BUILD_DIR)/test/test_inner_product_with_regularize_layer.testbin $(TEST_GPUID) --gtest_shuffle $(TEST_FILTER)
 	$(BUILD_DIR)/test/test_regularize_layer.testbin $(TEST_GPUID) --gtest_shuffle $(TEST_FILTER)
 
 tools: $(TOOL_BINS) $(TOOL_BIN_LINKS)
