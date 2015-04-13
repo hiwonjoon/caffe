@@ -823,6 +823,7 @@ class RegularizeLayer : public LossLayer<Dtype> {
   Blob<Dtype> tree_map_;// Tree matrix representation in form of matrix
   Blob<Dtype> gv_map_;	// sigma of square terms of bottom layer
   Blob<Dtype> g_agg_;	// aggregated coefficient.
+  Blob<Dtype> temp_;	// temp blob for intermediate results
   
   int K_;
   int N_;

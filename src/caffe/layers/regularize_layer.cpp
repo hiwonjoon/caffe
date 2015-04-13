@@ -162,7 +162,6 @@ Dtype RegularizeLayer<Dtype>::make_diff_g_rec(const RegularizeParameter::TreeSch
 
 template <typename Dtype>
 void RegularizeLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& bottom, const vector<Blob<Dtype>*>& top) {
-	//TODO : node_ == output_node 개수
 	analyze_tree();
 
 	//bottom_ = bottom;
@@ -180,10 +179,10 @@ void RegularizeLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& bottom, cons
 //	}
 //	std::cout << std::endl;
 
-	//param propagate down??
 	tree_map_.Reshape(node_,N_,1,1);
 	gv_map_.Reshape(node_,K_,1,1);
 	g_agg_.Reshape(node_,1,1,1);
+	temp_.Reshape(node_, K_, 1, 1);
 
 	make_tree_map();
 
@@ -202,11 +201,10 @@ void RegularizeLayer<Dtype>::Reshape(const vector<Blob<Dtype>*>& bottom, const v
 
 template <typename Dtype>
 void RegularizeLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom, const vector<Blob<Dtype>*>& top) {
-	Blob<Dtype> temp;
-	temp.CopyFrom(*bottom[0],false,true);
+	temp_.CopyFrom(*bottom[0],false,true);
 
 	const int count = bottom[0]->count();
-	Dtype * temp_data = temp.mutable_cpu_data();
+	Dtype * temp_data = temp_.mutable_cpu_data();
 	caffe_powx(count,temp_data,(Dtype)2,temp_data);
 
 	//for(int i = 0 ; i < bottom[0]->shape(0); ++i) {
@@ -219,7 +217,7 @@ void RegularizeLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom, con
 	const Dtype * tree_map_data = tree_map_.cpu_data();
 	Dtype* gv_map_data = gv_map_.mutable_cpu_data();		
 
-	caffe_cpu_gemm<Dtype>(CblasNoTrans, CblasNoTrans, node_, K_, N_, (Dtype)1., tree_map_data, temp.cpu_data(), (Dtype)0., gv_map_data);
+	caffe_cpu_gemm<Dtype>(CblasNoTrans, CblasNoTrans, node_, K_, N_, (Dtype)1., tree_map_data, temp_.cpu_data(), (Dtype)0., gv_map_data);
 
 	//for(int i = 0; i < node_;  ++i) {
 	//	for(int j = 0; j < K_; ++j) {
@@ -271,7 +269,7 @@ void RegularizeLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
 	const Dtype * top_diff = top[0]->cpu_diff();
 
 	//gradient with respect to g_ coefficient
-	Blob<Dtype> temp2(node_,K_,1,1);
+	temp_.Reshape(node_,K_,1,1);
 	Blob<Dtype> diff_g(internal_node_, node_, 1, 1);
 	make_diff_g(diff_g);
 
@@ -283,14 +281,14 @@ void RegularizeLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
 	//	std::cout << std::endl;
 	//}
 	
-	caffe_cpu_gemm<Dtype>(CblasNoTrans,CblasNoTrans,internal_node_,K_,node_, *top_diff, diff_g.cpu_data(),gv_map_.cpu_data(), (Dtype)0., temp2.mutable_cpu_data()); 
+	caffe_cpu_gemm<Dtype>(CblasNoTrans,CblasNoTrans,internal_node_,K_,node_, *top_diff, diff_g.cpu_data(),gv_map_.cpu_data(), (Dtype)0., temp_.mutable_cpu_data()); 
 
 	Dtype * g_diff = this->blobs_[0]->mutable_cpu_diff();
-	const Dtype * temp2_data = temp2.cpu_data();
+	const Dtype * temp_data = temp_.cpu_data();
 	for( int i = 0; i < internal_node_; i++ ){
 		Dtype sum = 0.;
 		for( int j = 0; j < K_; j++) {
-			sum += temp2_data[i*K_+j];
+			sum += temp_data[i*K_+j];
 		}
 		g_diff[internal_nodes_[i]-1] = sum;	
 	}
@@ -302,14 +300,14 @@ void RegularizeLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
 		Dtype* gv_map_data = gv_map_.mutable_cpu_data();
 		caffe_powx(count, gv_map_data, (Dtype)-1, gv_map_data);
 
-		Blob<Dtype> temp;
-		temp.CopyFrom(tree_map_,false,true);
-		Dtype * temp_data = temp.mutable_cpu_data();
+		Blob<Dtype> temp2;
+		temp2.CopyFrom(tree_map_,false,true);
+		Dtype * temp2_data = temp2.mutable_cpu_data();
 		for(int i = 0; i < node_; i++)
 		{
 			for(int j = 0; j < N_; j++)
 			{
-				temp_data[i*N_+j] *= (g_agg_.cpu_data())[i];
+				temp2_data[i*N_+j] *= (g_agg_.cpu_data())[i];
 			}
 		}
 
@@ -320,14 +318,10 @@ void RegularizeLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
 		//	std::cout << std::endl;
 		//}
 		
-		//TODO : use weight sharing?, (Dtype)1.0 or 0.0? 
-		std::vector<int> shape;
-		shape.push_back(N_);
-		shape.push_back(K_);
-		temp2.Reshape(shape);
-		caffe_cpu_gemm<Dtype>(CblasTrans, CblasNoTrans, N_, K_, node_, *top_diff, temp_data, gv_map_data, (Dtype)0., temp2.mutable_cpu_diff());
-		caffe_mul(temp2.count(), bottom[0]->cpu_data(), temp2.cpu_diff(), temp2.mutable_cpu_diff());
-		caffe_add(temp2.count(), bottom[0]->cpu_diff(), temp2.cpu_diff(), bottom[0]->mutable_cpu_diff());
+		temp_.Reshape(N_,K_,1,1);
+		caffe_cpu_gemm<Dtype>(CblasTrans, CblasNoTrans, N_, K_, node_, *top_diff, temp2_data, gv_map_data, (Dtype)0., temp_.mutable_cpu_diff());
+		caffe_mul<Dtype>(temp_.count(), bottom[0]->cpu_data(), temp_.cpu_diff(), temp_.mutable_cpu_diff());
+		caffe_add<Dtype>(temp_.count(), temp_.cpu_diff(), bottom[0]->cpu_diff(), bottom[0]->mutable_cpu_diff());
 	}
 
 }
