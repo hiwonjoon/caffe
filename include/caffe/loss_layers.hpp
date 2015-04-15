@@ -820,6 +820,7 @@ class RegularizeLayer : public LossLayer<Dtype> {
   //    const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
 
   //const vector<Blob<Dtype>*>& bottom_; //bottom layer sharing.
+  Blob<Dtype> g_;
   Blob<Dtype> tree_map_;// Tree matrix representation in form of matrix
   Blob<Dtype> gv_map_;	// sigma of square terms of bottom layer
   Blob<Dtype> g_agg_;	// aggregated coefficient.

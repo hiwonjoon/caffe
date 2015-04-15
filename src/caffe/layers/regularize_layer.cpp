@@ -82,6 +82,10 @@ void RegularizeLayer<Dtype>::make_g_agg()
 
 template <typename Dtype>
 Dtype RegularizeLayer<Dtype>::make_g_agg_rec(const RegularizeParameter::TreeScheme * root, int current_node) {
+	Blob<Dtype>* g = &g_;
+	//Blob<Dtype>* g = this->blobs_[0];
+
+
 	if( root->children_size() == 0 && current_node != root->node_num() )
 		return 0;
 
@@ -90,14 +94,14 @@ Dtype RegularizeLayer<Dtype>::make_g_agg_rec(const RegularizeParameter::TreeSche
 		if( root->children_size() == 0 )
 			return 1;
 		else
-			return (this->blobs_[0]->cpu_data())[current_node-1];
+			return (g->cpu_data())[current_node-1];
 	}
 
 	for( int i = 0; i < root->children_size(); i++)
 	{
 		Dtype agg = make_g_agg_rec(&root->children(i),current_node);
 		if( agg != 0 )
-			return agg * (1 - (this->blobs_[0]->cpu_data())[root->node_num()-1]);
+			return agg * (1 - (g->cpu_data())[root->node_num()-1]);
 	}
 	return 0;
 }
@@ -118,6 +122,9 @@ void RegularizeLayer<Dtype>::make_diff_g(Blob<Dtype>& diff_g)
 
 template <typename Dtype>
 Dtype RegularizeLayer<Dtype>::make_diff_g_rec(const RegularizeParameter::TreeScheme * root, int diff_node, int current_node, bool flag) {
+	Blob<Dtype>* g = &g_;
+	//Blob<Dtype>* g = this->blobs_[0];
+
 	if( root->node_num() == diff_node )
 	{
 		if( root->children_size() == 0 )
@@ -145,7 +152,7 @@ Dtype RegularizeLayer<Dtype>::make_diff_g_rec(const RegularizeParameter::TreeSch
 			if( root->children_size() == 0 )
 				return 1;
 			else
-				return this->blobs_[0]->cpu_data()[root->node_num()-1];
+				return g->cpu_data()[root->node_num()-1];
 		}
 		
 		for( int i = 0; i < root->children_size(); i++)
@@ -153,7 +160,7 @@ Dtype RegularizeLayer<Dtype>::make_diff_g_rec(const RegularizeParameter::TreeSch
 			Dtype result = make_diff_g_rec(&root->children(i),diff_node,current_node,flag);
 			if( result != 0. )
 			{
-				return result * (1 - (this->blobs_[0]->cpu_data())[root->node_num()-1]);
+				return result * (1 - (g->cpu_data())[root->node_num()-1]);
 			}
 		}
 		return 0.;
@@ -168,10 +175,16 @@ void RegularizeLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& bottom, cons
 	N_ = bottom[0]->shape(0);
 	K_ = bottom[0]->shape(1);
 
+	/*
 	this->blobs_.resize(1);
 	this->blobs_[0].reset(new Blob<Dtype>(node_,1,1,1));
 	shared_ptr<Filler<Dtype> > weight_filler(GetFiller<Dtype>(this->layer_param_.regularize_param().weight_filler()));
 	weight_filler->Fill(this->blobs_[0].get());
+	*/
+	
+	g_.Reshape(node_,1,1,1);
+	shared_ptr<Filler<Dtype> > weight_filler(GetFiller<Dtype>(this->layer_param_.regularize_param().weight_filler()));
+	weight_filler->Fill(&g_);
 
 //	const Dtype * g_data = this->blobs_[0]->cpu_data();
 //	for(int i = 0; i < node_; i++){
@@ -266,6 +279,9 @@ void RegularizeLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom, con
 template <typename Dtype>
 void RegularizeLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
     const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom) {
+	Blob<Dtype>* g = &g_;
+	//Blob<Dtype>* g = this->blobs_[0];
+	
 	const Dtype * top_diff = top[0]->cpu_diff();
 
 	//gradient with respect to g_ coefficient
@@ -283,7 +299,7 @@ void RegularizeLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
 	
 	caffe_cpu_gemm<Dtype>(CblasNoTrans,CblasNoTrans,internal_node_,K_,node_, *top_diff, diff_g.cpu_data(),gv_map_.cpu_data(), (Dtype)0., temp_.mutable_cpu_data()); 
 
-	Dtype * g_diff = this->blobs_[0]->mutable_cpu_diff();
+	Dtype * g_diff = g->mutable_cpu_diff();
 	const Dtype * temp_data = temp_.cpu_data();
 	for( int i = 0; i < internal_node_; i++ ){
 		Dtype sum = 0.;

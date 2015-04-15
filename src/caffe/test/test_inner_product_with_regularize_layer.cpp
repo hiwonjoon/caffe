@@ -78,11 +78,11 @@ TYPED_TEST(InnerProductWithRegularizeLayerTest, TestSetup) {
 	EXPECT_EQ(this->blob_top_loss_->height(), 1);
 	EXPECT_EQ(this->blob_top_loss_->width(), 1);
 	EXPECT_EQ(this->blob_top_loss_->channels(), 1);
-	EXPECT_EQ(layer->blobs().size(),3);
+	EXPECT_EQ(layer->blobs().size(),2);
 	EXPECT_EQ(layer->blobs()[0]->count(0,1),2);
 	EXPECT_EQ(layer->blobs()[0]->count(1,2),11);
 	EXPECT_EQ(layer->blobs()[1]->count(0,1),2);
-	EXPECT_EQ(layer->blobs()[2]->count(),3);	//expect regularize blobs size is equal to # of nodes.
+	//EXPECT_EQ(layer->blobs()[2]->count(),3);	//expect regularize blobs size is equal to # of nodes.
 }
 
 TYPED_TEST(InnerProductWithRegularizeLayerTest, TestForward) {
