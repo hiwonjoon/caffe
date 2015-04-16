@@ -358,10 +358,6 @@ layer {
     lr_mult: 20
     decay_mult: 0
   }
-  param { #learning rate multiplier for the coeffieinct of regularizer 
-    lr_mult: 10
-    decay_mult: 1
-  }
   inner_product_param {
     num_output: 13 
     weight_filler {
@@ -456,7 +452,7 @@ layer {
 	}
     weight_filler {
 	  type: "constant"
-	  vale: 0.5
+	  value: 0.5
 	}
   }
 }
