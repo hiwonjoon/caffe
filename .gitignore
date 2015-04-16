@@ -1,5 +1,6 @@
 ## General
 tags
+*.log
 
 # Compiled Object files
 *.slo
