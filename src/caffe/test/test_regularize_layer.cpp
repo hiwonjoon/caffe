@@ -98,7 +98,7 @@ class RegularizeLayerTest : public MultiDeviceTest<TypeParam> {
 };
 
 TYPED_TEST_CASE(RegularizeLayerTest, TestDtypesAndDevices);
-//TYPED_TEST_CASE(RegularizeLayerTest, DoubleCPU);
+//TYPED_TEST_CASE(RegularizeLayerTest, DoubleGPU);
 
 TYPED_TEST(RegularizeLayerTest, TestForward) {
 	typedef typename TypeParam::Dtype Dtype;

@@ -83,8 +83,9 @@ void InnerProductWithRegularizeLayer<Dtype>::Backward_cpu(const vector<Blob<Dtyp
 
 	(static_cast<RegularizeLayer<Dtype> *>(regularize_layer_.get()))->Backward_cpu(regu_top,regu_prop_down,regu_bot);
 }
+
 #ifdef CPU_ONLY
-//STUB_GPU(InnerProductWithRegularizeLayer);
+STUB_GPU(InnerProductWithRegularizeLayer);
 #endif
 
 INSTANTIATE_CLASS(InnerProductWithRegularizeLayer);

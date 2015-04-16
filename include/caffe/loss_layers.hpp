@@ -812,12 +812,17 @@ class RegularizeLayer : public LossLayer<Dtype> {
  protected:
   virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top);
-  //virtual void Forward_gpu(const vector<Blob<Dtype>*>& bottom,
-  //    const vector<Blob<Dtype>*>& top);
+  virtual void Forward_gpu(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+  void Forward_gpu_impl(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+
   virtual void Backward_cpu(const vector<Blob<Dtype>*>& top,
       const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
-  //virtual void Backward_gpu(const vector<Blob<Dtype>*>& top,
-  //    const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
+  virtual void Backward_gpu(const vector<Blob<Dtype>*>& top,
+      const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
+  virtual void Backward_gpu_impl(const vector<Blob<Dtype>*>& top,
+      const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom, Blob<Dtype>& diff_g, Blob<Dtype>& temp2);
 
   //const vector<Blob<Dtype>*>& bottom_; //bottom layer sharing.
   Blob<Dtype> g_;

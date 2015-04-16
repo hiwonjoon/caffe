@@ -277,6 +277,16 @@ void RegularizeLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom, con
 }
 
 template <typename Dtype>
+void RegularizeLayer<Dtype>::Forward_gpu(const vector<Blob<Dtype>*>& bottom, const vector<Blob<Dtype>*>& top) {
+#ifdef CPU_ONLY
+	Forward_cpu(bottom,top);
+#else
+	make_g_agg();
+	Forward_gpu_impl(bottom,top);
+#endif
+}
+
+template <typename Dtype>
 void RegularizeLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
     const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom) {
 	Blob<Dtype>* g = &g_;
@@ -342,10 +352,44 @@ void RegularizeLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
 
 }
 
-
+template <typename Dtype>
+void RegularizeLayer<Dtype>::Backward_gpu(const vector<Blob<Dtype>*>& top,
+    const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom) {
 #ifdef CPU_ONLY
-//STUB_GPU(RegularizeLayer);
+	Backward_cpu(top,propagate_down,bottom);
+#else
+	Blob<Dtype>* g = &g_;
+	//Blob<Dtype>* g = this->blobs_[0];
+
+	//gradient with respect to g_ coefficient
+	Blob<Dtype> diff_g(internal_node_, node_, 1, 1);
+	make_diff_g(diff_g);
+
+	Blob<Dtype> temp2;
+	temp2.CopyFrom(tree_map_,false,true);
+	Dtype * temp2_data = temp2.mutable_cpu_data();
+	for(int i = 0; i < node_; i++)
+	{
+		for(int j = 0; j < N_; j++)
+		{
+			temp2_data[i*N_+j] *= (g_agg_.cpu_data())[i];
+		}
+	}
+
+	Backward_gpu_impl(top,propagate_down,bottom,diff_g,temp2);
+
+	Dtype * g_diff = g->mutable_cpu_diff();
+	const Dtype * temp_data = temp_.cpu_data();
+	for( int i = 0; i < internal_node_; i++ ){
+		Dtype sum = 0.;
+		for( int j = 0; j < K_; j++) {
+			sum += temp_data[i*K_+j];
+		}
+		g_diff[internal_nodes_[i]-1] = sum;	
+	}
+
 #endif
+}
 
 INSTANTIATE_CLASS(RegularizeLayer);
 REGISTER_LAYER_CLASS(Regularize);
