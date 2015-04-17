@@ -467,7 +467,7 @@ layer {
   name: "regularize_loss"
   type: "RegularizeResult"
   bottom: "regularizer"
-  loss_weight: 0.1 #lambda
+  loss_weight: 0.001 #lambda
 }
 layer {
   name: "accuracy"

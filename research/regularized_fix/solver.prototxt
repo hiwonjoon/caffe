@@ -21,3 +21,6 @@ solver_type: ADAGRAD
 #momentum: 0.9
 
 #solver_type: NESTEROV
+
+#uncomment the following if you want to print debug info(Caution! log file will be large)
+#debug_info: true
