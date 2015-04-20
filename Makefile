@@ -340,7 +340,7 @@ CXXFLAGS += -MMD -MP
 
 # Complete build flags.
 COMMON_FLAGS += $(foreach includedir,$(INCLUDE_DIRS),-I$(includedir))
-CXXFLAGS += -pthread -fPIC $(COMMON_FLAGS) $(WARNINGS)
+CXXFLAGS += -pthread -fPIC $(COMMON_FLAGS) $(WARNINGS) -std=c++11
 NVCCFLAGS += -ccbin=$(CXX) -Xcompiler -fPIC $(COMMON_FLAGS)
 # mex may invoke an older gcc that is too liberal with -Wuninitalized
 MATLAB_CXXFLAGS := $(CXXFLAGS) -Wno-uninitialized
@@ -423,8 +423,10 @@ $(LINT_OUTPUTS): $(LINT_OUTPUT_DIR)/%.lint.txt : % $(LINT_SCRIPT) | $(LINT_OUTPU
 test: $(TEST_ALL_BIN) $(TEST_ALL_DYNLINK_BIN) $(TEST_BINS)
 
 runmine: $(TEST_BINS)
-	$(BUILD_DIR)/test/test_inner_product_with_regularize_layer.testbin $(TEST_GPUID) --gtest_shuffle $(TEST_FILTER)
-	$(BUILD_DIR)/test/test_regularize_layer.testbin $(TEST_GPUID) --gtest_shuffle $(TEST_FILTER)
+	$(BUILD_DIR)/test/test_super_category_layer.testbin $(TEST_GPUID) --gtest_shuffle $(TEST_FILTER)
+	$(BUILD_DIR)/test/test_super_category_label_layer.testbin $(TEST_GPUID) --gtest_shuffle $(TEST_FILTER)
+	#$(BUILD_DIR)/test/test_inner_product_with_regularize_layer.testbin $(TEST_GPUID) --gtest_shuffle $(TEST_FILTER)
+	#$(BUILD_DIR)/test/test_regularize_layer.testbin $(TEST_GPUID) --gtest_shuffle $(TEST_FILTER)
 
 tools: $(TOOL_BINS) $(TOOL_BIN_LINKS)
 

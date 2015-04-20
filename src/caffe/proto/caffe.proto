@@ -333,6 +333,7 @@ message LayerParameter {
   optional ThresholdParameter threshold_param = 128;
   optional WindowDataParameter window_data_param = 129;
   optional RegularizeParameter regularize_param = 132;
+  optional SuperCategoryParameter super_category_param= 133;
 }
 
 // Message that stores parameters used to apply transformation
@@ -782,6 +783,20 @@ message RegularizeParameter {
     CUDNN = 2;
   }
   optional FillerParameter weight_filler = 2; // The filler for the weight
+  optional Engine engine = 3 [default = DEFAULT];
+}
+
+message SuperCategoryParameter {
+  message TreeScheme {
+	  repeated TreeScheme children = 3;
+  }
+  optional TreeScheme root = 1;
+  optional FillerParameter weight_filler = 2; // The filler for the weight
+  enum Engine {
+    DEFAULT = 0;
+    CAFFE = 1;
+    CUDNN = 2;
+  }
   optional Engine engine = 3 [default = DEFAULT];
 }
 

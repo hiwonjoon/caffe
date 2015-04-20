@@ -4,6 +4,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <queue>
 
 #include "caffe/blob.hpp"
 #include "caffe/common.hpp"
@@ -295,6 +296,97 @@ class InnerProductWithRegularizeLayer : public InnerProductLayer<Dtype> {
   }
 
   shared_ptr<Layer<Dtype> > regularize_layer_;
+};
+
+//Tree Class for SuperCategory Layer
+//Class Location..?
+class Tree {
+public :
+  Tree() {}
+  ~Tree() {}
+
+  int GetIndex() const { return index; }
+  Tree * InsertChild(shared_ptr<Tree> child) { 
+	  children.push_back(child); 
+	  child->parent = this;
+	  return this;
+  }
+  const Tree * GetParent() const { return parent; }
+  const std::vector<shared_ptr<Tree> > * GetChildren() const {
+	  return &children;
+  }
+
+  int Depth() const;
+  void MakeBalance(int remain);
+
+  //Tree helper
+  static void GiveIndex(Tree * root, std::vector<Tree *>& serialized_tree);
+  static void GetNodeNumPerLevel(std::vector<int>& node_num, std::vector<int>& base_index,Tree * root);
+  static void MakeTree(Tree * node, const SuperCategoryParameter::TreeScheme * node_param);
+
+private :
+  int index;
+  Tree * parent;
+  std::vector<shared_ptr<Tree> > children;
+};
+
+template <typename Dtype>
+class SuperCategoryLayer : public Layer<Dtype> {
+ public:
+  explicit SuperCategoryLayer(const LayerParameter& param)
+      : Layer<Dtype>(param) {}
+  virtual void LayerSetUp(
+      const vector<Blob<Dtype>*>& bottom, const vector<Blob<Dtype>*>& top);
+  virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+
+  virtual inline int ExactNumBottomBlobs() const { return 1; }
+  virtual inline const char* type() const { return "SuperCateogoryLayer"; }
+
+ protected:
+  virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+  virtual void Forward_gpu(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top)
+  {
+	  return Forward_cpu(bottom,top);
+  }
+  virtual void Backward_cpu(const vector<Blob<Dtype>*>& top,
+      const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
+  virtual void Backward_gpu(const vector<Blob<Dtype>*>& top,
+      const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom)
+  {
+	  return Backward_cpu(top,propagate_down,bottom);
+  }
+  
+  Tree root_;
+  std::vector<int> node_num_per_level_;
+  std::vector<int> base_index_per_level_;
+  std::vector<Tree *> serialized_tree_;
+};
+template <typename Dtype>
+class SuperCategoryLabelLayer : public Layer<Dtype> {
+ public:
+  explicit SuperCategoryLabelLayer(const LayerParameter& param)
+      : Layer<Dtype>(param) {}
+  virtual void LayerSetUp(
+      const vector<Blob<Dtype>*>& bottom, const vector<Blob<Dtype>*>& top);
+  virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+
+  virtual inline int ExactNumBottomBlobs() const { return 1; }
+  virtual inline const char* type() const { return "SuperCateogoryLabelLayer"; }
+
+ protected:
+  virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+  virtual void Backward_cpu(const vector<Blob<Dtype>*>& top,
+      const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom){}
+  
+  Tree root_;
+  std::vector<int> node_num_per_level_;
+  std::vector<int> base_index_per_level_;
+  std::vector<Tree *> serialized_tree_;
 };
 
 /**
