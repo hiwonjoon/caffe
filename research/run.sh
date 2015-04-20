@@ -6,12 +6,13 @@ then
 fi
 cd $1
 
-list=($(ls -1 ./*.solverstate | tr '\n' '\0' | xargs -0 -n 1 basename | sort -V -r))
+count=($(ls -1 ./ | grep .solverstate | wc -l))
 filename=$(date +"%F_%H_%M")
 echo $filename
 
-if [ ${#list[@]} -ge 1 ]
+if [ $count -ge "1" ]
 then
+	list=($(ls -1 ./*.solverstate | tr '\n' '\0' | xargs -0 -n 1 basename | sort -V -r))
 	read -p "You have a solverstate. Do you want to continue learning process from the last(y/n)? " answer
 	case ${answer:0:1} in
 		y|Y )
@@ -21,6 +22,8 @@ then
 			../../build/tools/caffe train -solver ./solver.prototxt -weights ../../models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel -gpu 0 &> $filename.log &
 		;;
 	esac
+else
+	../../build/tools/caffe train -solver ./solver.prototxt -weights ../../models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel -gpu 0 &> $filename.log &
 fi
 
 cd ..
