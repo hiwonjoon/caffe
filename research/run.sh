@@ -10,6 +10,29 @@ count=($(ls -1 ./ | grep .solverstate | wc -l))
 filename=$(date +"%F_%H_%M")
 echo $filename
 
+gpu_num=0
+gpu_count=($(nvidia-smi -L | wc -l))
+if [ $gpu_count -gt 1 ]
+then
+	read -p "You have more than one graphic card. Do you want to see the current process list?(y/n)" answer
+	case ${answer:0:1} in
+		y|Y )
+			nvidia-smi
+		;;
+	esac
+	while :
+	do
+		read -p "Enter GPU number : " answer
+		gpu_num=${answer}
+		if [ "$gpu_num" -ge 0 -a "$gpu_num" -lt "$gpu_count" ]
+		then
+			break
+		fi
+	done
+fi
+
+echo Using GPU '#'$gpu_num.
+
 if [ $count -ge "1" ]
 then
 	list=($(ls -1 ./*.solverstate | tr '\n' '\0' | xargs -0 -n 1 basename | sort -V -r))
@@ -19,11 +42,11 @@ then
 			../../build/tools/caffe train -solver ./solver.prototxt -gpu 0 -snapshot ./$list &> $filename.log &
 		;;
 		* )
-			../../build/tools/caffe train -solver ./solver.prototxt -weights ../../models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel -gpu 0 &> $filename.log &
+			../../build/tools/caffe train -solver ./solver.prototxt -weights ../../models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel -gpu $gpu_num &> $filename.log &
 		;;
 	esac
 else
-	../../build/tools/caffe train -solver ./solver.prototxt -weights ../../models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel -gpu 0 &> $filename.log &
+	../../build/tools/caffe train -solver ./solver.prototxt -weights ../../models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel -gpu $gpu_num &> $filename.log &
 fi
 
 cd ..
