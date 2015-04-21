@@ -28,6 +28,8 @@ fi
 
 cd ..
 
+tail -F $1/$filename.log
+
 #script for future use
 
 #!/bin/bash
