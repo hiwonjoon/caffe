@@ -22,7 +22,7 @@ class SuperCategoryLabelLayerTest: public MultiDeviceTest<TypeParam> {
   typedef typename TypeParam::Dtype Dtype;
  protected:
   SuperCategoryLabelLayerTest()
-	  : blob_bottom_label_(new Blob<Dtype>(1, 1, 1, 1))
+	  : blob_bottom_label_(new Blob<Dtype>(5, 1, 1, 1))
   {
 	*(blob_bottom_label_->mutable_cpu_data()) = 1;
 	//add to vector
@@ -69,15 +69,15 @@ TYPED_TEST(SuperCategoryLabelLayerTest, TestSetUp) {
       new SuperCategoryLabelLayer<Dtype>(layer_param));
   layer->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
 
-  EXPECT_EQ(this->blob_top_vec_[0]->num(),1);
+  EXPECT_EQ(this->blob_top_vec_[0]->num(),5);
   EXPECT_EQ(this->blob_top_vec_[0]->height(),1);
   EXPECT_EQ(this->blob_top_vec_[0]->width(),1);
   EXPECT_EQ(this->blob_top_vec_[0]->channels(),1);
-  EXPECT_EQ(this->blob_top_vec_[1]->num(),1);
+  EXPECT_EQ(this->blob_top_vec_[1]->num(),5);
   EXPECT_EQ(this->blob_top_vec_[1]->height(),1);
   EXPECT_EQ(this->blob_top_vec_[1]->width(),1);
   EXPECT_EQ(this->blob_top_vec_[1]->channels(),1);
-  EXPECT_EQ(this->blob_top_vec_[2]->num(),1);
+  EXPECT_EQ(this->blob_top_vec_[2]->num(),5);
   EXPECT_EQ(this->blob_top_vec_[2]->height(),1);
   EXPECT_EQ(this->blob_top_vec_[2]->width(),1);
   EXPECT_EQ(this->blob_top_vec_[2]->channels(),1);
@@ -92,34 +92,33 @@ TYPED_TEST(SuperCategoryLabelLayerTest, TestForwardLabel) {
 	layer->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
 
 	this->blob_bottom_label_->mutable_cpu_data()[0] = 0;
+	this->blob_bottom_label_->mutable_cpu_data()[1] = 1;
+	this->blob_bottom_label_->mutable_cpu_data()[2] = 2;
+	this->blob_bottom_label_->mutable_cpu_data()[3] = 3;
+	this->blob_bottom_label_->mutable_cpu_data()[4] = 4;
+
 	layer->Forward(this->blob_bottom_vec_, this->blob_top_vec_);
 	EXPECT_EQ(this->blob_top_vec_[0]->cpu_data()[0], 0);
 	EXPECT_EQ(this->blob_top_vec_[1]->cpu_data()[0], 0);
 	EXPECT_EQ(this->blob_top_vec_[2]->cpu_data()[0], 0);
 
-	this->blob_bottom_label_->mutable_cpu_data()[0] = 1;
-	layer->Forward(this->blob_bottom_vec_, this->blob_top_vec_);
-	EXPECT_EQ(this->blob_top_vec_[0]->cpu_data()[0], 1);
-	EXPECT_EQ(this->blob_top_vec_[1]->cpu_data()[0], 1);
-	EXPECT_EQ(this->blob_top_vec_[2]->cpu_data()[0], 1);
+	EXPECT_EQ(this->blob_top_vec_[0]->cpu_data()[1], 1);
+	EXPECT_EQ(this->blob_top_vec_[1]->cpu_data()[1], 1);
+	EXPECT_EQ(this->blob_top_vec_[2]->cpu_data()[1], 1);
 
-	this->blob_bottom_label_->mutable_cpu_data()[0] = 2;
-	layer->Forward(this->blob_bottom_vec_, this->blob_top_vec_);
-	EXPECT_EQ(this->blob_top_vec_[0]->cpu_data()[0], 1);
-	EXPECT_EQ(this->blob_top_vec_[1]->cpu_data()[0], 2);
-	EXPECT_EQ(this->blob_top_vec_[2]->cpu_data()[0], 2);
+	EXPECT_EQ(this->blob_top_vec_[0]->cpu_data()[2], 1);
+	EXPECT_EQ(this->blob_top_vec_[1]->cpu_data()[2], 2);
+	EXPECT_EQ(this->blob_top_vec_[2]->cpu_data()[2], 2);
 
-	this->blob_bottom_label_->mutable_cpu_data()[0] = 3;
 	layer->Forward(this->blob_bottom_vec_, this->blob_top_vec_);
-	EXPECT_EQ(this->blob_top_vec_[0]->cpu_data()[0], 1);
-	EXPECT_EQ(this->blob_top_vec_[1]->cpu_data()[0], 3);
-	EXPECT_EQ(this->blob_top_vec_[2]->cpu_data()[0], 3);
+	EXPECT_EQ(this->blob_top_vec_[0]->cpu_data()[3], 1);
+	EXPECT_EQ(this->blob_top_vec_[1]->cpu_data()[3], 3);
+	EXPECT_EQ(this->blob_top_vec_[2]->cpu_data()[3], 3);
 
-	this->blob_bottom_label_->mutable_cpu_data()[0] = 4;
 	layer->Forward(this->blob_bottom_vec_, this->blob_top_vec_);
-	EXPECT_EQ(this->blob_top_vec_[0]->cpu_data()[0], 1);
-	EXPECT_EQ(this->blob_top_vec_[1]->cpu_data()[0], 3);
-	EXPECT_EQ(this->blob_top_vec_[2]->cpu_data()[0], 4);
+	EXPECT_EQ(this->blob_top_vec_[0]->cpu_data()[4], 1);
+	EXPECT_EQ(this->blob_top_vec_[1]->cpu_data()[4], 3);
+	EXPECT_EQ(this->blob_top_vec_[2]->cpu_data()[4], 4);
 }
 
 }  // namespace caffe

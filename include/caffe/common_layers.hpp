@@ -358,6 +358,10 @@ class SuperCategoryLayer : public Layer<Dtype> {
   {
 	  return Backward_cpu(top,propagate_down,bottom);
   }
+
+
+  int N_; //Batch Size
+  Blob<Dtype> temp_; //temporary blob for intermediate result
   
   Tree root_;
   std::vector<int> node_num_per_level_;
@@ -382,6 +386,8 @@ class SuperCategoryLabelLayer : public Layer<Dtype> {
       const vector<Blob<Dtype>*>& top);
   virtual void Backward_cpu(const vector<Blob<Dtype>*>& top,
       const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom){}
+
+  int N_;	//Batch Size
   
   Tree root_;
   std::vector<int> node_num_per_level_;
