@@ -404,13 +404,11 @@ layer {
     root {
 	  children: {
 		  children: {
+		  }
+		  children: {
 			  children: {
 			  }
 			  children: {
-				  children: {
-				  }
-				  children: {
-				  }
 			  }
 		  }
 	  }
@@ -465,13 +463,11 @@ layer {
     root {
 	  children: {
 		  children: {
+		  }
+		  children: {
 			  children: {
 			  }
 			  children: {
-				  children: {
-				  }
-				  children: {
-				  }
 			  }
 		  }
 	  }

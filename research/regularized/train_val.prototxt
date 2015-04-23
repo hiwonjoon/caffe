@@ -379,21 +379,18 @@ layer {
 	  children: {
 		  node_num: 2
 		  children: {
-			  node_num: 2
+			  node_num: 9
+			  output_index: 1
+		  }
+		  children: {
+			  node_num: 6
 			  children: {
-				  node_num: 9
-				  output_index: 1
+				  node_num: 10
+				  output_index: 2
 			  }
 			  children: {
-				  node_num: 6
-				  children: {
-					  node_num: 10
-					  output_index: 2
-				  }
-				  children: {
-					  node_num: 11
-					  output_index: 3
-				  }
+				  node_num: 11
+				  output_index: 3
 			  }
 		  }
 	  }
