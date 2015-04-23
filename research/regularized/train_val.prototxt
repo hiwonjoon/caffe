@@ -1,4 +1,4 @@
-name: "BaselineCaffeNet"
+name: "Regularize"
 layer {
   name: "data"
   type: "ImageData"
@@ -363,7 +363,7 @@ layer {
     decay_mult: 1
   }
   inner_product_param {
-    num_output: 13 
+    num_output: 50
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -374,82 +374,290 @@ layer {
     }
   }
   regularize_param{
-    root {
-	  node_num: 1
-	  children: {
-		  node_num: 2
+	root {
+		node_num: 1
+		children {
+			node_num: 2
+			output_index: 1
+		}
+		children {
+			node_num: 3
+			output_index: 2
+		}
+		children {
+			node_num: 4
+			output_index: 3
+		}
+		children {
+			node_num: 5
+			output_index: 4
+		}
+		children {
+			node_num: 6
+			children {
+				node_num: 11
+				output_index: 5
+			}
+			children {
+				node_num: 12
+				output_index: 6
+			}
+			children {
+				node_num: 13
+				output_index: 7
+			}
+			children {
+				node_num: 14
+				output_index: 8
+			}
+			children {
+				node_num: 15
+				output_index: 9
+			}
+		}
+		children {
+			node_num: 7
+			children {
+				node_num: 16
+				output_index: 10
+			}
+			children {
+				node_num: 17
+				children {
+					node_num: 27 
+					output_index: 11
+				}
+				children {
+					node_num: 28 
+					output_index: 12
+				}
+			}
+		}
+		children {
+			node_num: 8
+			children {
+				node_num : 18
+				children {
+					node_num : 29 
+					output_index: 13
+				}
+				children {
+					node_num : 30 
+					output_index: 14
+				}
+			}
+			children {
+				node_num : 19
+				children {
+					node_num : 31 
+					children {
+						node_num : 50
+						output_index: 15
+					}
+					children {
+						node_num : 51
+						output_index: 16
+					}
+				}
+				children {
+					node_num : 32 
+					children {
+						node_num : 52
+						output_index: 17
+					}
+					children {
+						node_num : 53
+						output_index: 18
+					}
+				}
+			}
+		}
+		children {
+			node_num: 9
+			children {
+				node_num:20
+				children {
+					node_num:33
+					output_index: 19
+				}
+				children {
+					node_num:34
+					output_index: 20 
+				}
+			}
+			children {
+				node_num:21
+				children {
+					node_num:35
+					output_index: 21
+				}
+				children {
+					node_num:36
+					output_index: 22 
+				}
+				children {
+					node_num:37
+					output_index: 23 
+				}
+			}
+			children {
+				node_num:22
+				children {
+					node_num:38
+					output_index: 24
+				}
+				children {
+					node_num:39
+					output_index: 25 
+				}
+			}
+			children {
+				node_num:23
+				children {
+					node_num:40
+					output_index: 26
+				}
+				children {
+					node_num:41
+					output_index: 27
+				}
+				children {
+					node_num:42
+					children {
+						node_num:54
+						output_index: 28
+					}
+					children {
+						node_num:55
+						output_index: 29
+					}
+					children {
+						node_num:56
+						children {
+							node_num:67
+							output_index: 30
+						}
+						children {
+							node_num:68
+							output_index: 31
+						}
+					}
+				}
+			}
+			children {
+				node_num:24
+				children {
+					node_num:43
+					children {
+						node_num:57
+						output_index: 32
+					}
+					children {
+						node_num:58
+						output_index: 33
+					}
+					children {
+						node_num:59
+						output_index: 34
+					}
+				}
+				children {
+					node_num:44
+					children {
+						node_num:60
+						output_index: 35
+					}
+					children {
+						node_num:61
+						children {
+							node_num:69
+							output_index: 36
+						}
+						children {
+							node_num:70
+							output_index: 37
+						}
+					}
+				}
+			}
+		}
+		children {
+		  node_num: 10
 		  children: {
-			  node_num: 9
-			  output_index: 1
-		  }
-		  children: {
-			  node_num: 6
+			  node_num: 25
 			  children: {
-				  node_num: 10
-				  output_index: 2
+				  node_num: 45 
+				  output_index: 38 
 			  }
 			  children: {
-				  node_num: 11
-				  output_index: 3
-			  }
-		  }
-	  }
-	  children: {
-		  node_num: 3
-		  children: {
-			  node_num: 12
-			  output_index: 4
-		  }
-		  children: {
-			  node_num: 13
-			  output_index: 5
-		  }
-		  children: {
-			  node_num:4
-			  children: {
-				  node_num: 14
-				  output_index: 6
-			  }
-			  children: {
-				  node_num: 7
+				  node_num: 46
 				  children: {
-					  node_num: 15
-					  output_index: 7
+					  node_num: 62 
+					  output_index: 39
 				  }
 				  children: {
-					  node_num: 16
-					  output_index: 8
+					  node_num: 63 
+					  output_index: 40
 				  }
 			  }
+		  }
+		  children: {
+			  node_num: 26 
 			  children: {
-				  node_num: 5
+				  node_num: 47 
+				  output_index: 41
+			  }
+			  children: {
+				  node_num: 48 
+				  output_index: 42 
+			  }
+			  children: {
+				  node_num: 49
 				  children: {
-					  node_num: 17
-					  output_index: 9
+					  node_num: 64 
+					  output_index: 43
 				  }
 				  children: {
-					  node_num: 18
-					  output_index: 10
-				  }
-				  children: {
-					  node_num: 19
-					  output_index: 11 
-				  }
-				  children: {
-					  node_num: 8 
+					  node_num: 65 
 					  children: {
-						  node_num: 20
-						  output_index: 12
+						  node_num: 71 
+						  output_index: 44 
 					  }
 					  children: {
-						  node_num: 21
-						  output_index: 13
+						  node_num: 72 
+						  output_index: 45 
 					  }
 				  }
+				  children: {
+					  node_num: 66 
+					  children: {
+						  node_num: 73 
+						  output_index: 46
+					  }
+					  children: {
+						  node_num: 74 
+						  output_index: 47 
+					  }
+					  children: {
+						  node_num: 75 
+						  output_index: 48 
+					  }
+					  children: {
+						  node_num: 76 
+						  children: {
+							  node_num: 77 
+							  output_index: 49 
+						  }
+						  children: {
+							  node_num: 78 
+							  output_index: 50 
+						  }
+					  }
 
+				  }
 			  }
 		  }
-	  }
+		}
 	}
     weight_filler {
 	  type: "uniform"

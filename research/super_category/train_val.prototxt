@@ -358,7 +358,7 @@ layer {
     decay_mult: 0
   }
   inner_product_param {
-    num_output: 13 
+    num_output: 50 
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -373,6 +373,7 @@ layer {
   name: "super_category"
   type: "SuperCategory"
   bottom: "fc8_baseline"
+  top: "layer_6"
   top: "layer_5"
   top: "layer_4"
   top: "layer_3"
@@ -380,56 +381,208 @@ layer {
   top: "layer_1"
 
   super_category_param{
-    root {
-	  children: {
+	root {
+		children {
+			label:0
+		}
+		children {
+			label:1
+		}
+		children {
+			label:2
+		}
+		children {
+			label:3
+		}
+		children {
+			children {
+				label:4
+			}
+			children {
+				label:5
+			}
+			children {
+				label:6
+			}
+			children {
+				label:7
+			}
+			children {
+				label:8
+			}
+		}
+		children {
+			children {
+				label:9
+			}
+			children {
+				children {
+					label:10
+				}
+				children {
+					label:11
+				}
+			}
+		}
+		children {
+			children {
+				children {
+					label:12
+				}
+				children {
+					label:13
+				}
+			}
+			children {
+				children {
+					children {
+						label:14
+					}
+					children {
+						label:15
+					}
+				}
+				children {
+					children {
+						label:16
+					}
+					children {
+						label:17
+					}
+				}
+			}
+		}
+		children {
+			children {
+				children {
+					label:18
+				}
+				children {
+					label:19
+				}
+			}
+			children {
+				children {
+					label:20
+				}
+				children {
+					label:21
+				}
+				children {
+					label:22
+				}
+			}
+			children {
+				children {
+					label:23
+				}
+				children {
+					label:24
+				}
+			}
+			children {
+				children {
+					label:25
+				}
+				children {
+					label:26
+				}
+				children {
+					children {
+						label:27
+					}
+					children {
+						label:28
+					}
+					children {
+						children {
+							label:29
+						}
+						children {
+							label:30
+						}
+					}
+				}
+			}
+			children {
+				children {
+					children {
+						label:31
+					}
+					children {
+						label:32
+					}
+					children {
+						label:33
+					}
+				}
+				children {
+					children {
+						label:34
+					}
+					children {
+						children {
+							label:35
+						}
+						children {
+							label:36
+						}
+					}
+				}
+			}
+		}
+		children {
 		  children: {
-			  label: 0
+			  children: {
+					label:37
+			  }
+			  children: {
+				  children: {
+					label:38
+				  }
+				  children: {
+					label:39
+				  }
+			  }
 		  }
 		  children: {
 			  children: {
-				label: 1
+				label:40
 			  }
 			  children: {
-				label: 2
-			  }
-		  }
-	  }
-	  children: {
-		  children: {
-			  label: 3
-		  }
-		  children: {
-			  label: 4
-		  }
-		  children: {
-			  children: {
-				label: 5
+				label:41
 			  }
 			  children: {
 				  children: {
-					label: 6
-				  }
-				  children: {
-					label: 7
-				  }
-			  }
-			  children: {
-				  children: {
-					label: 8
-				  }
-				  children: {
-					label: 9
-				  }
-				  children: {
-					label: 10
+					label:42
 				  }
 				  children: {
 					  children: {
-						label: 11 
+						label:43
 					  }
 					  children: {
-						label: 12 
+						label:44
 					  }
+				  }
+				  children: {
+					  children: {
+						label:45
+					  }
+					  children: {
+						label:46
+					  }
+					  children: {
+						label:47
+					  }
+					  children: {
+						  children: {
+							label:48
+						  }
+						  children: {
+							label:49
+						  }
+					  }
+
 				  }
 			  }
 		  }
@@ -441,6 +594,7 @@ layer {
   name: "super_category_label"
   type: "SuperCategoryLabel"
   bottom: "label"
+  top: "label_6"
   top: "label_5"
   top: "label_4"
   top: "label_3"
@@ -448,62 +602,222 @@ layer {
   top: "label_1"
 
   super_category_param{
-    root {
-	  children: {
+	root {
+		children {
+			label:0
+		}
+		children {
+			label:1
+		}
+		children {
+			label:2
+		}
+		children {
+			label:3
+		}
+		children {
+			children {
+				label:4
+			}
+			children {
+				label:5
+			}
+			children {
+				label:6
+			}
+			children {
+				label:7
+			}
+			children {
+				label:8
+			}
+		}
+		children {
+			children {
+				label:9
+			}
+			children {
+				children {
+					label:10
+				}
+				children {
+					label:11
+				}
+			}
+		}
+		children {
+			children {
+				children {
+					label:12
+				}
+				children {
+					label:13
+				}
+			}
+			children {
+				children {
+					children {
+						label:14
+					}
+					children {
+						label:15
+					}
+				}
+				children {
+					children {
+						label:16
+					}
+					children {
+						label:17
+					}
+				}
+			}
+		}
+		children {
+			children {
+				children {
+					label:18
+				}
+				children {
+					label:19
+				}
+			}
+			children {
+				children {
+					label:20
+				}
+				children {
+					label:21
+				}
+				children {
+					label:22
+				}
+			}
+			children {
+				children {
+					label:23
+				}
+				children {
+					label:24
+				}
+			}
+			children {
+				children {
+					label:25
+				}
+				children {
+					label:26
+				}
+				children {
+					children {
+						label:27
+					}
+					children {
+						label:28
+					}
+					children {
+						children {
+							label:29
+						}
+						children {
+							label:30
+						}
+					}
+				}
+			}
+			children {
+				children {
+					children {
+						label:31
+					}
+					children {
+						label:32
+					}
+					children {
+						label:33
+					}
+				}
+				children {
+					children {
+						label:34
+					}
+					children {
+						children {
+							label:35
+						}
+						children {
+							label:36
+						}
+					}
+				}
+			}
+		}
+		children {
 		  children: {
-			  label: 0
+			  children: {
+					label:37
+			  }
+			  children: {
+				  children: {
+					label:38
+				  }
+				  children: {
+					label:39
+				  }
+			  }
 		  }
 		  children: {
 			  children: {
-				label: 1
+				label:40
 			  }
 			  children: {
-				label: 2
-			  }
-		  }
-	  }
-	  children: {
-		  children: {
-			  label: 3
-		  }
-		  children: {
-			  label: 4
-		  }
-		  children: {
-			  children: {
-				label: 5
+				label:41
 			  }
 			  children: {
 				  children: {
-					label: 6
-				  }
-				  children: {
-					label: 7
-				  }
-			  }
-			  children: {
-				  children: {
-					label: 8
-				  }
-				  children: {
-					label: 9
-				  }
-				  children: {
-					label: 10
+					label:42
 				  }
 				  children: {
 					  children: {
-						label: 11 
+						label:43
 					  }
 					  children: {
-						label: 12 
+						label:44
 					  }
+				  }
+				  children: {
+					  children: {
+						label:45
+					  }
+					  children: {
+						label:46
+					  }
+					  children: {
+						label:47
+					  }
+					  children: {
+						  children: {
+							label:48
+						  }
+						  children: {
+							label:49
+						  }
+					  }
+
 				  }
 			  }
 		  }
 	  }
 	}
   }
+}
+layer {
+  name: "loss6"
+  type: "SoftmaxWithLoss"
+  bottom: "layer_6"
+  bottom: "label_6"
+  top: "loss6"
+  loss_weight: 0.1
 }
 layer {
   name: "loss5"
@@ -591,6 +905,16 @@ layer {
   bottom: "layer_5"
   bottom: "label_5"
   top: "accuracy5"
+  include {
+    phase: TEST
+  }
+}
+layer {
+  name: "accuracy_6"
+  type: "Accuracy"
+  bottom: "layer_6"
+  bottom: "label_6"
+  top: "accuracy6"
   include {
     phase: TEST
   }
