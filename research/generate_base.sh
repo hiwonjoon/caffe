@@ -18,9 +18,8 @@ then
 	esac
 fi
 
-#declare -a arr=("antelope" "bat" "beaver" "blue+whale" "bobcat" "buffalo" "chihuahua" "chimpanzee" "collie" "cow" "dalmatian" "deer" "dolphin" "elephant" "fox" "german+shepherd" "giant+panda" "giraffe" "gorilla" "grizzly+bear" "hamster" "hippopotamus" "horse" "humpback+whale" "killer+whale" "leopard" "lion" "mole" "moose" "mouse" "otter" "ox" "persian+cat" "pig" "polar+bear" "rabbit" "raccoon" "rat" "rhinoceros" "seal" "sheep" "siamese+cat" "skunk" "spider+monkey" "squirrel" "tiger" "walrus" "weasel" "wolf" "zebra")
+declare -a arr=("mole" "elephant" "rabbit" "bat" "beaver" "hamster" "squirrel" "rat" "mouse" "spider+monkey" "gorilla" "chimpanzee" "seal" "walrus" "killer+whale" "dolphin" "blue+whale" "humpback+whale" "grizzly+bear" "polar+bear" "skunk" "weasel" "otter" "giant+panda" "raccoon" "fox" "wolf" "dalmatian" "chihuahua" "german+shepherd" "collie" "tiger" "leopard" "lion" "bobcat" "persian+cat" "siamese+cat" "rhinoceros" "horse" "zebra" "hippopotamus" "pig" "giraffe" "moose" "deer" "antelope" "sheep" "buffalo" "ox" "cow" )
 
-declare -a arr=("rhinoceros" "horse" "zebra" "hippopotamus" "pig" "giraffe" "moose" "deer" "antelope" "sheep" "buffalo" "ox" "cow" )
 let a=0
 let lines=0
 for dir in "${arr[@]}"
