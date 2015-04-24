@@ -341,7 +341,7 @@ class SuperCategoryLayer : public Layer<Dtype> {
       const vector<Blob<Dtype>*>& top);
 
   virtual inline int ExactNumBottomBlobs() const { return 1; }
-  virtual inline const char* type() const { return "SuperCateogoryLayer"; }
+  virtual inline const char* type() const { return "SuperCategory"; }
 
  protected:
   virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
@@ -380,7 +380,7 @@ class SuperCategoryLabelLayer : public Layer<Dtype> {
       const vector<Blob<Dtype>*>& top);
 
   virtual inline int ExactNumBottomBlobs() const { return 1; }
-  virtual inline const char* type() const { return "SuperCateogoryLabelLayer"; }
+  virtual inline const char* type() const { return "SuperCategoryLabel"; }
 
  protected:
   virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
