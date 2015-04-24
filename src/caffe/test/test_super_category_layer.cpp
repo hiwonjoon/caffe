@@ -22,7 +22,7 @@ class SuperCategoryLayerTest: public MultiDeviceTest<TypeParam> {
   typedef typename TypeParam::Dtype Dtype;
  protected:
   SuperCategoryLayerTest()
-      : blob_bottom_data_(new Blob<Dtype>(3, 5, 1, 1))
+      : blob_bottom_data_(new Blob<Dtype>(1, 5, 1, 1))
   {
     // fill the values for bottom
     FillerParameter filler_param;
@@ -74,15 +74,15 @@ TYPED_TEST(SuperCategoryLayerTest, TestSetUp) {
       new SuperCategoryLayer<Dtype>(layer_param));
   layer->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
 
-  EXPECT_EQ(this->blob_top_vec_[0]->num(),3);
+  EXPECT_EQ(this->blob_top_vec_[0]->num(),1);
   EXPECT_EQ(this->blob_top_vec_[0]->channels(),2);
   EXPECT_EQ(this->blob_top_vec_[0]->height(),1);
   EXPECT_EQ(this->blob_top_vec_[0]->width(),1);
-  EXPECT_EQ(this->blob_top_vec_[1]->num(),3);
+  EXPECT_EQ(this->blob_top_vec_[1]->num(),1);
   EXPECT_EQ(this->blob_top_vec_[1]->channels(),4);
   EXPECT_EQ(this->blob_top_vec_[1]->height(),1);
   EXPECT_EQ(this->blob_top_vec_[1]->width(),1);
-  EXPECT_EQ(this->blob_top_vec_[2]->num(),3);
+  EXPECT_EQ(this->blob_top_vec_[2]->num(),1);
   EXPECT_EQ(this->blob_top_vec_[2]->channels(),5);
   EXPECT_EQ(this->blob_top_vec_[2]->height(),1);
   EXPECT_EQ(this->blob_top_vec_[2]->width(),1);

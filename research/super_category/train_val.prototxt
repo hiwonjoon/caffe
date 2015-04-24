@@ -378,27 +378,6 @@ layer {
   top: "layer_3"
   top: "layer_2"
   top: "layer_1"
-  # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
-  param { #leraing rate multiplier for the blob 0
-    lr_mult: 10
-    decay_mult: 1
-  }
-  param { #learning rate multiplier for the blob 1 
-    lr_mult: 10
-    decay_mult: 1
-  }
-  param { #learning rate multiplier for the blob 2
-    lr_mult: 10
-    decay_mult: 1
-  }
-  param { #learning rate multiplier for the blob 3 
-    lr_mult: 10
-    decay_mult: 1
-  }
-  param { #learning rate multiplier for the blob 4 
-    lr_mult: 10
-    decay_mult: 1
-  }
 
   super_category_param{
     root {

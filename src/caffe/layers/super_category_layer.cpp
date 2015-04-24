@@ -1,4 +1,5 @@
 #include <vector>
+#include <limits>
 #include <queue>
 
 #include "caffe/blob.hpp"
@@ -81,21 +82,9 @@ void SuperCategoryLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& bottom,
 	N_ = bottom[0]->count(0,1);
 	CHECK_EQ(*node_num_per_level_.rbegin(), bottom[0]->count(1));
 
-	this->blobs_.resize(node_num_per_level_.size());
 	this->temp_.Reshape(N_,1,1,1);
-	
-	shared_ptr<Filler<Dtype> > weight_filler(GetFiller<Dtype>(
-		super_param.weight_filler()));
-	for(int i = 0; i < node_num_per_level_.size() - 1; ++i )
-	{
-		this->blobs_[i].reset(new Blob<Dtype>(N_,node_num_per_level_[i+1],1,1));
-		weight_filler->Fill(this->blobs_[i].get());
-	}
-	this->blobs_[node_num_per_level_.size()-1].reset(new Blob<Dtype>(N_,bottom[0]->count(),1,1));
-	weight_filler->Fill(this->blobs_[node_num_per_level_.size()-1].get());
-
-	this->param_propagate_down_.resize(this->blobs_.size(), true);
 }
+
 template <typename Dtype>
 void SuperCategoryLabelLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top) {
@@ -115,9 +104,10 @@ void SuperCategoryLayer<Dtype>::Reshape(const vector<Blob<Dtype>*>& bottom,
 
 	CHECK_EQ(top.size(), node_num_per_level_.size());
 
-	int i = 0;
-	for( i = 0; i < node_num_per_level_.size(); ++i) {
+	mark_.resize(top.size());
+	for( int i = 0; i < node_num_per_level_.size(); ++i) {
 		top[i]->Reshape(N_,node_num_per_level_[i],1,1); // Top for output data
+		mark_[i].reset(new Blob<Dtype> (N_,node_num_per_level_[i],1,1));// Marking for Maxpoolling backprop
 	}
 }
 
@@ -155,8 +145,8 @@ void SuperCategoryLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
 				bottoms  = top[i+1];
 
 			Dtype * top_data = &top[i]->mutable_cpu_data()[node_num_per_level_[i]*n];
+			Dtype * mark_data = &mark_[i]->mutable_cpu_data()[node_num_per_level_[i]*n];
 			const Dtype * bottom_data = &bottoms->cpu_data()[node_cnt*n]; //is equal.
-			const Dtype * blob_data = &this->blobs_[i]->cpu_data()[node_cnt*n];
 
 			int base_idx = base_index_per_level_[i];
 			for(int j = 0; j < node_num_per_level_[i]; ++j ) {
@@ -166,15 +156,19 @@ void SuperCategoryLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
 				{
 					CHECK_EQ(i, node_num_per_level_.size() - 1);
 					//caffe_mul<Dtype>(N_,&blob_data[N_*j], &bottom_data[N_*j], &top_data[N_*j]);
-					top_data[j] = blob_data[j] * bottom_data[j];
+					top_data[j] = bottom_data[j];
 				}
 				else{
-					top_data[j] = 0;
+					top_data[j] = std::numeric_limits<Dtype>::min();
 					for(auto it = children->cbegin(); it != children->cend(); ++it) {
 						int idx = (*it)->GetIndex() - base_index_per_level_[i+1];
 						//caffe_mul<Dtype>(N_,&blob_data[idx*N_],&bottom_data[idx*N_],temp_.mutable_cpu_data());
 						//caffe_add<Dtype>(N_,temp_.cpu_data(),&top_data[j*N_],&top_data[j*N_]);
-						top_data[j] += blob_data[idx] * bottom_data[idx];
+						if( top_data[j] < bottom_data[idx] )
+						{
+							top_data[j] = bottom_data[idx];
+							mark_data[j] = static_cast<Dtype>(idx);
+						}
 					}
 				}
 			}
@@ -201,8 +195,6 @@ void SuperCategoryLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
     const vector<Blob<Dtype>*>& bottom) {
 	for(int n = 0; n < N_; ++n) {
 		for(int i = 0; i < node_num_per_level_.size(); ++i) {
-			if( this->param_propagate_down_[i] == false ) 
-				continue;
 
 			int node_cnt;
 			if( i == node_num_per_level_.size()-1)
@@ -210,17 +202,14 @@ void SuperCategoryLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
 			else
 				node_cnt = node_num_per_level_[i+1];
 
-			const Dtype * blob_data = &this->blobs_[i]->cpu_data()[n*node_cnt];
-			Dtype * blob_diff = &this->blobs_[i]->mutable_cpu_diff()[n*node_cnt];
 			const Dtype * top_diff = &top[i]->cpu_diff()[n*node_num_per_level_[i]];
-			const Dtype * bottom_data;
+			const Dtype * mark_data = &mark_[i]->cpu_data()[n*node_num_per_level_[i]];
 			Dtype * bottom_diff;
 			if( i + 1 == node_num_per_level_.size() ){
-				bottom_data = &bottom[0]->cpu_data()[n*node_cnt];	
 				bottom_diff = &bottom[0]->mutable_cpu_diff()[n*node_cnt];
+				caffe_set(node_cnt, Dtype(0), bottom_diff);
 			}
 			else {
-				bottom_data = &top[i+1]->cpu_data()[n*node_cnt];
 				bottom_diff = &top[i+1]->mutable_cpu_diff()[n*node_cnt];
 			}
 
@@ -231,21 +220,11 @@ void SuperCategoryLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
 				if( propagate_down[0] && children->size() == 0 ) { //this layer is connected with bottom layer
 					//caffe_mul<Dtype>(N_,&top_diff[j*N_],&bottom_data[j*N_],&blob_diff[j*N_]);
 					//caffe_mul<Dtype>(N_,&top_diff[j*N_],&blob_data[j*N_],&bottom_diff[j*N_]);
-					blob_diff[j] = top_diff[j] * bottom_data[j];
-					bottom_diff[j] = top_diff[j] * blob_data[j];
+					bottom_diff[j] += top_diff[j];
 				}
 				else {
-					for(auto it = children->cbegin(); it != children->cend(); ++it) {
-						int idx = (*it)->GetIndex() - base_index_per_level_[i+1];
-						//differentiate value of this->blobs
-						//caffe_mul<Dtype>(N_,&top_diff[j*N_],&bottom_data[idx*N_],&blob_diff[idx*N_]);
-						blob_diff[idx] = top_diff[j] * bottom_data[idx];
-						//Gradient with respect to relationship in Tree. top ~ top
-						//caffe_mul<Dtype>(N_,&top_diff[j*N_],&blob_data[idx*N_],temp_.mutable_cpu_data());
-						//caffe_add<Dtype>(N_,temp_.cpu_data(),&bottom_diff[idx*N_],&bottom_diff[idx*N_]);
-						bottom_diff[idx] += top_diff[j] * blob_data[idx];
-					}
-
+					int idx = static_cast<int>(mark_data[j]);
+					bottom_diff[idx] += top_diff[j];
 				}
 			}
 		}

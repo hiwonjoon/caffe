@@ -362,6 +362,7 @@ class SuperCategoryLayer : public Layer<Dtype> {
 
   int N_; //Batch Size
   Blob<Dtype> temp_; //temporary blob for intermediate result
+  std::vector<shared_ptr<Blob<Dtype> > > mark_;
   
   Tree root_;
   std::vector<int> node_num_per_level_;
