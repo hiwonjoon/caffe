@@ -193,6 +193,9 @@ template <typename Dtype>
 void SuperCategoryLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
     const vector<bool>& propagate_down,
     const vector<Blob<Dtype>*>& bottom) {
+
+	caffe_set(bottom[0]->count(), Dtype(0), bottom[0]->mutable_cpu_diff());
+
 	for(int n = 0; n < N_; ++n) {
 		for(int i = 0; i < node_num_per_level_.size(); ++i) {
 
@@ -207,7 +210,6 @@ void SuperCategoryLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
 			Dtype * bottom_diff;
 			if( i + 1 == node_num_per_level_.size() ){
 				bottom_diff = &bottom[0]->mutable_cpu_diff()[n*node_cnt];
-				caffe_set(node_cnt, Dtype(0), bottom_diff);
 			}
 			else {
 				bottom_diff = &top[i+1]->mutable_cpu_diff()[n*node_cnt];
@@ -220,7 +222,7 @@ void SuperCategoryLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
 				if( propagate_down[0] && children->size() == 0 ) { //this layer is connected with bottom layer
 					//caffe_mul<Dtype>(N_,&top_diff[j*N_],&bottom_data[j*N_],&blob_diff[j*N_]);
 					//caffe_mul<Dtype>(N_,&top_diff[j*N_],&blob_data[j*N_],&bottom_diff[j*N_]);
-					bottom_diff[j] += top_diff[j];
+					bottom_diff[j] = top_diff[j];
 				}
 				else {
 					int idx = static_cast<int>(mark_data[j]);
