@@ -86,6 +86,42 @@ void SuperCategoryLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& bottom,
 }
 
 template <typename Dtype>
+void SuperCategoryFCLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top) {
+	const SuperCategoryParameter super_param = this->layer_param_.super_category_param();
+
+	Tree::MakeTree(&root_, &super_param.root());
+	root_.MakeBalance(root_.Depth()-1);
+	Tree::GiveIndex(&root_, serialized_tree_);
+	Tree::GetNodeNumPerLevel(node_num_per_level_, base_index_per_level_, &this->root_);
+
+	N_ = bottom[0]->count(0,1);
+	CHECK_EQ(*node_num_per_level_.rbegin(), bottom[0]->count(1));
+
+	std::vector<Blob<Dtype>*> bottom_inner;
+	std::vector<Blob<Dtype>*> top_inner;
+	bottom_inner.push_back(bottom[0]);
+	top_inner.push_back(*top.rbegin());
+
+	inner_product_layer_.resize(node_num_per_level_.size());
+	for(int i = node_num_per_level_.size()-1; i >= 0; --i){
+		LayerParameter layer_param;
+		InnerProductParameter* inner_product_param = layer_param.mutable_inner_product_param();
+		*inner_product_param = this->layer_param_.inner_product_param();
+		inner_product_param->set_num_output(node_num_per_level_[i]);
+
+		inner_product_layer_[i].reset(new InnerProductLayer<Dtype>(layer_param));
+		inner_product_layer_[i]->SetUp(bottom_inner,top_inner);
+		if( i != 0 )
+		{
+			bottom_inner[0] = top_inner[0];
+			top_inner[0] = top[i-1];
+		}
+		this->blobs_.insert(this->blobs_.end(), inner_product_layer_[i]->blobs().begin(), inner_product_layer_[i]->blobs().end());
+	}
+}
+
+template <typename Dtype>
 void SuperCategoryLabelLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top) {
 	const SuperCategoryParameter super_param = this->layer_param_.super_category_param();
@@ -109,6 +145,12 @@ void SuperCategoryLayer<Dtype>::Reshape(const vector<Blob<Dtype>*>& bottom,
 		top[i]->Reshape(N_,node_num_per_level_[i],1,1); // Top for output data
 		mark_[i].reset(new Blob<Dtype> (N_,node_num_per_level_[i],1,1));// Marking for Maxpoolling backprop
 	}
+}
+
+template <typename Dtype>
+void SuperCategoryFCLayer<Dtype>::Reshape(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top) {
+	CHECK_EQ(top.size(), node_num_per_level_.size());
 }
 
 template <typename Dtype>
@@ -176,6 +218,25 @@ void SuperCategoryLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
 	}
 }
 
+
+template <typename Dtype>
+void SuperCategoryFCLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
+    const vector<Blob<Dtype>*>& top) {
+
+	std::vector<Blob<Dtype>*> bottom_inner;
+	std::vector<Blob<Dtype>*> top_inner;
+	bottom_inner.push_back(bottom[0]);
+	top_inner.push_back(*top.rbegin());
+	for(int i = node_num_per_level_.size() - 1; i >= 0; --i) {
+		inner_product_layer_[i]->Forward_cpu(bottom_inner,top_inner);
+
+		if( i != 0 ){
+			bottom_inner[0] = top[i];
+			top_inner[0] = top[i-1];
+		}
+	}
+}
+
 template <typename Dtype>
 void SuperCategoryLabelLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
     const vector<Blob<Dtype>*>& top) {
@@ -233,13 +294,73 @@ void SuperCategoryLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
 	}
 }
 
+template <typename Dtype>
+void SuperCategoryFCLayer<Dtype>::Backward_cpu_inner(InnerProductLayer<Dtype>* fc_layer, const vector<Blob<Dtype>*>& top,
+    const vector<bool>& propagate_down,
+    const vector<Blob<Dtype>*>& bottom) {
+	int N_ = fc_layer->N_;
+	int K_ = fc_layer->K_;
+	int M_ = fc_layer->M_;
+	bool bias_term_ = fc_layer->bias_term_;
+	Blob<Dtype>& bias_multiplier_ = fc_layer->bias_multiplier_;
+
+  if (fc_layer->param_propagate_down_[0]) {
+    const Dtype* top_diff = top[0]->cpu_diff();
+    const Dtype* bottom_data = bottom[0]->cpu_data();
+    // Gradient with respect to weight
+    caffe_cpu_gemm<Dtype>(CblasTrans, CblasNoTrans, N_, K_, M_, (Dtype)1.,
+        top_diff, bottom_data, (Dtype)0., fc_layer->blobs_[0]->mutable_cpu_diff());
+  }
+  if (bias_term_ && fc_layer->param_propagate_down_[1]) {
+    const Dtype* top_diff = top[0]->cpu_diff();
+    // Gradient with respect to bias
+    caffe_cpu_gemv<Dtype>(CblasTrans, M_, N_, (Dtype)1., top_diff,
+        bias_multiplier_.cpu_data(), (Dtype)0.,
+        fc_layer->blobs_[1]->mutable_cpu_diff());
+  }
+  if (propagate_down[0]) {
+    const Dtype* top_diff = top[0]->cpu_diff();
+    // Gradient with respect to bottom data
+    caffe_cpu_gemm<Dtype>(CblasNoTrans, CblasNoTrans, M_, K_, N_, (Dtype)1.,
+        top_diff, fc_layer->blobs_[0]->cpu_data(), (Dtype)1.,
+        bottom[0]->mutable_cpu_diff());
+  }
+}
+
+template <typename Dtype>
+void SuperCategoryFCLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
+    const vector<bool>& propagate_down,
+    const vector<Blob<Dtype>*>& bottom) {
+	std::vector<Blob<Dtype>*> bottom_inner;
+	std::vector<Blob<Dtype>*> top_inner;
+	std::vector<bool> prop_inner;
+
+	bottom_inner.push_back(top[1]);
+	top_inner.push_back(top[0]);
+	prop_inner.push_back(true);
+
+	caffe_set(bottom[0]->count(), Dtype(0), bottom[0]->mutable_cpu_diff());
+	for(int i = 0; i < node_num_per_level_.size(); ++i) {
+		this->Backward_cpu_inner(inner_product_layer_[i].get(),top_inner,prop_inner,bottom_inner);
+
+		if( i == node_num_per_level_.size() - 2 )
+			bottom_inner[0] = bottom[0];
+		else
+			bottom_inner[0] = top[i+2];
+		top_inner[0] = top[i+1];
+	}
+}
 #ifdef CPU_ONLY
 STUB_GPU(SuperCategoryLayer);
+STUB_GPU(SuperCategoryFCLayer);
 STUB_GPU(SuperCategoryLabelLayer);
 #endif
 
 INSTANTIATE_CLASS(SuperCategoryLayer);
 REGISTER_LAYER_CLASS(SuperCategory);
+
+INSTANTIATE_CLASS(SuperCategoryFCLayer);
+REGISTER_LAYER_CLASS(SuperCategoryFC);
 
 INSTANTIATE_CLASS(SuperCategoryLabelLayer);
 REGISTER_LAYER_CLASS(SuperCategoryLabel);

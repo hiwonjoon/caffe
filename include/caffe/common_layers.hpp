@@ -235,6 +235,9 @@ class FlattenLayer : public Layer<Dtype> {
  * TODO(dox): thorough documentation for Forward, Backward, and proto params.
  */
 template <typename Dtype>
+class SuperCategoryFCLayer;
+
+template <typename Dtype>
 class InnerProductLayer : public Layer<Dtype> {
  public:
   explicit InnerProductLayer(const LayerParameter& param)
@@ -263,6 +266,8 @@ class InnerProductLayer : public Layer<Dtype> {
   int N_;
   bool bias_term_;
   Blob<Dtype> bias_multiplier_;
+
+  friend class SuperCategoryFCLayer<Dtype>;
 };
 
 //TODO : change src location? common_layer.hpp?
@@ -369,6 +374,49 @@ class SuperCategoryLayer : public Layer<Dtype> {
   std::vector<int> base_index_per_level_;
   std::vector<Tree *> serialized_tree_;
 };
+
+template <typename Dtype>
+class SuperCategoryFCLayer : public Layer<Dtype> {
+ public:
+  explicit SuperCategoryFCLayer(const LayerParameter& param)
+      : Layer<Dtype>(param) {}
+  virtual void LayerSetUp(
+      const vector<Blob<Dtype>*>& bottom, const vector<Blob<Dtype>*>& top);
+  virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+
+  virtual inline int ExactNumBottomBlobs() const { return 1; }
+  virtual inline const char* type() const { return "SuperCategoryFC"; }
+
+ protected:
+  virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+  virtual void Forward_gpu(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top)
+  {
+	  return Forward_cpu(bottom,top);
+  }
+  virtual void Backward_cpu_inner(InnerProductLayer<Dtype> * fc_layer, const vector<Blob<Dtype>*>& top,
+      const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
+  virtual void Backward_cpu(const vector<Blob<Dtype>*>& top,
+      const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
+  virtual void Backward_gpu(const vector<Blob<Dtype>*>& top,
+      const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom)
+  {
+	  return Backward_cpu(top,propagate_down,bottom);
+  }
+
+
+  int N_; //Batch Size
+  
+  Tree root_;
+  std::vector<int> node_num_per_level_;
+  std::vector<int> base_index_per_level_;
+  std::vector<Tree *> serialized_tree_;
+
+  std::vector<shared_ptr<InnerProductLayer<Dtype> > > inner_product_layer_;
+};
+
 template <typename Dtype>
 class SuperCategoryLabelLayer : public Layer<Dtype> {
  public:
