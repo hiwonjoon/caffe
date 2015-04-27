@@ -422,10 +422,6 @@ layer {
 		  }
 	  }
 	}
-    weight_filler {
-	  type: "constant"
-	  value: 0.5
-	}
   }
 }
 layer {
@@ -488,34 +484,39 @@ layer {
   type: "SoftmaxWithLoss"
   bottom: "layer_5"
   bottom: "label_5"
-  loss_weight: 1
+  top: "loss5"
+  loss_weight: 0.0001
 }
 layer {
   name: "loss4"
   type: "SoftmaxWithLoss"
   bottom: "layer_4"
   bottom: "label_4"
-  loss_weight: 1
+  top: "loss4"
+  loss_weight: 0.0001
 }
 layer {
   name: "loss3"
   type: "SoftmaxWithLoss"
   bottom: "layer_3"
   bottom: "label_3"
-  loss_weight: 1
+  top: "loss3"
+  loss_weight: 0.0001
 }
 layer {
   name: "loss2"
   type: "SoftmaxWithLoss"
   bottom: "layer_2"
   bottom: "label_2"
-  loss_weight: 1
+  top: "loss2"
+  loss_weight: 0.0001
 }
 layer {
   name: "loss1"
   type: "SoftmaxWithLoss"
   bottom: "layer_1"
   bottom: "label_1"
+  top: "loss1"
   loss_weight: 1
 }
 layer {
