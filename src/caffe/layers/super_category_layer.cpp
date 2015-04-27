@@ -106,8 +106,11 @@ void SuperCategoryLayer<Dtype>::Reshape(const vector<Blob<Dtype>*>& bottom,
 
 	mark_.resize(top.size());
 	for( int i = 0; i < node_num_per_level_.size(); ++i) {
-		top[i]->Reshape(N_,node_num_per_level_[i],1,1); // Top for output data
-		mark_[i].reset(new Blob<Dtype> (N_,node_num_per_level_[i],1,1));// Marking for Maxpoolling backprop
+		std::vector<int> shape;
+		shape.push_back(N_);
+		shape.push_back(node_num_per_level_[i]);
+		top[i]->Reshape(shape); // Top for output data
+		mark_[i].reset(new Blob<int> (shape));// Marking for Maxpoolling backprop
 	}
 }
 
@@ -119,7 +122,9 @@ void SuperCategoryLabelLayer<Dtype>::Reshape(const vector<Blob<Dtype>*>& bottom,
 
 	int i = 0;
 	for( i = 0; i < node_num_per_level_.size(); ++i) {
-		top[i]->Reshape(N_,1,1,1); // Top for label
+		std::vector<int> shape;
+		shape.push_back(N_);
+		top[i]->Reshape(shape); // Top for label
 	}
 	CHECK_EQ(bottom[0]->count(), N_);
 }
@@ -145,7 +150,7 @@ void SuperCategoryLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
 				bottoms  = top[i+1];
 
 			Dtype * top_data = &top[i]->mutable_cpu_data()[node_num_per_level_[i]*n];
-			Dtype * mark_data = &mark_[i]->mutable_cpu_data()[node_num_per_level_[i]*n];
+			int * mark_data = &mark_[i]->mutable_cpu_data()[node_num_per_level_[i]*n];
 			const Dtype * bottom_data = &bottoms->cpu_data()[node_cnt*n]; //is equal.
 
 			int base_idx = base_index_per_level_[i];
@@ -159,7 +164,7 @@ void SuperCategoryLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
 					top_data[j] = bottom_data[j];
 				}
 				else{
-					top_data[j] = std::numeric_limits<Dtype>::min();
+					top_data[j] = -1 * std::numeric_limits<Dtype>::max();
 					for(auto it = children->cbegin(); it != children->cend(); ++it) {
 						int idx = (*it)->GetIndex() - base_index_per_level_[i+1];
 						//caffe_mul<Dtype>(N_,&blob_data[idx*N_],&bottom_data[idx*N_],temp_.mutable_cpu_data());
@@ -167,7 +172,7 @@ void SuperCategoryLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
 						if( top_data[j] < bottom_data[idx] )
 						{
 							top_data[j] = bottom_data[idx];
-							mark_data[j] = static_cast<Dtype>(idx);
+							mark_data[j] = (int)(idx);
 						}
 					}
 				}
@@ -186,6 +191,7 @@ void SuperCategoryLabelLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bot
 			top[i]->mutable_cpu_data()[n] = node_idx - base_index_per_level_[i];
 			node_idx = serialized_tree_[node_idx]->GetParent()->GetIndex();
 		}
+		CHECK_EQ(top[node_num_per_level_.size()-1]->cpu_data()[n],bottom[0]->cpu_data()[n]);
 	}
 }
 
@@ -196,37 +202,41 @@ void SuperCategoryLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
 
 	caffe_set(bottom[0]->count(), Dtype(0), bottom[0]->mutable_cpu_diff());
 
-	for(int n = 0; n < N_; ++n) {
-		for(int i = 0; i < node_num_per_level_.size(); ++i) {
+	if( propagate_down[0] ) {
 
-			int node_cnt;
-			if( i == node_num_per_level_.size()-1)
-				node_cnt = node_num_per_level_[i];
-			else
-				node_cnt = node_num_per_level_[i+1];
+		for(int n = 0; n < N_; ++n) {
+			for(int i = 0; i < node_num_per_level_.size(); ++i) {
 
-			const Dtype * top_diff = &top[i]->cpu_diff()[n*node_num_per_level_[i]];
-			const Dtype * mark_data = &mark_[i]->cpu_data()[n*node_num_per_level_[i]];
-			Dtype * bottom_diff;
-			if( i + 1 == node_num_per_level_.size() ){
-				bottom_diff = &bottom[0]->mutable_cpu_diff()[n*node_cnt];
-			}
-			else {
-				bottom_diff = &top[i+1]->mutable_cpu_diff()[n*node_cnt];
-			}
+				int node_cnt;
+				if( i == node_num_per_level_.size()-1)
+					node_cnt = node_num_per_level_[i];
+				else
+					node_cnt = node_num_per_level_[i+1];
 
-			int base_idx = base_index_per_level_[i];
-			for(int j = 0; j < node_num_per_level_[i]; ++j) {
-				Tree * node = serialized_tree_[base_idx + j];
-				const std::vector<shared_ptr<Tree> > * children = node->GetChildren();
-				if( propagate_down[0] && children->size() == 0 ) { //this layer is connected with bottom layer
-					//caffe_mul<Dtype>(N_,&top_diff[j*N_],&bottom_data[j*N_],&blob_diff[j*N_]);
-					//caffe_mul<Dtype>(N_,&top_diff[j*N_],&blob_data[j*N_],&bottom_diff[j*N_]);
-					bottom_diff[j] = top_diff[j];
+				const Dtype * top_diff = &top[i]->cpu_diff()[n*node_num_per_level_[i]];
+				const int * mark_data = &mark_[i]->cpu_data()[n*node_num_per_level_[i]];
+				Dtype * bottom_diff;
+				if( i + 1 == node_num_per_level_.size() ){
+					bottom_diff = &bottom[0]->mutable_cpu_diff()[n*node_cnt];
 				}
 				else {
-					int idx = static_cast<int>(mark_data[j]);
-					bottom_diff[idx] += top_diff[j];
+					bottom_diff = &top[i+1]->mutable_cpu_diff()[n*node_cnt];
+				}
+
+				int base_idx = base_index_per_level_[i];
+				for(int j = 0; j < node_num_per_level_[i]; ++j) {
+					Tree * node = serialized_tree_[base_idx + j];
+					const std::vector<shared_ptr<Tree> > * children = node->GetChildren();
+					if( children->size() == 0 ) { //this layer is connected with bottom layer
+						//caffe_mul<Dtype>(N_,&top_diff[j*N_],&bottom_data[j*N_],&blob_diff[j*N_]);
+						//caffe_mul<Dtype>(N_,&top_diff[j*N_],&blob_data[j*N_],&bottom_diff[j*N_]);
+						CHECK_EQ(i, node_num_per_level_.size() - 1);
+						bottom_diff[j] = top_diff[j];
+					}
+					else {
+						int idx = mark_data[j];
+						bottom_diff[idx] += top_diff[j];
+					}
 				}
 			}
 		}
