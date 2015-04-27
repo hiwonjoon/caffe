@@ -485,7 +485,7 @@ layer {
   bottom: "layer_5"
   bottom: "label_5"
   top: "loss5"
-  loss_weight: 0.0001
+  loss_weight: 0.1 
 }
 layer {
   name: "loss4"
@@ -493,7 +493,7 @@ layer {
   bottom: "layer_4"
   bottom: "label_4"
   top: "loss4"
-  loss_weight: 0.0001
+  loss_weight: 0.1
 }
 layer {
   name: "loss3"
@@ -501,7 +501,7 @@ layer {
   bottom: "layer_3"
   bottom: "label_3"
   top: "loss3"
-  loss_weight: 0.0001
+  loss_weight: 0.2
 }
 layer {
   name: "loss2"
@@ -509,7 +509,7 @@ layer {
   bottom: "layer_2"
   bottom: "label_2"
   top: "loss2"
-  loss_weight: 0.0001
+  loss_weight: 0.3
 }
 layer {
   name: "loss1"
@@ -517,14 +517,54 @@ layer {
   bottom: "layer_1"
   bottom: "label_1"
   top: "loss1"
-  loss_weight: 1
+  loss_weight: 0.3
 }
 layer {
-  name: "accuracy"
+  name: "accuracy_1"
   type: "Accuracy"
   bottom: "layer_1"
   bottom: "label"
   top: "accuracy"
+  include {
+    phase: TEST
+  }
+}
+layer {
+  name: "accuracy_2"
+  type: "Accuracy"
+  bottom: "layer_2"
+  bottom: "label_2"
+  top: "accuracy2"
+  include {
+    phase: TEST
+  }
+}
+layer {
+  name: "accuracy_3"
+  type: "Accuracy"
+  bottom: "layer_3"
+  bottom: "label_3"
+  top: "accuracy3"
+  include {
+    phase: TEST
+  }
+}
+layer {
+  name: "accuracy_4"
+  type: "Accuracy"
+  bottom: "layer_4"
+  bottom: "label_4"
+  top: "accuracy4"
+  include {
+    phase: TEST
+  }
+}
+layer {
+  name: "accuracy_5"
+  type: "Accuracy"
+  bottom: "layer_5"
+  bottom: "label_5"
+  top: "accuracy5"
   include {
     phase: TEST
   }
