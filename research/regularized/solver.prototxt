@@ -15,9 +15,9 @@ snapshot_prefix: "./regularized"
 # uncomment the following to default to CPU mode solving
 # solver_mode: CPU
 
-solver_type: ADAGRAD
+#solver_type: ADAGRAD
 
-#solver_type: SGD
-#momentum: 0.9
+solver_type: SGD
+momentum: 0.9
 
 #solver_type: NESTEROV
