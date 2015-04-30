@@ -23,10 +23,13 @@ void Tree::MakeBalance(int remain) {
 	if( remain == 0 ) return;
 	if( children.size() == 0 ) {
 	  Tree * root = this;
+	  int label = root->label;
 	  for(int i = 0; i < remain; ++i ) {
 		  root->InsertChild(shared_ptr<Tree>(new Tree()));
+		  root->SetLabel(-1);
 		  root = root->children[0].get();
 	  }
+	  root->SetLabel(label);
 	}
 	else {
 	  for(int i = 0; i < children.size(); ++i)
@@ -41,13 +44,14 @@ void Tree::GiveIndex(Tree * root, std::vector<Tree *>& serialized_tree) {
 	while( queue.size() != 0 ) {
 	  Tree * node = queue.front();
 	  node->index = cnt++;
+
 	  serialized_tree.push_back(node);
 	  for(int i = 0; i < node->children.size(); ++i)
 		  queue.push(node->children[i].get());
 	  queue.pop();
 	}
 }
-void Tree::GetNodeNumPerLevel(std::vector<int>& node_num, std::vector<int>& base_index,Tree * root) { 
+void Tree::GetNodeNumPerLevelAndGiveLabel(std::vector<int>& node_num, std::vector<int>& base_index,Tree * root, std::vector<Tree *>& serialized_tree, std::vector<int>& label_to_index) { 
 	Tree * right_root = root;
 	int depth = root->Depth();
 	node_num.resize(depth-1);
@@ -58,13 +62,32 @@ void Tree::GetNodeNumPerLevel(std::vector<int>& node_num, std::vector<int>& base
 	  base_index[i] = root->children[0]->index;
 	  root = root->children[0].get();
 	  right_root = right_root->children[right_root->children.size()-1].get();
+
+	  if( i < depth-2 ){ //label for last layer is already made
+		  for(int j = base_index[i]; j < base_index[i]+node_num[i]; ++j)
+			  serialized_tree[j]->label = j - base_index[i];
+	  }
+	  else {
+		  label_to_index.resize(node_num[i]);
+		  for(int index = 0; index < node_num[i]; ++index) {
+			  int label = serialized_tree[index+base_index[i]]->GetLabel();
+				label_to_index[label] = index;
+		  }
+	  }
 	}
 }
 void Tree::MakeTree(Tree * node, const SuperCategoryParameter::TreeScheme * node_param){
-	for(int i = 0; i < node_param->children_size(); ++i) {
-		shared_ptr<Tree> child(new Tree());
-		node->InsertChild(child);
-		MakeTree(child.get(), &node_param->children(i));
+	if( node_param->children_size() == 0 ){
+		CHECK_NE(node_param->label(),-1);
+		node->SetLabel(node_param->label());
+	}
+	else {
+		CHECK_EQ(node->label,-1);
+		for(int i = 0; i < node_param->children_size(); ++i) {
+			shared_ptr<Tree> child(new Tree());
+			node->InsertChild(child);
+			MakeTree(child.get(), &node_param->children(i));
+		}
 	}
 }
 
@@ -75,9 +98,10 @@ void SuperCategoryLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& bottom,
 	const SuperCategoryParameter super_param = this->layer_param_.super_category_param();
 
 	Tree::MakeTree(&root_, &super_param.root());
-	root_.MakeBalance(root_.Depth()-1);
+	depth_ = root_.Depth();
+	root_.MakeBalance(depth_-1);
 	Tree::GiveIndex(&root_, serialized_tree_);
-	Tree::GetNodeNumPerLevel(node_num_per_level_, base_index_per_level_, &this->root_);
+	Tree::GetNodeNumPerLevelAndGiveLabel(node_num_per_level_, base_index_per_level_, &this->root_,serialized_tree_,label_to_index_);
 
 	N_ = bottom[0]->count(0,1);
 	CHECK_EQ(*node_num_per_level_.rbegin(), bottom[0]->count(1));
@@ -93,19 +117,20 @@ void SuperCategoryLabelLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& bott
 	N_ = bottom[0]->count(0,1);
 
 	Tree::MakeTree(&root_, &super_param.root());
-	root_.MakeBalance(root_.Depth()-1);
+	depth_ = root_.Depth();
+	root_.MakeBalance(depth_-1);
 	Tree::GiveIndex(&root_, serialized_tree_);
-	Tree::GetNodeNumPerLevel(node_num_per_level_, base_index_per_level_, &this->root_);
+	Tree::GetNodeNumPerLevelAndGiveLabel(node_num_per_level_, base_index_per_level_, &this->root_,serialized_tree_,label_to_index_);
 }
 
 template <typename Dtype>
 void SuperCategoryLayer<Dtype>::Reshape(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top) {
 
-	CHECK_EQ(top.size(), node_num_per_level_.size());
+	CHECK_EQ(top.size(), depth_-1);
 
 	mark_.resize(top.size());
-	for( int i = 0; i < node_num_per_level_.size(); ++i) {
+	for( int i = 0; i < depth_-1; ++i) {
 		std::vector<int> shape;
 		shape.push_back(N_);
 		shape.push_back(node_num_per_level_[i]);
@@ -118,10 +143,10 @@ template <typename Dtype>
 void SuperCategoryLabelLayer<Dtype>::Reshape(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top) {
 
-	CHECK_EQ(top.size(), node_num_per_level_.size());
+	CHECK_EQ(top.size(), depth_-1);
 
 	int i = 0;
-	for( i = 0; i < node_num_per_level_.size(); ++i) {
+	for( i = 0; i < depth_-1; ++i) {
 		std::vector<int> shape;
 		shape.push_back(N_);
 		top[i]->Reshape(shape); // Top for label
@@ -135,16 +160,16 @@ void SuperCategoryLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
 
 	//For Data
 	for(int n = 0; n < N_; ++n) {
-		for(int i = node_num_per_level_.size() - 1; i >= 0; --i)
+		for(int i = depth_-2; i >= 0; --i)
 		{
 			int node_cnt;
-			if( i == node_num_per_level_.size()-1)
+			if( i == depth_-2)
 				node_cnt = node_num_per_level_[i];
 			else
 				node_cnt = node_num_per_level_[i+1];
 
 			Blob<Dtype> * bottoms;
-			if( i == node_num_per_level_.size() - 1 )
+			if( i == depth_-2 )
 				bottoms = bottom[0];
 			else
 				bottoms  = top[i+1];
@@ -159,7 +184,7 @@ void SuperCategoryLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
 				const std::vector<shared_ptr<Tree> > * children = node->GetChildren();
 				if( children->size() == 0 )
 				{
-					CHECK_EQ(i, node_num_per_level_.size() - 1);
+					CHECK_EQ(i, depth_-2);
 					//caffe_mul<Dtype>(N_,&blob_data[N_*j], &bottom_data[N_*j], &top_data[N_*j]);
 					top_data[j] = bottom_data[j];
 				}
@@ -186,12 +211,13 @@ void SuperCategoryLabelLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bot
     const vector<Blob<Dtype>*>& top) {
 	//For Label
 	for(int n = 0; n < N_; ++n) {
-		int node_idx = static_cast<int>(bottom[0]->cpu_data()[n]) + *(base_index_per_level_.rbegin());
-		for(int i = node_num_per_level_.size()-1; i >= 0; --i) {
-			top[i]->mutable_cpu_data()[n] = node_idx - base_index_per_level_[i];
-			node_idx = serialized_tree_[node_idx]->GetParent()->GetIndex();
+		int idx = label_to_index_[static_cast<int>(bottom[0]->cpu_data()[n])] + *(base_index_per_level_.rbegin());
+		const Tree * node = serialized_tree_[idx];
+		for(int i = depth_-2; i >= 0; --i) {
+			top[i]->mutable_cpu_data()[n] = node->GetLabel();
+			node = node->GetParent();
 		}
-		CHECK_EQ(top[node_num_per_level_.size()-1]->cpu_data()[n],bottom[0]->cpu_data()[n]);
+		CHECK_EQ(top[depth_-2]->cpu_data()[n],bottom[0]->cpu_data()[n]);
 	}
 }
 
@@ -205,10 +231,10 @@ void SuperCategoryLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
 	if( propagate_down[0] ) {
 
 		for(int n = 0; n < N_; ++n) {
-			for(int i = 0; i < node_num_per_level_.size(); ++i) {
+			for(int i = 0; i < depth_-1; ++i) {
 
 				int node_cnt;
-				if( i == node_num_per_level_.size()-1)
+				if( i == depth_-2)
 					node_cnt = node_num_per_level_[i];
 				else
 					node_cnt = node_num_per_level_[i+1];
@@ -216,7 +242,7 @@ void SuperCategoryLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
 				const Dtype * top_diff = &top[i]->cpu_diff()[n*node_num_per_level_[i]];
 				const int * mark_data = &mark_[i]->cpu_data()[n*node_num_per_level_[i]];
 				Dtype * bottom_diff;
-				if( i + 1 == node_num_per_level_.size() ){
+				if( i + 1 == depth_-1 ){
 					bottom_diff = &bottom[0]->mutable_cpu_diff()[n*node_cnt];
 				}
 				else {
@@ -230,7 +256,7 @@ void SuperCategoryLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
 					if( children->size() == 0 ) { //this layer is connected with bottom layer
 						//caffe_mul<Dtype>(N_,&top_diff[j*N_],&bottom_data[j*N_],&blob_diff[j*N_]);
 						//caffe_mul<Dtype>(N_,&top_diff[j*N_],&blob_data[j*N_],&bottom_diff[j*N_]);
-						CHECK_EQ(i, node_num_per_level_.size() - 1);
+						CHECK_EQ(i, depth_-2);
 						bottom_diff[j] = top_diff[j];
 					}
 					else {

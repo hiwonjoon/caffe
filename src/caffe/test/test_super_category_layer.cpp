@@ -49,12 +49,17 @@ class SuperCategoryLayerTest: public MultiDeviceTest<TypeParam> {
   void SetSuperCategoryParam(SuperCategoryParameter * sup_param) {
 	  SuperCategoryParameter::TreeScheme * root = sup_param->mutable_root();
 	  SuperCategoryParameter::TreeScheme * child1 = root->add_children();
+	  child1->set_label(0);
 	  SuperCategoryParameter::TreeScheme * child2 = root->add_children();
 	  SuperCategoryParameter::TreeScheme * child2_1 = child2->add_children();
+	  child2_1->set_label(1);
 	  SuperCategoryParameter::TreeScheme * child2_2 = child2->add_children();
+	  child2_2->set_label(2);
 	  SuperCategoryParameter::TreeScheme * child2_3 = child2->add_children();
 	  SuperCategoryParameter::TreeScheme * child2_3_1 = child2_3->add_children();
+	  child2_3_1->set_label(3);
 	  SuperCategoryParameter::TreeScheme * child2_3_2 = child2_3->add_children();
+	  child2_3_2->set_label(4);
 
 	  //weight_filler
 	  sup_param->mutable_weight_filler()->set_type("uniform");

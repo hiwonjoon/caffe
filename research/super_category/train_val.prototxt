@@ -383,39 +383,52 @@ layer {
     root {
 	  children: {
 		  children: {
+			  label: 0
 		  }
 		  children: {
 			  children: {
+				label: 1
 			  }
 			  children: {
+				label: 2
 			  }
 		  }
 	  }
 	  children: {
 		  children: {
+			  label: 3
 		  }
 		  children: {
+			  label: 4
 		  }
 		  children: {
 			  children: {
+				label: 5
 			  }
 			  children: {
 				  children: {
+					label: 6
 				  }
 				  children: {
+					label: 7
 				  }
 			  }
 			  children: {
 				  children: {
+					label: 8
 				  }
 				  children: {
+					label: 9
 				  }
 				  children: {
+					label: 10
 				  }
 				  children: {
 					  children: {
+						label: 11 
 					  }
 					  children: {
+						label: 12 
 					  }
 				  }
 			  }
@@ -438,39 +451,52 @@ layer {
     root {
 	  children: {
 		  children: {
+			  label: 0
 		  }
 		  children: {
 			  children: {
+				label: 1
 			  }
 			  children: {
+				label: 2
 			  }
 		  }
 	  }
 	  children: {
 		  children: {
+			  label: 3
 		  }
 		  children: {
+			  label: 4
 		  }
 		  children: {
 			  children: {
+				label: 5
 			  }
 			  children: {
 				  children: {
+					label: 6
 				  }
 				  children: {
+					label: 7
 				  }
 			  }
 			  children: {
 				  children: {
+					label: 8
 				  }
 				  children: {
+					label: 9
 				  }
 				  children: {
+					label: 10
 				  }
 				  children: {
 					  children: {
+						label: 11 
 					  }
 					  children: {
+						label: 12 
 					  }
 				  }
 			  }

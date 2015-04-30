@@ -302,15 +302,17 @@ class InnerProductWithRegularizeLayer : public InnerProductLayer<Dtype> {
 //Class Location..?
 class Tree {
 public :
-  Tree() {}
+  Tree() : label(-1) {}
   ~Tree() {}
 
+  int GetLabel() const { return label; }
   int GetIndex() const { return index; }
   Tree * InsertChild(shared_ptr<Tree> child) { 
 	  children.push_back(child); 
 	  child->parent = this;
 	  return this;
   }
+  void SetLabel(int label_) { this->label = label_; }
   const Tree * GetParent() const { return parent; }
   const std::vector<shared_ptr<Tree> > * GetChildren() const {
 	  return &children;
@@ -321,11 +323,13 @@ public :
 
   //Tree helper
   static void GiveIndex(Tree * root, std::vector<Tree *>& serialized_tree);
-  static void GetNodeNumPerLevel(std::vector<int>& node_num, std::vector<int>& base_index,Tree * root);
+  static void GetNodeNumPerLevelAndGiveLabel(std::vector<int>& node_num, std::vector<int>& base_index,Tree * root, std::vector<Tree *>& serialized_tree, std::vector<int>& label_to_index);
   static void MakeTree(Tree * node, const SuperCategoryParameter::TreeScheme * node_param);
 
 private :
+  int label;
   int index;
+
   Tree * parent;
   std::vector<shared_ptr<Tree> > children;
 };
@@ -365,8 +369,10 @@ class SuperCategoryLayer : public Layer<Dtype> {
   std::vector<shared_ptr<Blob<int> > > mark_;
   
   Tree root_;
+  int depth_;
   std::vector<int> node_num_per_level_;
   std::vector<int> base_index_per_level_;
+  std::vector<int> label_to_index_;
   std::vector<Tree *> serialized_tree_;
 };
 template <typename Dtype>
@@ -391,8 +397,10 @@ class SuperCategoryLabelLayer : public Layer<Dtype> {
   int N_;	//Batch Size
   
   Tree root_;
+  int depth_;
   std::vector<int> node_num_per_level_;
   std::vector<int> base_index_per_level_;
+  std::vector<int> label_to_index_;
   std::vector<Tree *> serialized_tree_;
 };
 

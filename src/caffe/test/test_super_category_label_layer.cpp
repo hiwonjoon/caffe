@@ -51,12 +51,17 @@ class SuperCategoryLabelLayerTest: public MultiDeviceTest<TypeParam> {
 
 	  SuperCategoryParameter::TreeScheme * root = sup_param->mutable_root();
 	  SuperCategoryParameter::TreeScheme * child1 = root->add_children();
+	  child1->set_label(0);
 	  SuperCategoryParameter::TreeScheme * child2 = root->add_children();
 	  SuperCategoryParameter::TreeScheme * child2_1 = child2->add_children();
+	  child2_1->set_label(1);
 	  SuperCategoryParameter::TreeScheme * child2_2 = child2->add_children();
+	  child2_2->set_label(2);
 	  SuperCategoryParameter::TreeScheme * child2_3 = child2->add_children();
 	  SuperCategoryParameter::TreeScheme * child2_3_1 = child2_3->add_children();
+	  child2_3_1->set_label(3);
 	  SuperCategoryParameter::TreeScheme * child2_3_2 = child2_3->add_children();
+	  child2_3_2->set_label(4);
 
 	  //weight_filler
 	  sup_param->mutable_weight_filler()->set_type("uniform");
@@ -69,24 +74,37 @@ class SuperCategoryLabelLayerTest: public MultiDeviceTest<TypeParam> {
 	  SuperCategoryParameter::TreeScheme * root = sup_param->mutable_root();
 	  SuperCategoryParameter::TreeScheme * child1 = root->add_children();
 	  SuperCategoryParameter::TreeScheme * child1_1 = child1->add_children();
+	  child1_1->set_label(12);
 	  SuperCategoryParameter::TreeScheme * child1_2 = child1->add_children();
 	  SuperCategoryParameter::TreeScheme * child1_2_1 = child1_2->add_children();
+	  child1_2_1->set_label(0);
 	  SuperCategoryParameter::TreeScheme * child1_2_2 = child1_2->add_children();
+	  child1_2_2->set_label(1);
 	  SuperCategoryParameter::TreeScheme * child2 = root->add_children();
 	  SuperCategoryParameter::TreeScheme * child2_1 = child2->add_children();
+	  child2_1->set_label(5);
 	  SuperCategoryParameter::TreeScheme * child2_2 = child2->add_children();
+	  child2_2->set_label(3);
 	  SuperCategoryParameter::TreeScheme * child2_3 = child2->add_children();
 	  SuperCategoryParameter::TreeScheme * child2_3_1 = child2_3->add_children();
+	  child2_3_1->set_label(4);
 	  SuperCategoryParameter::TreeScheme * child2_3_2 = child2_3->add_children();
 	  SuperCategoryParameter::TreeScheme * child2_3_2_1 = child2_3_2->add_children();
+	  child2_3_2_1->set_label(2);
 	  SuperCategoryParameter::TreeScheme * child2_3_2_2 = child2_3_2->add_children();
+	  child2_3_2_2->set_label(6);
 	  SuperCategoryParameter::TreeScheme * child2_3_3 = child2_3->add_children();
 	  SuperCategoryParameter::TreeScheme * child2_3_3_1 = child2_3_3->add_children();
+	  child2_3_3_1->set_label(7);
 	  SuperCategoryParameter::TreeScheme * child2_3_3_2 = child2_3_3->add_children();
+	  child2_3_3_2->set_label(8);
 	  SuperCategoryParameter::TreeScheme * child2_3_3_3 = child2_3_3->add_children();
+	  child2_3_3_3->set_label(9);
 	  SuperCategoryParameter::TreeScheme * child2_3_3_4 = child2_3_3->add_children();
 	  SuperCategoryParameter::TreeScheme * child2_3_3_4_1 = child2_3_3_4->add_children();
+	  child2_3_3_4_1->set_label(10);
 	  SuperCategoryParameter::TreeScheme * child2_3_3_4_2 = child2_3_3_4->add_children();
+	  child2_3_3_4_2->set_label(11);
 
 	  //weight_filler
 	  sup_param->mutable_weight_filler()->set_type("uniform");
@@ -169,67 +187,67 @@ TYPED_TEST(SuperCategoryLabelLayerTest, TestForwardLabel_Hard) {
 
 	layer->Forward(this->blob_bottom_vec_, this->blob_top_vec_hard_);
 	EXPECT_EQ(this->blob_top_vec_hard_[4]->cpu_data()[0], 0);
-	EXPECT_EQ(this->blob_top_vec_hard_[3]->cpu_data()[0], 0);
-	EXPECT_EQ(this->blob_top_vec_hard_[2]->cpu_data()[0], 0);
-	EXPECT_EQ(this->blob_top_vec_hard_[1]->cpu_data()[0], 0);
+	EXPECT_EQ(this->blob_top_vec_hard_[3]->cpu_data()[0], 1);
+	EXPECT_EQ(this->blob_top_vec_hard_[2]->cpu_data()[0], 1);
+	EXPECT_EQ(this->blob_top_vec_hard_[1]->cpu_data()[0], 1);
 	EXPECT_EQ(this->blob_top_vec_hard_[0]->cpu_data()[0], 0);
 
 	EXPECT_EQ(this->blob_top_vec_hard_[4]->cpu_data()[1], 1);
-	EXPECT_EQ(this->blob_top_vec_hard_[3]->cpu_data()[1], 1);
-	EXPECT_EQ(this->blob_top_vec_hard_[2]->cpu_data()[1], 1);
+	EXPECT_EQ(this->blob_top_vec_hard_[3]->cpu_data()[1], 2);
+	EXPECT_EQ(this->blob_top_vec_hard_[2]->cpu_data()[1], 2);
 	EXPECT_EQ(this->blob_top_vec_hard_[1]->cpu_data()[1], 1);
 	EXPECT_EQ(this->blob_top_vec_hard_[0]->cpu_data()[1], 0);
 
 	EXPECT_EQ(this->blob_top_vec_hard_[4]->cpu_data()[2], 2);
-	EXPECT_EQ(this->blob_top_vec_hard_[3]->cpu_data()[2], 2);
-	EXPECT_EQ(this->blob_top_vec_hard_[2]->cpu_data()[2], 2);
-	EXPECT_EQ(this->blob_top_vec_hard_[1]->cpu_data()[2], 1);
-	EXPECT_EQ(this->blob_top_vec_hard_[0]->cpu_data()[2], 0);
+	EXPECT_EQ(this->blob_top_vec_hard_[3]->cpu_data()[2], 6);
+	EXPECT_EQ(this->blob_top_vec_hard_[2]->cpu_data()[2], 6);
+	EXPECT_EQ(this->blob_top_vec_hard_[1]->cpu_data()[2], 4);
+	EXPECT_EQ(this->blob_top_vec_hard_[0]->cpu_data()[2], 1);
 
 	EXPECT_EQ(this->blob_top_vec_hard_[4]->cpu_data()[3], 3);
-	EXPECT_EQ(this->blob_top_vec_hard_[3]->cpu_data()[3], 3);
-	EXPECT_EQ(this->blob_top_vec_hard_[2]->cpu_data()[3], 3);
-	EXPECT_EQ(this->blob_top_vec_hard_[1]->cpu_data()[3], 2);
+	EXPECT_EQ(this->blob_top_vec_hard_[3]->cpu_data()[3], 4);
+	EXPECT_EQ(this->blob_top_vec_hard_[2]->cpu_data()[3], 4);
+	EXPECT_EQ(this->blob_top_vec_hard_[1]->cpu_data()[3], 3);
 	EXPECT_EQ(this->blob_top_vec_hard_[0]->cpu_data()[3], 1);
 
 	EXPECT_EQ(this->blob_top_vec_hard_[4]->cpu_data()[4], 4);
-	EXPECT_EQ(this->blob_top_vec_hard_[3]->cpu_data()[4], 4);
-	EXPECT_EQ(this->blob_top_vec_hard_[2]->cpu_data()[4], 4);
-	EXPECT_EQ(this->blob_top_vec_hard_[1]->cpu_data()[4], 3);
+	EXPECT_EQ(this->blob_top_vec_hard_[3]->cpu_data()[4], 5);
+	EXPECT_EQ(this->blob_top_vec_hard_[2]->cpu_data()[4], 5);
+	EXPECT_EQ(this->blob_top_vec_hard_[1]->cpu_data()[4], 4);
 	EXPECT_EQ(this->blob_top_vec_hard_[0]->cpu_data()[4], 1);
 
 	EXPECT_EQ(this->blob_top_vec_hard_[4]->cpu_data()[5], 5);
-	EXPECT_EQ(this->blob_top_vec_hard_[3]->cpu_data()[5], 5);
-	EXPECT_EQ(this->blob_top_vec_hard_[2]->cpu_data()[5], 5);
-	EXPECT_EQ(this->blob_top_vec_hard_[1]->cpu_data()[5], 4);
+	EXPECT_EQ(this->blob_top_vec_hard_[3]->cpu_data()[5], 3);
+	EXPECT_EQ(this->blob_top_vec_hard_[2]->cpu_data()[5], 3);
+	EXPECT_EQ(this->blob_top_vec_hard_[1]->cpu_data()[5], 2);
 	EXPECT_EQ(this->blob_top_vec_hard_[0]->cpu_data()[5], 1);
 
 	EXPECT_EQ(this->blob_top_vec_hard_[4]->cpu_data()[6], 6);
-	EXPECT_EQ(this->blob_top_vec_hard_[3]->cpu_data()[6], 6);
+	EXPECT_EQ(this->blob_top_vec_hard_[3]->cpu_data()[6], 7);
 	EXPECT_EQ(this->blob_top_vec_hard_[2]->cpu_data()[6], 6);
 	EXPECT_EQ(this->blob_top_vec_hard_[1]->cpu_data()[6], 4);
 	EXPECT_EQ(this->blob_top_vec_hard_[0]->cpu_data()[6], 1);
 
 	EXPECT_EQ(this->blob_top_vec_hard_[4]->cpu_data()[7], 7);
-	EXPECT_EQ(this->blob_top_vec_hard_[3]->cpu_data()[7], 7);
-	EXPECT_EQ(this->blob_top_vec_hard_[2]->cpu_data()[7], 6);
+	EXPECT_EQ(this->blob_top_vec_hard_[3]->cpu_data()[7], 8);
+	EXPECT_EQ(this->blob_top_vec_hard_[2]->cpu_data()[7], 7);
 	EXPECT_EQ(this->blob_top_vec_hard_[1]->cpu_data()[7], 4);
 	EXPECT_EQ(this->blob_top_vec_hard_[0]->cpu_data()[7], 1);
 
 	EXPECT_EQ(this->blob_top_vec_hard_[4]->cpu_data()[8], 8);
-	EXPECT_EQ(this->blob_top_vec_hard_[3]->cpu_data()[8], 8);
+	EXPECT_EQ(this->blob_top_vec_hard_[3]->cpu_data()[8], 9);
 	EXPECT_EQ(this->blob_top_vec_hard_[2]->cpu_data()[8], 7);
 	EXPECT_EQ(this->blob_top_vec_hard_[1]->cpu_data()[8], 4);
 	EXPECT_EQ(this->blob_top_vec_hard_[0]->cpu_data()[8], 1);
 
 	EXPECT_EQ(this->blob_top_vec_hard_[4]->cpu_data()[9], 9);
-	EXPECT_EQ(this->blob_top_vec_hard_[3]->cpu_data()[9], 9);
+	EXPECT_EQ(this->blob_top_vec_hard_[3]->cpu_data()[9], 10);
 	EXPECT_EQ(this->blob_top_vec_hard_[2]->cpu_data()[9], 7);
 	EXPECT_EQ(this->blob_top_vec_hard_[1]->cpu_data()[9], 4);
 	EXPECT_EQ(this->blob_top_vec_hard_[0]->cpu_data()[9], 1);
 
 	EXPECT_EQ(this->blob_top_vec_hard_[4]->cpu_data()[10], 10);
-	EXPECT_EQ(this->blob_top_vec_hard_[3]->cpu_data()[10], 10);
+	EXPECT_EQ(this->blob_top_vec_hard_[3]->cpu_data()[10], 11);
 	EXPECT_EQ(this->blob_top_vec_hard_[2]->cpu_data()[10], 7);
 	EXPECT_EQ(this->blob_top_vec_hard_[1]->cpu_data()[10], 4);
 	EXPECT_EQ(this->blob_top_vec_hard_[0]->cpu_data()[10], 1);
@@ -240,11 +258,11 @@ TYPED_TEST(SuperCategoryLabelLayerTest, TestForwardLabel_Hard) {
 	EXPECT_EQ(this->blob_top_vec_hard_[1]->cpu_data()[11], 4);
 	EXPECT_EQ(this->blob_top_vec_hard_[0]->cpu_data()[11], 1);
 
-	EXPECT_EQ(this->blob_top_vec_hard_[4]->cpu_data()[12], 12);
-	EXPECT_EQ(this->blob_top_vec_hard_[3]->cpu_data()[12], 11);
-	EXPECT_EQ(this->blob_top_vec_hard_[2]->cpu_data()[12], 7);
-	EXPECT_EQ(this->blob_top_vec_hard_[1]->cpu_data()[12], 4);
-	EXPECT_EQ(this->blob_top_vec_hard_[0]->cpu_data()[12], 1);
+	EXPECT_EQ(this->blob_top_vec_hard_[4]->cpu_data()[12], 12); //for label 12
+	EXPECT_EQ(this->blob_top_vec_hard_[3]->cpu_data()[12], 0);
+	EXPECT_EQ(this->blob_top_vec_hard_[2]->cpu_data()[12], 0);
+	EXPECT_EQ(this->blob_top_vec_hard_[1]->cpu_data()[12], 0);
+	EXPECT_EQ(this->blob_top_vec_hard_[0]->cpu_data()[12], 0);
 }
 
 }  // namespace caffe
