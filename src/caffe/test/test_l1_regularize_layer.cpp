@@ -76,7 +76,7 @@ TYPED_TEST(L1RegularizeLayerTest, TestForward) {
     layer->Forward(this->blob_bottom_vec_, this->blob_top_vec_);
     const Dtype* data = this->blob_top_->cpu_data();
 
-	EXPECT_EQ(data[0], 2 * this->blob_bottom_vec_[0]->count());
+	EXPECT_EQ(data[0], 2 * this->blob_bottom_vec_[0]->shape(1));
   } else {
     LOG(ERROR) << "Skipping test due to old architecture.";
   }

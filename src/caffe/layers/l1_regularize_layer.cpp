@@ -41,6 +41,7 @@ void L1RegularizeLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom, c
 	const int count = bottom[0]->count();
 	caffe_cpu_sign(count, bottom[0]->cpu_data(), temp_.mutable_cpu_data());
 	caffe_cpu_gemm(CblasNoTrans, CblasNoTrans, 1, 1, count, (Dtype)1., temp_.cpu_data(), bottom[0]->cpu_data(), (Dtype)0., top[0]->mutable_cpu_data());
+	*top[0]->mutable_cpu_data() /= N_;
 }
 
 template <typename Dtype>
@@ -48,7 +49,7 @@ void L1RegularizeLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
     const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom) {
 	const int count = bottom[0]->count();
 	if( propagate_down[0] ) {
-		caffe_axpy(count, top[0]->cpu_diff()[0], temp_.mutable_cpu_data(),bottom[0]->mutable_cpu_diff());
+		caffe_axpy(count, top[0]->cpu_diff()[0] / N_, temp_.mutable_cpu_data(),bottom[0]->mutable_cpu_diff());
 	}
 }
 
