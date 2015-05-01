@@ -332,8 +332,9 @@ message LayerParameter {
   optional TanHParameter tanh_param = 127;
   optional ThresholdParameter threshold_param = 128;
   optional WindowDataParameter window_data_param = 129;
-  optional RegularizeParameter regularize_param = 132;
+  optional RegularizeParameter regularize_param = 132; //TODO : Change name to TreeGuiededGroupParameter
   optional SuperCategoryParameter super_category_param= 133;
+  optional RegularizeParameter_2 regularize_2_param = 134;
 }
 
 // Message that stores parameters used to apply transformation
@@ -799,6 +800,10 @@ message SuperCategoryParameter {
     CUDNN = 2;
   }
   optional Engine engine = 3 [default = DEFAULT];
+}
+
+message RegularizeParameter_2 {
+	optional float lambda = 1 [default = 0.001];
 }
 
 // DEPRECATED: use LayerParameter.

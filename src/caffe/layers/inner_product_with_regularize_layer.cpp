@@ -79,7 +79,7 @@ void InnerProductWithRegularizeLayer<Dtype>::Backward_cpu(const vector<Blob<Dtyp
 
 	vector<bool> regu_prop_down;
 	regu_prop_down.resize(1);
-	regu_prop_down[0] = propagate_down[1];
+	regu_prop_down[0] = true;
 
 	(static_cast<L1RegularizeLayer<Dtype> *>(regularize_layer_.get()))->Backward_cpu(regu_top,regu_prop_down,regu_bot);
 }

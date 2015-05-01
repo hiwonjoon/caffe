@@ -15,7 +15,7 @@ namespace caffe {
 
 template <typename Dtype>
 void RegularizeResultLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& bottom, const vector<Blob<Dtype>*>& top) {
-	
+	lambda_ = this->layer_param_.regularize_2_param().lambda();
 }
 template <typename Dtype>
 void RegularizeResultLayer<Dtype>::Reshape(const vector<Blob<Dtype>*>& bottom, const vector<Blob<Dtype>*>& top) {
@@ -30,7 +30,8 @@ template <typename Dtype>
 void RegularizeResultLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
     const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom) {
 	if( propagate_down[0] ) {
-		bottom[0]->mutable_cpu_diff()[0] = top[0]->cpu_diff()[0];
+		const Dtype loss_weight = top[0]->cpu_diff()[0];
+		bottom[0]->mutable_cpu_diff()[0] = top[0]->cpu_data()[0] * loss_weight * lambda_;
 	}
 }
 INSTANTIATE_CLASS(RegularizeResultLayer);
