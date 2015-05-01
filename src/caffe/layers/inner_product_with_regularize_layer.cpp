@@ -16,7 +16,7 @@ namespace caffe {
 template <typename Dtype>
 void InnerProductWithRegularizeLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& bottom, const vector<Blob<Dtype>*>& top) {
 	InnerProductLayer<Dtype>::LayerSetUp(bottom,top);
-	regularize_layer_.reset(new RegularizeLayer<Dtype>(this->layer_param_));
+	regularize_layer_.reset(new L1RegularizeLayer<Dtype>(this->layer_param_));
 	
 	vector<Blob<Dtype>*> regu_bot;
 	regu_bot.resize(1);
@@ -31,7 +31,7 @@ void InnerProductWithRegularizeLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>
 	//blob sharing
 	this->blobs_.insert(this->blobs_.end(), regularize_layer_->blobs().begin(), regularize_layer_->blobs().end());
 	//propagate down parameter sharing
-	this->param_propagate_down_.insert(this->param_propagate_down_.end(), static_cast<RegularizeLayer<Dtype>*>(regularize_layer_.get())->param_propagate_down_.begin(), static_cast<RegularizeLayer<Dtype>*>(regularize_layer_.get())->param_propagate_down_.end());
+	this->param_propagate_down_.insert(this->param_propagate_down_.end(), static_cast<L1RegularizeLayer<Dtype>*>(regularize_layer_.get())->param_propagate_down_.begin(), static_cast<L1RegularizeLayer<Dtype>*>(regularize_layer_.get())->param_propagate_down_.end());
 }
 
 template <typename Dtype>
@@ -61,7 +61,7 @@ void InnerProductWithRegularizeLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype
 	regu_top.resize(1);
 	regu_top[0] = top[1];
 
-	(static_cast<RegularizeLayer<Dtype> *>(regularize_layer_.get()))->Forward_cpu(regu_bot,regu_top);
+	(static_cast<L1RegularizeLayer<Dtype> *>(regularize_layer_.get()))->Forward_cpu(regu_bot,regu_top);
 }
 
 template <typename Dtype>
@@ -81,7 +81,7 @@ void InnerProductWithRegularizeLayer<Dtype>::Backward_cpu(const vector<Blob<Dtyp
 	regu_prop_down.resize(1);
 	regu_prop_down[0] = propagate_down[1];
 
-	(static_cast<RegularizeLayer<Dtype> *>(regularize_layer_.get()))->Backward_cpu(regu_top,regu_prop_down,regu_bot);
+	(static_cast<L1RegularizeLayer<Dtype> *>(regularize_layer_.get()))->Backward_cpu(regu_top,regu_prop_down,regu_bot);
 }
 #ifdef CPU_ONLY
 //STUB_GPU(InnerProductWithRegularizeLayer);

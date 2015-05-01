@@ -18,7 +18,7 @@ class InnerProductWithRegularizeLayerTest : public MultiDeviceTest<TypeParam> {
   typedef typename TypeParam::Dtype Dtype;
  protected:
   InnerProductWithRegularizeLayerTest()
-      : blob_bottom_(new Blob<Dtype>(1, 1, 1, 11)),
+      : blob_bottom_(new Blob<Dtype>(10, 5, 3, 3)),
         blob_top_(new Blob<Dtype>()) ,
         blob_top_loss_(new Blob<Dtype>()) {
     // fill the values
@@ -50,39 +50,18 @@ TYPED_TEST(InnerProductWithRegularizeLayerTest, TestSetup) {
 	  layer_param.mutable_inner_product_param();
 	inner_product_param->set_num_output(2);
 
-	RegularizeParameter* regu_param =
-		layer_param.mutable_regularize_param();
-	RegularizeParameter::TreeScheme * root = regu_param->mutable_root();
-	root->set_node_num(1);
-	RegularizeParameter::TreeScheme * child1 = root->add_children();
-	child1->set_node_num(2);
-	child1->set_output_index(1);
-	RegularizeParameter::TreeScheme * child2 = root->add_children();
-	child2->set_node_num(3);
-	child2->set_output_index(2);
-
-	//regu_param->mutable_weight_filler()->set_type("constant");
-	//regu_param->mutable_weight_filler()->set_value(0.5);
-	regu_param->mutable_weight_filler()->set_type("uniform");
-	regu_param->mutable_weight_filler()->set_min(1);
-	regu_param->mutable_weight_filler()->set_max(2);
-
 	shared_ptr<InnerProductLayer<Dtype> > layer(
 	  new InnerProductWithRegularizeLayer<Dtype>(layer_param));
 	layer->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
-	EXPECT_EQ(this->blob_top_->num(), 1);
+	EXPECT_EQ(this->blob_top_->num(), 10);
+	EXPECT_EQ(this->blob_top_->channels(), 2);
 	EXPECT_EQ(this->blob_top_->height(), 1);
 	EXPECT_EQ(this->blob_top_->width(), 1);
-	EXPECT_EQ(this->blob_top_->channels(), 2);
 	EXPECT_EQ(this->blob_top_loss_->num(), 1);
 	EXPECT_EQ(this->blob_top_loss_->height(), 1);
 	EXPECT_EQ(this->blob_top_loss_->width(), 1);
 	EXPECT_EQ(this->blob_top_loss_->channels(), 1);
-	EXPECT_EQ(layer->blobs().size(),3);
-	EXPECT_EQ(layer->blobs()[0]->count(0,1),2);
-	EXPECT_EQ(layer->blobs()[0]->count(1,2),11);
-	EXPECT_EQ(layer->blobs()[1]->count(0,1),2);
-	EXPECT_EQ(layer->blobs()[2]->count(),3);	//expect regularize blobs size is equal to # of nodes.
+	EXPECT_EQ(layer->blobs().size(),2);
 }
 
 TYPED_TEST(InnerProductWithRegularizeLayerTest, TestForward) {
@@ -97,34 +76,6 @@ TYPED_TEST(InnerProductWithRegularizeLayerTest, TestForward) {
     inner_product_param->mutable_bias_filler()->set_type("uniform");
     inner_product_param->mutable_bias_filler()->set_min(1);
     inner_product_param->mutable_bias_filler()->set_max(2);
-	//Regularizeparameter Setting
-	RegularizeParameter* regu_param = 
-		layer_param.mutable_regularize_param();
-	RegularizeParameter::TreeScheme * root = regu_param->mutable_root();
-	root->set_node_num(1);
-	RegularizeParameter::TreeScheme * child1 = root->add_children();
-	child1->set_node_num(2);
-
-	RegularizeParameter::TreeScheme * child1_1 = child1->add_children();
-	child1_1->set_node_num(3);
-	child1_1->set_output_index(1);
-
-	RegularizeParameter::TreeScheme * child1_2 = child1->add_children();
-	child1_2->set_node_num(4);
-
-	RegularizeParameter::TreeScheme * child1_2_1 = child1_2->add_children();
-	child1_2_1->set_node_num(6);
-	child1_2_1->set_output_index(2);
-
-	RegularizeParameter::TreeScheme * child2 = root->add_children();
-	child2->set_node_num(5);
-	child2->set_output_index(3);
-
-	//regu_param->mutable_weight_filler()->set_type("constant");
-	//regu_param->mutable_weight_filler()->set_value(0.5);
-	regu_param->mutable_weight_filler()->set_type("uniform");
-	regu_param->mutable_weight_filler()->set_min(1);
-	regu_param->mutable_weight_filler()->set_max(2);
 
     shared_ptr<Layer<Dtype> > layer(
         new InnerProductWithRegularizeLayer<Dtype>(layer_param));
@@ -151,38 +102,10 @@ TYPED_TEST(InnerProductWithRegularizeLayerTest, TestGradient) {
     inner_product_param->mutable_bias_filler()->set_type("uniform");
     inner_product_param->mutable_bias_filler()->set_min(1);
     inner_product_param->mutable_bias_filler()->set_max(2);
-	//Regularizeparameter Setting
-	RegularizeParameter* regu_param = 
-		layer_param.mutable_regularize_param();
-	RegularizeParameter::TreeScheme * root = regu_param->mutable_root();
-	root->set_node_num(1);
-	RegularizeParameter::TreeScheme * child1 = root->add_children();
-	child1->set_node_num(2);
-
-	RegularizeParameter::TreeScheme * child1_1 = child1->add_children();
-	child1_1->set_node_num(3);
-	child1_1->set_output_index(1);
-
-	RegularizeParameter::TreeScheme * child1_2 = child1->add_children();
-	child1_2->set_node_num(4);
-
-	RegularizeParameter::TreeScheme * child1_2_1 = child1_2->add_children();
-	child1_2_1->set_node_num(6);
-	child1_2_1->set_output_index(2);
-
-	RegularizeParameter::TreeScheme * child2 = root->add_children();
-	child2->set_node_num(5);
-	child2->set_output_index(3);
-
-	//regu_param->mutable_weight_filler()->set_type("constant");
-	//regu_param->mutable_weight_filler()->set_value(0.5);
-	regu_param->mutable_weight_filler()->set_type("uniform");
-	regu_param->mutable_weight_filler()->set_min(1);
-	regu_param->mutable_weight_filler()->set_max(2);
 
     shared_ptr<Layer<Dtype> > layer(
         new InnerProductWithRegularizeLayer<Dtype>(layer_param));
-    GradientChecker<Dtype> checker(1e-2, 1e-1);
+    GradientChecker<Dtype> checker(1e-2, 1e-2);
     checker.CheckGradientExhaustive(layer.get(), this->blob_bottom_vec_, this->blob_top_vec_);
 }
 }

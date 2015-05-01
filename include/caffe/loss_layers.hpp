@@ -849,6 +849,44 @@ class RegularizeLayer : public LossLayer<Dtype> {
 };
 
 
+/**
+ * @brief Taks a feature vector and regularize.
+ */
+template <typename Dtype>
+class L1RegularizeLayer : public LossLayer<Dtype> {
+ public:
+  explicit L1RegularizeLayer(const LayerParameter& param)
+      : LossLayer<Dtype>(param) {}
+  virtual void LayerSetUp(
+      const vector<Blob<Dtype>*>& bottom, const vector<Blob<Dtype>*>& top);
+  virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+
+  virtual inline int ExactNumTopBlobs() const { return 1; }
+  virtual inline const char* type() const { return "L1Regularize"; }
+  virtual inline int ExactNumBottomBlobs() const { return 1; }
+
+ protected:
+  virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+  //virtual void Forward_gpu(const vector<Blob<Dtype>*>& bottom,
+  //    const vector<Blob<Dtype>*>& top);
+  virtual void Backward_cpu(const vector<Blob<Dtype>*>& top,
+      const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
+  //virtual void Backward_gpu(const vector<Blob<Dtype>*>& top,
+  //    const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
+  
+  int N_;
+  int K_;
+
+ private :
+  Blob<Dtype> temp_;
+
+
+  friend class InnerProductWithRegularizeLayer<Dtype>;
+};
+
+
 }  // namespace caffe
 
 #endif  // CAFFE_LOSS_LAYERS_HPP_
