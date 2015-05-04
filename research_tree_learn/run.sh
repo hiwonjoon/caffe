@@ -32,13 +32,13 @@ fi
 
 echo Using GPU '#'$gpu_num.
 
-count=($(ls -1 ./ | grep .caffemodel | wc -l))
+count=($(ls -1 ./ | grep base.caffemodel | wc -l))
 if [ $count -ne "1" ]
 then
 	echo "There are no caffemodel provided."
 	exit 1
 fi
-model=($(ls -1 ./*.caffemodel | tr '\n' '\0' | xargs -0 -n 1 basename | sort -V -r))
+model=($(ls -1 ./base.caffemodel | tr '\n' '\0' | xargs -0 -n 1 basename | sort -V -r))
 
 
 count=($(ls -1 ./ | grep .solverstate | wc -l))
