@@ -84,6 +84,8 @@ template <typename Dtype>
 void OrthogonalRegularizeLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
     const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom) {
 	Dtype top_diff = *top[0]->cpu_diff();
+	
+	caffe_set( bottom[1]->count(), (Dtype)0., bottom[1]->mutable_cpu_diff() );
 
 	const Dtype * temp_data = temp_.cpu_data();
 	for(int j = 0; j < N_lower_; ++j)
@@ -98,17 +100,15 @@ void OrthogonalRegularizeLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& 
 				i_ptr = i;
 			}
 		}
-		caffe_cpu_scale( K_, -1 * top_diff, &bottom[1]->cpu_data()[K_*i_ptr], &temp2_.mutable_cpu_diff()[K_*j]);
+        if( propagate_down[0] ) {
+            caffe_cpu_scale( K_, (Dtype)-1 * top_diff, &bottom[1]->cpu_data()[K_*i_ptr], &bottom[0]->mutable_cpu_diff()[K_*j]);
+        }
 
 		if( propagate_down[1] ) {
 			caffe_copy(K_, &bottom[0]->cpu_data()[K_*j], temp3_.mutable_cpu_data());
 			caffe_cpu_axpby( K_, (Dtype)2, &bottom[1]->cpu_data()[K_*i_ptr], (Dtype)-1, temp3_.mutable_cpu_data());
 			caffe_cpu_axpby( K_, top_diff, temp3_.cpu_data(), (Dtype)1, &bottom[1]->mutable_cpu_diff()[K_*i_ptr]);
 		}
-	}
-
-	if( propagate_down[0] ) {
-		caffe_add( bottom[0]->count(), temp2_.cpu_diff(), bottom[0]->cpu_diff(), bottom[0]->mutable_cpu_diff() );
 	}
 }
 

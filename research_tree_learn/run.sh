@@ -4,6 +4,8 @@ then
 	echo "Specify the directory which you want."
 	exit 1
 fi
+./generate_source.sh
+
 cd $1
 
 filename=$(date +"%F_%H_%M")
