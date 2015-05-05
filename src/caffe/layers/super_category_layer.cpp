@@ -74,6 +74,7 @@ void Tree::GetNodeNumPerLevelAndGiveLabel(std::vector<int>& node_num, std::vecto
 				label_to_index[label] = index;
 		  }
 	  }
+
 	}
 }
 void Tree::MakeTree(Tree * node, const SuperCategoryParameter::TreeScheme * node_param){
@@ -189,15 +190,16 @@ void SuperCategoryLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
 					top_data[j] = bottom_data[j];
 				}
 				else{
-					top_data[j] = -1 * std::numeric_limits<Dtype>::max();
+					int node_label = node->GetLabel();
+					top_data[node_label] = -1 * std::numeric_limits<Dtype>::max();
 					for(auto it = children->cbegin(); it != children->cend(); ++it) {
-						int idx = (*it)->GetIndex() - base_index_per_level_[i+1];
+						int label = (*it)->GetLabel();
 						//caffe_mul<Dtype>(N_,&blob_data[idx*N_],&bottom_data[idx*N_],temp_.mutable_cpu_data());
 						//caffe_add<Dtype>(N_,temp_.cpu_data(),&top_data[j*N_],&top_data[j*N_]);
-						if( top_data[j] < bottom_data[idx] )
+						if( top_data[node_label] < bottom_data[label] )
 						{
-							top_data[j] = bottom_data[idx];
-							mark_data[j] = (int)(idx);
+							top_data[node_label] = bottom_data[label];
+							mark_data[node_label] = label;
 						}
 					}
 				}
@@ -260,8 +262,9 @@ void SuperCategoryLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
 						bottom_diff[j] = top_diff[j];
 					}
 					else {
-						int idx = mark_data[j];
-						bottom_diff[idx] += top_diff[j];
+						int node_label = node->GetLabel();
+						int label = mark_data[node_label];
+						bottom_diff[label] += top_diff[node_label];
 					}
 				}
 			}
