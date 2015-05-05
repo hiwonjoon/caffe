@@ -23,6 +23,6 @@ display: 200
 max_iter: 200000
 # snapshot intermediate results
 snapshot: 10000
-snapshot_prefix: "./supercategory"
+snapshot_prefix: "./cifar100_supercategory"
 # solver mode: CPU or GPU
 solver_mode: GPU

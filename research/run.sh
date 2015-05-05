@@ -6,6 +6,8 @@ then
 fi
 cd $1
 
+./generate_source.sh
+
 count=($(ls -1 ./ | grep .solverstate | wc -l))
 filename=$(date +"%F_%H_%M")
 echo $filename

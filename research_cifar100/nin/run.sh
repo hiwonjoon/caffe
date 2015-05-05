@@ -1,11 +1,4 @@
 #! /bin/bash
-if [ $# -ne 1 ]
-then
-	echo "Specify the directory which you want."
-	exit 1
-fi
-cd $1
-
 count=($(ls -1 ./ | grep .solverstate | wc -l))
 filename=$(date +"%F_%H_%M")
 echo $filename
@@ -42,16 +35,14 @@ then
 			../../build/tools/caffe train -solver ./solver.prototxt -gpu $gpu_num -snapshot ./$list &> $filename.log &
 		;;
 		* )
-			../../build/tools/caffe train -solver ./solver.prototxt -gpu $gpu_num -weights ./base.caffemodel &> $filename.log &
+			../../build/tools/caffe train -solver ./solver.prototxt -gpu $gpu_num -weights ./cifar10_nin.caffemodel &> $filename.log &
 		;;
 	esac
 else
-	../../build/tools/caffe train -solver ./solver.prototxt -gpu $gpu_num -weights ./base.caffemodel &> $filename.log &
+	../../build/tools/caffe train -solver ./solver.prototxt -gpu $gpu_num -weights ./cifar10_nin.caffemodel &> $filename.log &
 fi
 
-cd ..
-
-tail -F $1/$filename.log
+tail -F $filename.log
 
 #script for future use
 
