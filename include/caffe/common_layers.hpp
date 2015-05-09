@@ -335,6 +335,48 @@ private :
 };
 
 template <typename Dtype>
+class SuperCategoryFMLayer : public Layer<Dtype> {
+ public:
+  explicit SuperCategoryFMLayer(const LayerParameter& param)
+      : Layer<Dtype>(param) {}
+  virtual void LayerSetUp(
+      const vector<Blob<Dtype>*>& bottom, const vector<Blob<Dtype>*>& top);
+  virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+
+  virtual inline int ExactNumBottomBlobs() const { return 1; }
+  virtual inline const char* type() const { return "SuperCategoryFM"; }
+
+ protected:
+  virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+  virtual void Forward_gpu(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top)
+  {
+	  return Forward_cpu(bottom,top);
+  }
+  virtual void Backward_cpu(const vector<Blob<Dtype>*>& top,
+      const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
+  virtual void Backward_gpu(const vector<Blob<Dtype>*>& top,
+      const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom)
+  {
+	  return Backward_cpu(top,propagate_down,bottom);
+  }
+
+  int M_; //Batch Size
+  int N_; //Filter Size(# of category)
+  int H_; //height of feature map size
+  int W_; //width of feature map size 
+
+  Tree root_;
+  int depth_;
+  std::vector<int> node_num_per_level_;
+  std::vector<int> base_index_per_level_;
+  std::vector<int> label_to_index_;
+  std::vector<Tree *> serialized_tree_;
+};
+
+template <typename Dtype>
 class SuperCategoryLayer : public Layer<Dtype> {
  public:
   explicit SuperCategoryLayer(const LayerParameter& param)
