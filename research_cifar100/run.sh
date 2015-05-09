@@ -6,8 +6,6 @@ then
 fi
 cd $1
 
-./generate_source.sh
-
 count=($(ls -1 ./ | grep .solverstate | wc -l))
 filename=$(date +"%F_%H_%M")
 echo $filename
@@ -41,14 +39,14 @@ then
 	read -p "You have a solverstate. Do you want to continue learning process from the last(y/n)? " answer
 	case ${answer:0:1} in
 		y|Y )
-			../../build/tools/caffe train -solver ./solver.prototxt -gpu 0 -snapshot ./$list &> $filename.log &
+			../../build/tools/caffe train -solver ./solver.prototxt -gpu $gpu_num -snapshot ./$list &> $filename.log &
 		;;
 		* )
-			../../build/tools/caffe train -solver ./solver.prototxt -weights ../../models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel -gpu $gpu_num &> $filename.log &
+			../../build/tools/caffe train -solver ./solver.prototxt -gpu $gpu_num -weights ./base.caffemodel &> $filename.log &
 		;;
 	esac
 else
-	../../build/tools/caffe train -solver ./solver.prototxt -weights ../../models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel -gpu $gpu_num &> $filename.log &
+	../../build/tools/caffe train -solver ./solver.prototxt -gpu $gpu_num -weights ./base.caffemodel &> $filename.log &
 fi
 
 cd ..
