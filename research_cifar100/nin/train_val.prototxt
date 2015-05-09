@@ -1,16 +1,15 @@
-name: "CIFAR100_full"
+name: "CIFAR10_nin"
 layers {
   name: "cifar"
   type: DATA
   top: "data"
   top: "label"
-  transform_param {
-    mean_file: "/home/nine/datasets/cifar100/mean.binaryproto"
-  }
   data_param {
-    source: "/home/nine/datasets/cifar100/cifar100_train_lmdb"
+	source: "/home/nine/datasets/cifar10/cifar-train-leveldb"
+	backend: LEVELDB
+    #source: "/home/nine/datasets/cifar10_temp/cifar10_train_lmdb"
+	#backend: LMDB
     batch_size: 128
-    backend: LMDB
   }
   include: { phase: TRAIN }
 }
@@ -19,13 +18,12 @@ layers {
   type: DATA
   top: "data"
   top: "label"
-  transform_param {
-    mean_file: "/home/nine/datasets/cifar100/mean.binaryproto"
-  }
   data_param {
-    source: "/home/nine/datasets/cifar100/cifar100_test_lmdb"
+	source: "/home/nine/datasets/cifar10/cifar_test"
+	backend: LEVELDB
+    #source: "/home/nine/datasets/cifar10_temp/cifar10_test_lmdb"
+	#backend: LMDB
     batch_size: 100
-    backend: LMDB
   }
   include: { phase: TEST }
 }
@@ -299,7 +297,7 @@ layers {
   top: "cccp5"
 }
 layers {
-  name: "cccp6_100"
+  name: "cccp6"
   type: CONVOLUTION
   bottom: "cccp5"
   top: "cccp6"
@@ -308,7 +306,7 @@ layers {
   weight_decay: 1
   weight_decay: 0
   convolution_param {
-    num_output: 100
+    num_output: 10
     group: 1
     kernel_size: 1
     weight_filler {
