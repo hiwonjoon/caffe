@@ -19,7 +19,7 @@ layers {
   top: "data"
   top: "label"
   data_param {
-	source: "/home/nine/datasets/cifar10/cifar_test"
+	source: "/home/nine/datasets/cifar10/cifar-test-leveldb"
 	backend: LEVELDB
     #source: "/home/nine/datasets/cifar10_temp/cifar10_test_lmdb"
 	#backend: LMDB
