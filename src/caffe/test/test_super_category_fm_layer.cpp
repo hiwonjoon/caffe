@@ -46,7 +46,7 @@ class SuperCategoryFMLayerTest: public MultiDeviceTest<TypeParam> {
   vector<Blob<Dtype>*> blob_top_vec_hard_;
 
   void SetSuperCategoryParam(SuperCategoryParameter * sup_param) {
-	  blob_bottom_data_->Reshape(3,5,4,4);
+	  blob_bottom_data_->Reshape(2,5,2,2);
 	  // fill the values for bottom
 	  FillerParameter filler_param;
 	  filler_param.set_min(1);
@@ -73,7 +73,7 @@ class SuperCategoryFMLayerTest: public MultiDeviceTest<TypeParam> {
 	  sup_param->mutable_weight_filler()->set_max(2);
   }
   void SetSuperCategoryParam_Hard(SuperCategoryParameter * sup_param) {
-	  blob_bottom_data_->Reshape(3,13,4,4);
+	  blob_bottom_data_->Reshape(2,13,2,2);
 	  // fill the values for bottom
 	  FillerParameter filler_param;
 	  filler_param.set_min(1);
@@ -133,18 +133,18 @@ TYPED_TEST(SuperCategoryFMLayerTest, TestSetUp) {
       new SuperCategoryFMLayer<Dtype>(layer_param));
   layer->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
 
-  EXPECT_EQ(this->blob_top_vec_[0]->num(),3);
+  EXPECT_EQ(this->blob_top_vec_[0]->num(),2);
   EXPECT_EQ(this->blob_top_vec_[0]->channels(),2);
-  EXPECT_EQ(this->blob_top_vec_[0]->height(),4);
-  EXPECT_EQ(this->blob_top_vec_[0]->width(),4);
-  EXPECT_EQ(this->blob_top_vec_[1]->num(),3);
+  EXPECT_EQ(this->blob_top_vec_[0]->height(),2);
+  EXPECT_EQ(this->blob_top_vec_[0]->width(),2);
+  EXPECT_EQ(this->blob_top_vec_[1]->num(),2);
   EXPECT_EQ(this->blob_top_vec_[1]->channels(),4);
-  EXPECT_EQ(this->blob_top_vec_[1]->height(),4);
-  EXPECT_EQ(this->blob_top_vec_[1]->width(),4);
-  EXPECT_EQ(this->blob_top_vec_[2]->num(),3);
+  EXPECT_EQ(this->blob_top_vec_[1]->height(),2);
+  EXPECT_EQ(this->blob_top_vec_[1]->width(),2);
+  EXPECT_EQ(this->blob_top_vec_[2]->num(),2);
   EXPECT_EQ(this->blob_top_vec_[2]->channels(),5);
-  EXPECT_EQ(this->blob_top_vec_[2]->height(),4);
-  EXPECT_EQ(this->blob_top_vec_[2]->width(),4);
+  EXPECT_EQ(this->blob_top_vec_[2]->height(),2);
+  EXPECT_EQ(this->blob_top_vec_[2]->width(),2);
 }
 
 TYPED_TEST(SuperCategoryFMLayerTest, TestForward) {

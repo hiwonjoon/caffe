@@ -351,17 +351,11 @@ class SuperCategoryFMLayer : public Layer<Dtype> {
   virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top);
   virtual void Forward_gpu(const vector<Blob<Dtype>*>& bottom,
-      const vector<Blob<Dtype>*>& top)
-  {
-	  return Forward_cpu(bottom,top);
-  }
+      const vector<Blob<Dtype>*>& top);
   virtual void Backward_cpu(const vector<Blob<Dtype>*>& top,
       const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
   virtual void Backward_gpu(const vector<Blob<Dtype>*>& top,
-      const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom)
-  {
-	  return Backward_cpu(top,propagate_down,bottom);
-  }
+      const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
 
   int M_; //Batch Size
   int N_; //Filter Size(# of category)
@@ -374,6 +368,7 @@ class SuperCategoryFMLayer : public Layer<Dtype> {
   std::vector<int> base_index_per_level_;
   std::vector<int> label_to_index_;
   std::vector<Tree *> serialized_tree_;
+  std::vector<std::vector<shared_ptr<Blob<Dtype> > > > temp_blobs;
 };
 
 template <typename Dtype>
@@ -402,7 +397,7 @@ class SuperCategoryLayer : public Layer<Dtype> {
   virtual void Backward_gpu(const vector<Blob<Dtype>*>& top,
       const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom)
   {
-	  return Backward_cpu(top,propagate_down,bottom);
+	  return Forward_cpu(bottom,top);
   }
 
 
