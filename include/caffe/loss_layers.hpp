@@ -977,7 +977,7 @@ class OrthogonalRegularizeLayer : public LossLayer<Dtype> {
       const vector<Blob<Dtype>*>& top);
 
   virtual inline int ExactNumTopBlobs() const { return 1; }
-  virtual inline const char* type() const { return "OrhogonalRegularize"; }
+  virtual inline const char* type() const { return "OrthogonalRegularize"; }
   virtual inline int ExactNumBottomBlobs() const { return 2; }
 
  protected:
