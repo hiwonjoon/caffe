@@ -26,20 +26,6 @@ void SuperCategoryFMLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& bottom,
 	N_ = bottom[0]->shape(1);
 	H_ = bottom[0]->shape(2);
 	W_ = bottom[0]->shape(3);
-
-	std::vector<int> shape;
-	shape.push_back(M_);
-	shape.push_back(1);
-	shape.push_back(H_);
-	shape.push_back(W_);
-
-	temp_blobs.resize(depth_);
-	for(int i = 0; i < depth_; ++i) {
-		temp_blobs[i].resize(node_num_per_level_[i]);
-		for(int j = 0; j < node_num_per_level_[i]; ++j) {
-			temp_blobs[i][j].reset(new Blob<Dtype>(shape));
-		}
-	}
 }
 
 template <typename Dtype>
@@ -61,42 +47,29 @@ void SuperCategoryFMLayer<Dtype>::Reshape(const vector<Blob<Dtype>*>& bottom,
 template <typename Dtype>
 void SuperCategoryFMLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
     const vector<Blob<Dtype>*>& top) {
-	for(int i = 0; i < depth_; ++i) {
-		for(int j = 0; j < node_num_per_level_[i]; ++j) {
-			if( i == depth_-1 ) {
-				for(int m = 0; m < M_; ++m) {
-					caffe_copy(H_*W_, &bottom[0]->cpu_data()[bottom[0]->offset(m,j)],&temp_blobs[i][j]->mutable_cpu_data()[temp_blobs[i][j]->offset(m)]);
-				}
-			}
-			else
-				caffe_set(temp_blobs[i][j]->count(), (Dtype)0., temp_blobs[i][j]->mutable_cpu_data());
-		}
-	}
-
-	for( int i = depth_-2; i >= 0; --i ) {
-		int base_idx = base_index_per_level_[i];
-		for(int j = 0; j < node_num_per_level_[i]; ++j) {
-			Tree * node = serialized_tree_[base_idx + j];
-			const std::vector<shared_ptr<Tree> >* children = node->GetChildren();
-
-			shared_ptr<Blob<Dtype>> tops = temp_blobs[i][node->GetLabel()];
-			Dtype * top_data = tops->mutable_cpu_data();
-
-			for(auto it = children->cbegin(); it != children->cend(); ++it) {
-				shared_ptr<Blob<Dtype>> bottoms = temp_blobs[i+1][(*it)->GetLabel()];
-				const Dtype * bottom_data = bottoms->cpu_data();
-				caffe_axpy(M_*H_*W_,(Dtype)(1.),bottom_data,top_data);
-			}
-			caffe_scal(M_*H_*W_,(Dtype)(1./children->size()),top_data);
-		}
-	}
+	caffe_copy(bottom[0]->count(), bottom[0]->cpu_data(), top[depth_-1]->mutable_cpu_data());
+	for(int i = 0; i < depth_-1; ++i)
+		caffe_set(top[i]->count(), (Dtype)0., top[i]->mutable_cpu_data());
 
 	for(int m = 0; m < M_; ++m) {
-		for(int i = 0; i < depth_; ++i) {
+		for( int i = depth_-2; i >= 0; --i ) {
+			Blob<Dtype> * tops = top[i];
+			Blob<Dtype> * bottoms = top[i+1];
+
 			int base_idx = base_index_per_level_[i];
 			for(int j = 0; j < node_num_per_level_[i]; ++j) {
 				Tree * node = serialized_tree_[base_idx + j];
-				caffe_copy(H_*W_,&temp_blobs[i][node->GetLabel()]->cpu_data()[temp_blobs[i][node->GetLabel()]->offset(m)],&top[i]->mutable_cpu_data()[top[i]->offset(m,node->GetLabel())]);
+				const std::vector<shared_ptr<Tree> >* children = node->GetChildren();
+
+				Dtype * top_data = &tops->mutable_cpu_data()[tops->offset(m,node->GetLabel())];
+
+				for(auto it = children->cbegin(); it != children->cend(); ++it) {
+					int offset = bottoms->offset(m,(*it)->GetLabel());
+					const Dtype * bottom_data = &bottoms->cpu_data()[offset];
+					caffe_axpy(H_*W_,(Dtype)(1.),bottom_data,top_data);
+				}
+
+				caffe_scal(H_*W_,(Dtype)(1./children->size()),top_data);
 			}
 		}
 	}
@@ -110,39 +83,22 @@ void SuperCategoryFMLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
 		return;
 
 	for(int m = 0; m < M_; ++m) {
-		for(int i = 0; i < depth_; ++i) {
+		for( int i = 0; i < depth_-1; ++i ) {
+			Blob<Dtype> * tops = top[i];
+			Blob<Dtype> * bottoms = top[i+1];
+
 			int base_idx = base_index_per_level_[i];
 			for(int j = 0; j < node_num_per_level_[i]; ++j) {
 				Tree * node = serialized_tree_[base_idx + j];
-				caffe_copy(H_*W_,&top[i]->cpu_diff()[top[i]->offset(m,node->GetLabel())],&temp_blobs[i][node->GetLabel()]->mutable_cpu_diff()[temp_blobs[i][node->GetLabel()]->offset(m)]);
-			}
-		}
-	}
+				const std::vector<shared_ptr<Tree> >* children = node->GetChildren();
+				const Dtype * top_diff = &tops->cpu_diff()[tops->offset(m,node->GetLabel())];
+				for(auto it = children->cbegin(); it != children->cend(); ++it) {
+					int offset = bottoms->offset(m,(*it)->GetLabel());
+					Dtype * bottom_diff = &bottoms->mutable_cpu_diff()[offset];
 
-	for( int i = 0; i < depth_-1; ++i ) {
-		int base_idx = base_index_per_level_[i];
-		for(int j = 0; j < node_num_per_level_[i]; ++j) {
-			Tree * node = serialized_tree_[base_idx + j];
-			const std::vector<shared_ptr<Tree> >* children = node->GetChildren();
+					caffe_axpy(H_*W_,(Dtype)(1./children->size()),top_diff,bottom_diff);	
+				}
 
-			shared_ptr<Blob<Dtype>> tops = temp_blobs[i][node->GetLabel()];
-			const Dtype * top_diff = tops->cpu_diff();
-			for(auto it = children->cbegin(); it != children->cend(); ++it) {
-				shared_ptr<Blob<Dtype>> bottoms = temp_blobs[i+1][(*it)->GetLabel()];
-				Dtype * bottom_diff = bottoms->mutable_cpu_diff();
-
-				caffe_axpy(M_*H_*W_,(Dtype)(1./children->size()),top_diff,bottom_diff);	
-			}
-
-		}
-	}
-
-	for(int m = 0; m < M_; ++m) {
-		for(int i = 0; i < depth_; ++i) {
-			int base_idx = base_index_per_level_[i];
-			for(int j = 0; j < node_num_per_level_[i]; ++j) {
-				Tree * node = serialized_tree_[base_idx + j];
-				caffe_copy(H_*W_,&temp_blobs[i][node->GetLabel()]->cpu_diff()[temp_blobs[i][node->GetLabel()]->offset(m)],&top[i]->mutable_cpu_diff()[top[i]->offset(m,node->GetLabel())]);
 			}
 		}
 	}
