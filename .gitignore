@@ -1,6 +1,8 @@
 ## General
 tags
 *.log
+*.png
+*.pkl
 
 # Compiled Object files
 *.slo
