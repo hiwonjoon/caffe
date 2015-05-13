@@ -403,6 +403,9 @@ class SuperCategoryFMLayer : public Layer<Dtype> {
   std::vector<int> base_index_per_level_;
   std::vector<int> label_to_index_;
   std::vector<Tree *> serialized_tree_;
+
+  EltwiseParameter_EltwiseOp op_;
+  std::vector<shared_ptr<Blob<int> > > mark_;
 };
 
 template <typename Dtype>
