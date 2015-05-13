@@ -298,6 +298,35 @@ class InnerProductWithRegularizeLayer : public InnerProductLayer<Dtype> {
   shared_ptr<Layer<Dtype> > regularize_layer_;
 };
 
+template <typename Dtype>
+class InnerProductForRegularizeLayer : public InnerProductLayer<Dtype> {
+ public:
+  explicit InnerProductForRegularizeLayer(const LayerParameter& param)
+      : InnerProductLayer<Dtype>(param) {}
+  virtual void LayerSetUp(
+      const vector<Blob<Dtype>*>& bottom, const vector<Blob<Dtype>*>& top);
+  virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+
+  virtual inline int ExactNumTopBlobs() const { return 2; } //one for the innerproduct layer output, the other for regularize layer
+  virtual inline const char* type() const { return "InnerProductForRegularize"; }
+
+ protected:
+  virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+  virtual void Forward_gpu(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top)
+  {
+	  return Forward_cpu(bottom,top);
+  }
+  virtual void Backward_cpu(const vector<Blob<Dtype>*>& top,
+      const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
+  virtual void Backward_gpu(const vector<Blob<Dtype>*>& top,
+      const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom)
+  {
+	  return Backward_cpu(top,propagate_down,bottom);
+  }
+};
 //Tree Class for SuperCategory Layer
 //Class Location..?
 class Tree {
@@ -374,6 +403,9 @@ class SuperCategoryFMLayer : public Layer<Dtype> {
   std::vector<int> base_index_per_level_;
   std::vector<int> label_to_index_;
   std::vector<Tree *> serialized_tree_;
+
+  EltwiseParameter_EltwiseOp op_;
+  std::vector<shared_ptr<Blob<int> > > mark_;
 };
 
 template <typename Dtype>
