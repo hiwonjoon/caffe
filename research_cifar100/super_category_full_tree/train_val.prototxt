@@ -1,0 +1,1352 @@
+name: "CIFAR100_nin"
+layer {
+  name: "cifar"
+  type: "Data" 
+  top: "data"
+  top: "label"
+  transform_param {
+    mirror: true
+    crop_size: 26
+  }
+  data_param {
+	source: "/storage/datasets/cifar-100/cifar_train_leveldb_3"
+	backend: LEVELDB
+    #source: "/home/nine/datasets/cifar10_temp/cifar10_train_lmdb"
+	#backend: LMDB
+    batch_size: 256
+  }
+  include: { phase: TRAIN }
+}
+layer {
+  name: "cifar"
+  type: "Data"
+  top: "data"
+  top: "label"
+  transform_param {
+    mirror: false
+    crop_size: 26
+  }
+  data_param {
+	source: "/storage/datasets/cifar-100/cifar_test_leveldb_3"
+	backend: LEVELDB
+    #source: "/home/nine/datasets/cifar10_temp/cifar10_test_lmdb"
+	#backend: LMDB
+    batch_size: 100
+  }
+  include: { phase: TEST }
+}
+layer {
+  name: "conv1"
+  type: "Convolution" 
+  bottom: "data"
+  top: "conv1"
+  param {
+	  lr_mult: 1
+	  decay_mult: 1
+  }
+  param {
+	  lr_mult: 2
+	  decay_mult: 0
+  }
+  convolution_param {
+    num_output: 192
+    pad: 5
+    kernel_size: 5
+    weight_filler {
+      type: "gaussian"
+      std: 0.05
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "relu1"
+  type: "ReLU"
+  bottom: "conv1"
+  top: "conv1"
+}
+layer {
+  name: "cccp1"
+  type: "Convolution" 
+  bottom: "conv1"
+  top: "cccp1"
+  param {
+	  lr_mult: 1
+	  decay_mult: 1
+  }
+  param {
+	  lr_mult: 2
+	  decay_mult: 0
+  }
+  convolution_param {
+    num_output: 160
+    group: 1
+    kernel_size: 1
+    weight_filler {
+      type: "gaussian"
+      std: 0.05
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "relu_cccp1"
+  type: "ReLU"
+  bottom: "cccp1"
+  top: "cccp1"
+}
+layer {
+  name: "cccp2"
+  type: "Convolution" 
+  bottom: "cccp1"
+  top: "cccp2"
+  param {
+	  lr_mult: 1
+	  decay_mult: 1
+  }
+  param {
+	  lr_mult: 2
+	  decay_mult: 0
+  }
+  convolution_param {
+    num_output: 96
+    group: 1
+    kernel_size: 1
+    weight_filler {
+      type: "gaussian"
+      std: 0.05
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "relu_cccp2"
+  type: "ReLU"
+  bottom: "cccp2"
+  top: "cccp2"
+}
+layer {
+  name: "pool1"
+  type: "Pooling"
+  bottom: "cccp2"
+  top: "pool1"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+layer {
+  name: "drop3"
+  type: "Dropout"
+  bottom: "pool1"
+  top: "pool1"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "conv2"
+  type: "Convolution" 
+  bottom: "pool1"
+  top: "conv2"
+  param {
+	  lr_mult: 1
+	  decay_mult: 1
+  }
+  param {
+	  lr_mult: 2
+	  decay_mult: 0
+  }
+  convolution_param {
+    num_output: 192
+    pad: 2
+    kernel_size: 5
+    weight_filler {
+      type: "gaussian"
+      std: 0.05
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "relu2"
+  type: "ReLU"
+  bottom: "conv2"
+  top: "conv2"
+}
+layer {
+  name: "cccp3"
+  type: "Convolution"
+  bottom: "conv2"
+  top: "cccp3"
+  param {
+	  lr_mult: 1
+	  decay_mult: 1
+  }
+  param {
+	  lr_mult: 2
+	  decay_mult: 0
+  }
+  convolution_param {
+    num_output: 192
+    group: 1
+    kernel_size: 1
+    weight_filler {
+      type: "gaussian"
+      std: 0.05
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "relu_cccp3"
+  type: "ReLU" 
+  bottom: "cccp3"
+  top: "cccp3"
+}
+layer {
+  name: "cccp4"
+  type: "Convolution"
+  bottom: "cccp3"
+  top: "cccp4"
+  param {
+	  lr_mult: 1
+	  decay_mult: 1
+  }
+  param {
+	  lr_mult: 2
+	  decay_mult: 0
+  }
+  convolution_param {
+    num_output: 192
+    group: 1
+    kernel_size: 1
+    weight_filler {
+      type: "gaussian"
+      std: 0.05
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "relu_cccp4"
+  type: "ReLU"
+  bottom: "cccp4"
+  top: "cccp4"
+}
+layer {
+  name: "pool2"
+  type: "Pooling" 
+  bottom: "cccp4"
+  top: "pool2"
+  pooling_param {
+    pool: AVE
+    kernel_size: 3
+    stride: 2
+  }
+}
+layer {
+  name: "drop6"
+  type: "Dropout"
+  bottom: "pool2"
+  top: "pool2"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "conv3"
+  type: "Convolution" 
+  bottom: "pool2"
+  top: "conv3"
+  param {
+	  lr_mult: 1
+	  decay_mult: 1
+  }
+  param {
+	  lr_mult: 2
+	  decay_mult: 0
+  }
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    weight_filler {
+      type: "gaussian"
+      std: 0.05
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "relu3"
+  type: "ReLU"
+  bottom: "conv3"
+  top: "conv3"
+}
+layer {
+  name: "cccp5"
+  type: "Convolution" 
+  bottom: "conv3"
+  top: "cccp5"
+  param {
+	  lr_mult: 1
+	  decay_mult: 1
+  }
+  param {
+	  lr_mult: 2
+	  decay_mult: 0
+  }
+  convolution_param {
+    num_output: 192
+    group: 1
+    kernel_size: 1
+    weight_filler {
+      type: "gaussian"
+      std: 0.05
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "relu_cccp5"
+  type: "ReLU"
+  bottom: "cccp5"
+  top: "cccp5"
+}
+layer {
+  name: "cccp6"
+  type: "Convolution"
+  bottom: "cccp5"
+  top: "cccp6"
+  param {
+	  lr_mult: 0.1
+	  decay_mult: 1
+  }
+  param {
+	  lr_mult: 0.1
+	  decay_mult: 0
+  }
+  convolution_param {
+    num_output: 100
+    group: 1
+    kernel_size: 1
+    weight_filler {
+      type: "gaussian"
+      std: 0.05
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "relu_cccp6"
+  type: "ReLU"
+  bottom: "cccp6"
+  top: "cccp6"
+}
+layer {
+	name: "super_category"
+	type: "SuperCategoryFM"
+	bottom: "cccp6"
+	top: "layer1"
+	top: "layer2"
+	top: "layer3"
+	top: "layer4"
+	top: "layer5"
+	top: "layer6"
+	top: "layer7"
+	top: "layer8"
+	eltwise_param {
+		operation: MIN	
+	}
+  super_category_param{
+root{
+ 	children:{
+		children:{
+			children:{ #invertebrate
+				children:{ #arthropod
+					children:{ #insect
+						children:{
+							label : 7 # beetle
+						}
+						children:{
+							label : 6 # bee
+						}
+						children:{
+							label : 14 # butterfly
+						}
+						children:{
+							label : 24 # cockroach
+						}
+						children:{
+							label : 18 # caterpillar
+						}
+					} #insect end
+					children:{
+						label : 79 # spider
+					}
+					children:{ #decapod crustacean
+						children:{ 
+							label : 26 # crab
+						}
+						children:{
+							label : 45 # lobster
+						}
+					} #decapod crustacean end
+				} #arthropod end
+				children:{
+					label : 99 # worm
+				}
+				children:{
+					label : 77 # snail
+				}
+			} #invertebrate end 
+			children:{ #vertebrate
+				children:{ #mammal
+					children:{ #placental
+						children:{ #rodent
+							children:{
+								label : 4 # beaver
+							}
+							children:{
+								label : 63 # porcupine
+							}
+							children:{
+								label : 36 # hamster
+							}
+							children:{
+								label : 50 # mouse
+							}
+							children:{
+								label : 80 # squirrel
+							} #rodent end
+						}
+						children:{ #aquatic
+							children:{
+								label : 72 # seal
+							}
+							children:{
+								label : 30 # dolphin
+							}
+							children:{
+								label : 95 # whale
+							}                            
+						}
+						children:{ #carnivore
+							children:{ #musteline
+								children:{
+									label : 55 # otter
+								}
+								children:{
+									label : 75 # skunk
+								}
+							} #musteline end
+							children:{
+								label : 3 # bear
+							}
+							children:{ #canine
+								children:{
+									label : 97 # wolf
+								}
+								children:{
+									label : 34 # fox
+								}
+							} #canine end
+							children:{
+								label : 66 # raccoon
+							}
+							children:{ #big cat
+								children:{
+									label : 42 # leopard
+								}
+								children:{
+									label : 43 # lion
+								}
+								children:{
+									label : 88 # tiger
+								}
+							} #big cat end
+						} #carnivore end
+						children:{
+							label : 31 # elephant
+						}
+						children:{
+							label : 74 # shrew
+						}
+						children:{
+							label : 65 # rabbit
+						}
+						children:{
+							label : 21 # chimpanzee
+						}
+						children:{ #even-toed
+							children:{
+								label : 15 # camel
+							}
+							children:{
+								label : 19 # cattle
+							}
+						}
+					} #placental end
+					children:{ #marsupial
+						children:{
+							label : 38 # kangaroo
+						}
+						children:{
+							label : 64 # possum
+						}
+					} #marsupial end
+				}
+				children:{ #reptile
+					children:{ #diapsid
+						children:{
+							label : 78 # snake
+						}
+						children:{
+							label : 27 # crocodile
+						}
+						children:{
+							label : 29 # dinosaur
+						}
+						children:{
+							label : 44 # lizard
+						}
+					}
+					children:{
+						label : 93 # turtle
+					}
+				} #reptile end
+				children:{ #fish
+					children:{ #elasmobranch
+						children:{
+							label : 67 # ray
+						}
+						children:{
+							label : 73 # shark
+						}
+					}
+					children:{ #teleost fish
+						children:{ #soft-finned-fish
+							children:{
+								label : 91 # trout
+							}
+							children:{
+								label : 1 # aquarium_fish
+							}
+						}
+						children:{
+							label : 32 # flatfish
+						}
+					}
+				} #fish end
+			} #vertebrate end
+		} #animal end
+		children:{ #Misc
+			children:{
+				label : 68 # road
+			}
+			children:{
+				label : 23 # cloud
+			}
+			children:{
+				label : 60 # plain
+			}
+			children:{ #person
+				children:{ #adult
+					children:{
+						label : 35 # girl
+					}
+					children:{
+						label : 11 # boy
+					}
+					children:{
+						label : 2 # baby
+					}
+				}
+				children:{
+					label : 98 # woman
+				}
+				children:{
+					label : 46 # man
+				}
+			}
+			children:{ #vascular plant
+				children:{ #flower 
+					children:{ 
+						label : 70 # rose
+					}
+					children:{
+						label : 92 # tulip
+					}
+					children:{
+						label : 62 # poppy
+					}
+					children:{
+						label : 82 # sunflower
+					}
+					children:{
+						label : 54 # orchid
+					}
+				}
+				children:{ #tree
+					children:{
+						label : 52 # oak_tree
+					}
+					children:{
+						label : 56 # palm_tree
+					}
+					children:{
+						label : 96 # willow_tree
+					}
+					children:{
+						label : 47 # maple_tree
+					}
+					children:{
+						label : 59 # pine_tree
+					}
+				} #tree end
+			} #vascular plant end 
+		} #misc end end
+		children:{
+			children:{ #container
+				children:{
+					label : 16 # can
+				}
+				children:{
+					label : 28 # cup
+				}
+				children:{
+					label : 9 # bottle
+				}
+				children:{
+					label : 10 # bowl
+				}    
+				children:{
+					label : 61 # plate
+				}
+			}
+			children:{ #device
+				children:{
+					label : 39 # keyboard
+				}
+				children:{
+					label : 40 # lamp
+				}
+				children:{
+					label : 22 # clock
+				}
+			}
+			children:{ #conveyance
+				children:{ #vehicle
+					children:{ #wheeled-vechicle
+						children:{ 
+							label : 8 # bicycle
+						}
+						children:{ #self-propelled vehicle
+							children:{
+								children:{
+									label : 48 # motorcycle
+								}
+								children:{
+									label : 58 # pickup_truck
+								}
+							}
+							children:{
+								label : 81 # streetcar
+							}
+							children:{
+								label : 89 # tractor
+							}
+							children:{
+								label : 85 # tank
+							}
+						}
+					} #wheeled-vechicle end
+					children:{
+						label : 69 # rocket
+					}
+				}
+				children:{ #public transport
+					children:{
+						label : 13 # bus
+					}
+					children:{
+						label : 90 # train
+					}
+				}
+			}
+			children:{ #electronic equipment
+				children:{
+					label : 86 # telephone
+				}
+				children:{
+					label : 87 # television
+				}
+			}
+			children:{
+				label : 41 # lawn_mower
+			}
+			children:{ #furniture
+				children:{
+					label : 84 # table
+				}
+				children:{
+					label : 94 # wardrobe
+				}
+				children:{
+					label : 20 # chair
+				}
+				children:{
+					label : 25 # couch
+				}
+				children:{
+					label : 5 # bed
+				}                
+			}
+		} #industry mentary
+		children:{ #vegetable
+			children:{
+				label : 51 # mushroom
+			}
+			children:{
+				label : 83 # sweet_pepper
+			}
+		}
+		children:{ #structure
+			children:{
+				label : 12 # bridge
+			}
+			children:{
+				label : 76 # skyscraper
+			}
+			children:{
+				label : 17 # castle
+			}
+			children:{
+				label : 37 # house
+			}
+		}
+		children:{ #geological formation
+			children:{
+				label : 33 # forest
+			}
+			children:{
+				label : 49 # mountain
+			}
+			children:{
+				label : 71 # sea
+			}
+		}
+		children:{ #edible fruit
+			children:{
+				label : 0 # apple
+			}
+			children:{
+				label : 57 # pear
+			}
+			children:{
+				label : 53 # orange
+			}
+		}
+	}
+}
+
+  }
+}
+layer {
+  name: "super_category_label"
+  type: "SuperCategoryLabel"
+  bottom: "label"
+  top: "label_1"
+  top: "label_2"
+  top: "label_3"
+  top: "label_4"
+  top: "label_5"
+  top: "label_6"
+  top: "label_7"
+  top: "label_8"
+  super_category_param{
+root{
+ 	children:{
+		children:{
+			children:{ #invertebrate
+				children:{ #arthropod
+					children:{ #insect
+						children:{
+							label : 7 # beetle
+						}
+						children:{
+							label : 6 # bee
+						}
+						children:{
+							label : 14 # butterfly
+						}
+						children:{
+							label : 24 # cockroach
+						}
+						children:{
+							label : 18 # caterpillar
+						}
+					} #insect end
+					children:{
+						label : 79 # spider
+					}
+					children:{ #decapod crustacean
+						children:{ 
+							label : 26 # crab
+						}
+						children:{
+							label : 45 # lobster
+						}
+					} #decapod crustacean end
+				} #arthropod end
+				children:{
+					label : 99 # worm
+				}
+				children:{
+					label : 77 # snail
+				}
+			} #invertebrate end 
+			children:{ #vertebrate
+				children:{ #mammal
+					children:{ #placental
+						children:{ #rodent
+							children:{
+								label : 4 # beaver
+							}
+							children:{
+								label : 63 # porcupine
+							}
+							children:{
+								label : 36 # hamster
+							}
+							children:{
+								label : 50 # mouse
+							}
+							children:{
+								label : 80 # squirrel
+							} #rodent end
+						}
+						children:{ #aquatic
+							children:{
+								label : 72 # seal
+							}
+							children:{
+								label : 30 # dolphin
+							}
+							children:{
+								label : 95 # whale
+							}                            
+						}
+						children:{ #carnivore
+							children:{ #musteline
+								children:{
+									label : 55 # otter
+								}
+								children:{
+									label : 75 # skunk
+								}
+							} #musteline end
+							children:{
+								label : 3 # bear
+							}
+							children:{ #canine
+								children:{
+									label : 97 # wolf
+								}
+								children:{
+									label : 34 # fox
+								}
+							} #canine end
+							children:{
+								label : 66 # raccoon
+							}
+							children:{ #big cat
+								children:{
+									label : 42 # leopard
+								}
+								children:{
+									label : 43 # lion
+								}
+								children:{
+									label : 88 # tiger
+								}
+							} #big cat end
+						} #carnivore end
+						children:{
+							label : 31 # elephant
+						}
+						children:{
+							label : 74 # shrew
+						}
+						children:{
+							label : 65 # rabbit
+						}
+						children:{
+							label : 21 # chimpanzee
+						}
+						children:{ #even-toed
+							children:{
+								label : 15 # camel
+							}
+							children:{
+								label : 19 # cattle
+							}
+						}
+					} #placental end
+					children:{ #marsupial
+						children:{
+							label : 38 # kangaroo
+						}
+						children:{
+							label : 64 # possum
+						}
+					} #marsupial end
+				}
+				children:{ #reptile
+					children:{ #diapsid
+						children:{
+							label : 78 # snake
+						}
+						children:{
+							label : 27 # crocodile
+						}
+						children:{
+							label : 29 # dinosaur
+						}
+						children:{
+							label : 44 # lizard
+						}
+					}
+					children:{
+						label : 93 # turtle
+					}
+				} #reptile end
+				children:{ #fish
+					children:{ #elasmobranch
+						children:{
+							label : 67 # ray
+						}
+						children:{
+							label : 73 # shark
+						}
+					}
+					children:{ #teleost fish
+						children:{ #soft-finned-fish
+							children:{
+								label : 91 # trout
+							}
+							children:{
+								label : 1 # aquarium_fish
+							}
+						}
+						children:{
+							label : 32 # flatfish
+						}
+					}
+				} #fish end
+			} #vertebrate end
+		} #animal end
+		children:{ #Misc
+			children:{
+				label : 68 # road
+			}
+			children:{
+				label : 23 # cloud
+			}
+			children:{
+				label : 60 # plain
+			}
+			children:{ #person
+				children:{ #adult
+					children:{
+						label : 35 # girl
+					}
+					children:{
+						label : 11 # boy
+					}
+					children:{
+						label : 2 # baby
+					}
+				}
+				children:{
+					label : 98 # woman
+				}
+				children:{
+					label : 46 # man
+				}
+			}
+			children:{ #vascular plant
+				children:{ #flower 
+					children:{ 
+						label : 70 # rose
+					}
+					children:{
+						label : 92 # tulip
+					}
+					children:{
+						label : 62 # poppy
+					}
+					children:{
+						label : 82 # sunflower
+					}
+					children:{
+						label : 54 # orchid
+					}
+				}
+				children:{ #tree
+					children:{
+						label : 52 # oak_tree
+					}
+					children:{
+						label : 56 # palm_tree
+					}
+					children:{
+						label : 96 # willow_tree
+					}
+					children:{
+						label : 47 # maple_tree
+					}
+					children:{
+						label : 59 # pine_tree
+					}
+				} #tree end
+			} #vascular plant end 
+		} #misc end end
+		children:{
+			children:{ #container
+				children:{
+					label : 16 # can
+				}
+				children:{
+					label : 28 # cup
+				}
+				children:{
+					label : 9 # bottle
+				}
+				children:{
+					label : 10 # bowl
+				}    
+				children:{
+					label : 61 # plate
+				}
+			}
+			children:{ #device
+				children:{
+					label : 39 # keyboard
+				}
+				children:{
+					label : 40 # lamp
+				}
+				children:{
+					label : 22 # clock
+				}
+			}
+			children:{ #conveyance
+				children:{ #vehicle
+					children:{ #wheeled-vechicle
+						children:{ 
+							label : 8 # bicycle
+						}
+						children:{ #self-propelled vehicle
+							children:{
+								children:{
+									label : 48 # motorcycle
+								}
+								children:{
+									label : 58 # pickup_truck
+								}
+							}
+							children:{
+								label : 81 # streetcar
+							}
+							children:{
+								label : 89 # tractor
+							}
+							children:{
+								label : 85 # tank
+							}
+						}
+					} #wheeled-vechicle end
+					children:{
+						label : 69 # rocket
+					}
+				}
+				children:{ #public transport
+					children:{
+						label : 13 # bus
+					}
+					children:{
+						label : 90 # train
+					}
+				}
+			}
+			children:{ #electronic equipment
+				children:{
+					label : 86 # telephone
+				}
+				children:{
+					label : 87 # television
+				}
+			}
+			children:{
+				label : 41 # lawn_mower
+			}
+			children:{ #furniture
+				children:{
+					label : 84 # table
+				}
+				children:{
+					label : 94 # wardrobe
+				}
+				children:{
+					label : 20 # chair
+				}
+				children:{
+					label : 25 # couch
+				}
+				children:{
+					label : 5 # bed
+				}                
+			}
+		} #industry mentary
+		children:{ #vegetable
+			children:{
+				label : 51 # mushroom
+			}
+			children:{
+				label : 83 # sweet_pepper
+			}
+		}
+		children:{ #structure
+			children:{
+				label : 12 # bridge
+			}
+			children:{
+				label : 76 # skyscraper
+			}
+			children:{
+				label : 17 # castle
+			}
+			children:{
+				label : 37 # house
+			}
+		}
+		children:{ #geological formation
+			children:{
+				label : 33 # forest
+			}
+			children:{
+				label : 49 # mountain
+			}
+			children:{
+				label : 71 # sea
+			}
+		}
+		children:{ #edible fruit
+			children:{
+				label : 0 # apple
+			}
+			children:{
+				label : 57 # pear
+			}
+			children:{
+				label : 53 # orange
+			}
+		}
+	}
+}
+
+  }
+}
+layer {
+  name: "pool_layer1" #most highest category
+  type: "Pooling" 
+  bottom: "layer1"
+  top: "pool_layer1"
+  pooling_param {
+    pool: AVE
+    kernel_size: 8
+    stride: 1
+  }
+}
+layer {
+  name: "pool_layer2"
+  type: "Pooling" 
+  bottom: "layer2"
+  top: "pool_layer2"
+  pooling_param {
+    pool: AVE
+    kernel_size: 8
+    stride: 1
+  }
+}
+layer {
+  name: "pool_layer3"
+  type: "Pooling" 
+  bottom: "layer3"
+  top: "pool_layer3"
+  pooling_param {
+    pool: AVE
+    kernel_size: 8
+    stride: 1
+  }
+}
+layer {
+  name: "pool_layer4"
+  type: "Pooling" 
+  bottom: "layer4"
+  top: "pool_layer4"
+  pooling_param {
+    pool: AVE
+    kernel_size: 8
+    stride: 1
+  }
+}
+layer {
+  name: "pool_layer5"
+  type: "Pooling" 
+  bottom: "layer5"
+  top: "pool_layer5"
+  pooling_param {
+    pool: AVE
+    kernel_size: 8
+    stride: 1
+  }
+}
+layer {
+  name: "pool_layer6"
+  type: "Pooling" 
+  bottom: "layer6"
+  top: "pool_layer6"
+  pooling_param {
+    pool: AVE
+    kernel_size: 8
+    stride: 1
+  }
+}
+layer {
+  name: "pool_layer7"
+  type: "Pooling" 
+  bottom: "layer7"
+  top: "pool_layer7"
+  pooling_param {
+    pool: AVE
+    kernel_size: 8
+    stride: 1
+  }
+}
+layer {
+  name: "pool_layer8" #most fine grained cateogory == label
+  type: "Pooling" 
+  bottom: "layer8"
+  top: "pool_layer8"
+  pooling_param {
+    pool: AVE
+    kernel_size: 8
+    stride: 1
+  }
+}
+layer {
+  name: "loss8"
+  type: "SoftmaxWithLoss"
+  bottom: "pool_layer8"
+  bottom: "label_8"
+  top: "loss8"
+  loss_weight: 1
+}
+layer {
+  name: "loss7"
+  type: "SoftmaxWithLoss"
+  bottom: "pool_layer7"
+  bottom: "label_7"
+  top: "loss7"
+  loss_weight: 1
+}
+layer {
+  name: "loss6"
+  type: "SoftmaxWithLoss"
+  bottom: "pool_layer6"
+  bottom: "label_6"
+  top: "loss6"
+  loss_weight: 0
+}
+layer {
+  name: "loss5"
+  type: "SoftmaxWithLoss"
+  bottom: "pool_layer5"
+  bottom: "label_5"
+  top: "loss5"
+  loss_weight: 0
+}
+layer {
+  name: "loss4"
+  type: "SoftmaxWithLoss"
+  bottom: "pool_layer4"
+  bottom: "label_4"
+  top: "loss4"
+  loss_weight: 0
+}
+layer {
+  name: "loss3"
+  type: "SoftmaxWithLoss"
+  bottom: "pool_layer3"
+  bottom: "label_3"
+  top: "loss3"
+  loss_weight: 0
+}
+layer {
+  name: "loss2"
+  type: "SoftmaxWithLoss"
+  bottom: "pool_layer2"
+  bottom: "label_2"
+  top: "loss2"
+  loss_weight: 0
+}
+layer {
+  name: "loss1"
+  type: "SoftmaxWithLoss"
+  bottom: "pool_layer1"
+  bottom: "label_1"
+  top: "loss1"
+  loss_weight: 0
+}
+layer {
+  name: "accuracy"
+  type: "Accuracy"
+  bottom: "pool_layer8"
+  bottom: "label"
+  top: "accuracy"
+}
+layer {
+  name: "accuracy_supercategory"
+  type: "Accuracy"
+  bottom: "pool_layer7"
+  bottom: "label_7"
+  top: "accuracy_supercategory"
+}
