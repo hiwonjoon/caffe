@@ -498,6 +498,7 @@ message EltwiseParameter {
     MAX = 2;
     MIN = 3;
     AVG = 4;
+	MINUS = 5;
   }
   optional EltwiseOp operation = 1 [default = SUM]; // element-wise operation
   repeated float coeff = 2; // blob-wise coefficient for SUM operation
