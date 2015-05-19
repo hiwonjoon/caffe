@@ -8,16 +8,21 @@
 #include "caffe/layer.hpp"
 #include "caffe/util/math_functions.hpp"
 #include "caffe/vision_layers.hpp"
+#include "caffe/util/io.hpp"
 
 namespace caffe {
 //Layer Implementation
 template <typename Dtype>
 void SuperCategoryFMPostLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top) {
-	const SuperCategoryParameter super_param = this->layer_param_.super_category_param();
 	op_ = this->layer_param_.eltwise_param().operation();
 
-	Tree::MakeTree(&root_, &super_param.root());
+	SuperCategoryParameter * super_param = this->layer_param_.mutable_super_category_param();
+	if( super_param->file_name().empty() == false ) {
+		ReadProtoFromTextFileOrDie(super_param->file_name().c_str(), super_param->mutable_root());
+	}
+
+	Tree::MakeTree(&root_, &super_param->root());
 	depth_ = root_.Depth() - 1;
 	root_.MakeBalance(depth_);
 	Tree::GiveIndex(&root_, serialized_tree_);

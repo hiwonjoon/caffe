@@ -8,6 +8,7 @@
 #include "caffe/layer.hpp"
 #include "caffe/util/math_functions.hpp"
 #include "caffe/vision_layers.hpp"
+#include "caffe/util/io.hpp"
 
 namespace caffe {
 //Tree Implementation
@@ -96,9 +97,13 @@ void Tree::MakeTree(Tree * node, const SuperCategoryParameter::TreeScheme * node
 template <typename Dtype>
 void SuperCategoryLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top) {
-	const SuperCategoryParameter super_param = this->layer_param_.super_category_param();
 
-	Tree::MakeTree(&root_, &super_param.root());
+	SuperCategoryParameter * super_param = this->layer_param_.mutable_super_category_param();
+	if( super_param->file_name().empty() == false ) {
+		ReadProtoFromTextFileOrDie(super_param->file_name().c_str(), super_param->mutable_root());
+	}
+
+	Tree::MakeTree(&root_, &super_param->root());
 	depth_ = root_.Depth();
 	root_.MakeBalance(depth_-1);
 	Tree::GiveIndex(&root_, serialized_tree_);
@@ -113,11 +118,14 @@ void SuperCategoryLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& bottom,
 template <typename Dtype>
 void SuperCategoryLabelLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top) {
-	const SuperCategoryParameter super_param = this->layer_param_.super_category_param();
+	SuperCategoryParameter * super_param = this->layer_param_.mutable_super_category_param();
+	if( super_param->file_name().empty() == false ) {
+		ReadProtoFromTextFileOrDie(super_param->file_name().c_str(), super_param->mutable_root());
+	}
 
 	N_ = bottom[0]->count(0,1);
 
-	Tree::MakeTree(&root_, &super_param.root());
+	Tree::MakeTree(&root_, &super_param->root());
 	depth_ = root_.Depth();
 	root_.MakeBalance(depth_-1);
 	Tree::GiveIndex(&root_, serialized_tree_);

@@ -795,6 +795,7 @@ message SuperCategoryParameter {
 	  optional int32 label = 1 [default = -1];
 	  repeated TreeScheme children = 3;
   }
+  optional string file_name = 4; 
   optional TreeScheme root = 1;
   optional FillerParameter weight_filler = 2; // The filler for the weight
   enum Engine {
