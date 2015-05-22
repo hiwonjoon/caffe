@@ -42,11 +42,11 @@ then
 			../../build/tools/caffe train -solver ./solver.prototxt -gpu $gpu_num -snapshot ./$list &> $filename.log &
 		;;
 		* )
-			../../build/tools/caffe train -solver ./solver.prototxt -gpu $gpu_num &> $filename.log &
+			../../build/tools/caffe train -solver ./solver.prototxt -weights ./base.caffemodel -gpu $gpu_num &> $filename.log &
 		;;
 	esac
 else
-	../../build/tools/caffe train -solver ./solver.prototxt -gpu $gpu_num &> $filename.log &
+	../../build/tools/caffe train -solver ./solver.prototxt -weights ./base.caffemodel -gpu $gpu_num &> $filename.log &
 fi
 
 cd ..
