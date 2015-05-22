@@ -1,20 +1,17 @@
-net: "train_val_super_category.prototxt"
+net: "train_val.prototxt"
 test_iter: 100
 test_interval: 500
-base_lr: 0.01
-
-#solver_type:ADAGRAD
-#solver_type:SGD
+base_lr: 0.1
 momentum: 0.9
 
 weight_decay: 0.0001
 lr_policy: "step"
 gamma: 0.1
-stepsize: 100000
+stepsize: 20000
 display: 100
-max_iter: 120000
-snapshot: 10000
-snapshot_prefix: "cifar10_nin"
+max_iter: 60000
+snapshot: 20000
+snapshot_prefix: "cifar100_nin_dolphin_100"
 solver_mode: GPU
 
 #debug_info:true
