@@ -89,7 +89,9 @@ class ResizeCropImagesMapper(mapreducer.BasicMapper):
                 line = line.split()
                 image_file_name = line[0]
                 input_file = os.path.join(FLAGS.input_folder, image_file_name)
+                print input_file
                 output_file = os.path.join(FLAGS.output_folder, image_file_name)
+                print output_file
                 output_dir = output_file[:output_file.rfind('/')]
                 if not os.path.exists(output_dir):
                     os.makedirs(output_dir)
@@ -107,3 +109,5 @@ mapreducer.REGISTER_DEFAULT_WRITER(mapreducer.FileWriter)
  
 if __name__ == '__main__':
     launcher.launch()
+    print FLAGS.input
+
