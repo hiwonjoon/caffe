@@ -1,0 +1,211 @@
+children : { #home
+	children : {
+		label : 6 #bedroom
+	}
+	children : {
+		label : 48 #nursery
+	}
+	children : {
+		label : 15 #closet
+	}
+	children : {
+		label : 51 #pantry
+	}
+	children : {
+		label : 11 #children_room
+	}
+	children : {
+		label : 42 #lobby
+	}
+	children : {
+		label : 22 #dining_room
+	}
+	children : {
+		label : 19 #corridor
+	}
+	children : {
+		label : 41 #livingroom
+	}
+	children : {
+		label : 5 #bathroom
+	}
+	children : {
+		label : 37 #kitchen
+	}
+	children : {
+		label : 57 #stairscase
+	}
+	children : {
+		label : 66 #winecellar
+	}
+	children : {
+		label : 27 #garage
+	}
+}
+children : { #workingplace
+	children : {
+		label : 32 #hospitalroom
+	}
+	children : {
+		label : 36 #kindergarden
+	}
+	children : {
+		label : 55 #restaurant_kitchen
+	}
+	children : {
+		label : 1 #artstudio
+	}
+	children : {
+		label : 13 #classroom
+	}
+	children : {
+		label : 38 #laboratorywet
+	}
+	children : {
+		label : 58 #studiomusic
+	}
+	children : {
+		label : 50 #operating_room
+	}
+	children : {
+		label : 49 #office
+	}
+	children : {
+		label : 17 #computerroom
+	}
+	children : {
+		label : 65 #warehouse
+	}
+	children : {
+		label : 28 #greenhouse
+	}
+	children : {
+		label : 21 #dentaloffice
+	}
+	children : {
+		label : 62 #tv_studio
+	}
+	children : {
+		label : 45 #meeting_room
+	}
+}
+children : { #leisure
+	children : {
+		label : 9 #buffet
+	}
+	children : {
+		label : 24 #fastfood_restaurant
+	}
+	children : {
+		label : 18 #concert_hall
+	}
+	children : {
+		label : 54 #restaurant
+	}
+	children : {
+		label : 4 #bar
+	}
+	children : {
+		label : 46 #movietheater
+	}
+	children : {
+		label : 26 #gameroom
+	}
+	children : {
+		label : 10 #casino
+	}
+	children : {
+		label : 8 #bowling
+	}
+	children : {
+		label : 30 #gym
+	}
+	children : {
+		label : 31 #hairsalon
+	}
+	children : {
+		label : 2 #auditorium
+	}
+}
+children : { #public
+	children : {
+		label : 53 #prisoncell
+	}
+	children : {
+		label : 40 #library
+	}
+	children : {
+		label : 14 #cloister
+	}
+	children : {
+		label : 12 #church_inside
+	}
+	children : {
+		label : 64 #waitingroom
+	}
+	children : {
+		label : 47 #museum
+	}
+	children : {
+		label : 23 #elevator
+	}
+	children : {
+		label : 59 #subway
+	}
+	children : {
+		label : 52 #poolinside
+	}
+	children : {
+		label : 33 #inside_bus
+	}
+	children : {
+		label : 34 #inside_subway
+	}
+	children : {
+		label : 43 #locker_room
+	}
+	children : {
+		label : 61 #trainstation
+	}
+	children : {
+		label : 0 #airport_inside
+	}
+}
+children : { #store
+	children : {
+		label : 3 #bakery
+	}
+	children : {
+		label : 29 #grocerystore
+	}
+	children : {
+		label : 16 #clothingstore
+	}
+	children : {
+		label : 20 #deli
+	}
+	children : {
+		label : 39 #laundromat
+	}
+	children : {
+		label : 35 #jewelleryshop
+	}
+	children : {
+		label : 7 #bookstore
+	}
+	children : {
+		label : 63 #videostore
+	}
+	children : {
+		label : 25 #florist
+	}
+	children : {
+		label : 56 #shoeshop
+	}
+	children : {
+		label : 44 #mall
+	}
+	children : {
+		label : 60 #toystore
+	}
+}
