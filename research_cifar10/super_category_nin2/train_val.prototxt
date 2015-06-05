@@ -441,7 +441,7 @@ layer {
   bottom: "pool4"
   bottom: "label_2"
   top: "loss1"
-  loss_weight: 0.2
+  loss_weight: 0.9
 }
 layer {
   name: "loss2_supercategory"
@@ -449,7 +449,7 @@ layer {
   bottom: "pool3"
   bottom: "label_1"
   top: "loss2_supercategory"
-  loss_weight: 0.4
+  loss_weight: 0.1
 }
 layer {
   name: "loss3_diffloss"
@@ -457,7 +457,7 @@ layer {
   bottom: "pool5_diff"
   bottom: "label_2"
   top: "loss3_diffloss"
-  loss_weight: 0.4
+  loss_weight: 0.2
 }
 layer {
 	name: "add"

@@ -4,13 +4,13 @@ layer {
   type: "Data" 
   top: "data"
   top: "label"
-  #transform_param {
-  #  mirror: true
-  #  crop_size: 26
-  #}
+  transform_param {
+    mirror: true
+    crop_size: 26
+  }
   data_param {
-    source: "/storage/datasets/cifar-10-preprocessed/cifar10_train_leveldb"
-	backend: LEVELDB
+    source: "/home/nine/datasets/cifar10/cifar_train_lmdb"
+	backend: LMDB
     batch_size: 128 
   }
   include: { phase: TRAIN }
@@ -20,13 +20,13 @@ layer {
   type: "Data"
   top: "data"
   top: "label"
-  #transform_param {
-  #  mirror: false
-  #  crop_size: 26
-  #}
+  transform_param {
+    mirror: false
+    crop_size: 26
+  }
   data_param {
-    source: "/storage/datasets/cifar-10-preprocessed/cifar10_test_leveldb"
-	backend: LEVELDB
+    source: "/home/nine/datasets/cifar10/cifar_test_lmdb"
+	backend: LMDB 
     batch_size: 100 
   }
   include: { phase: TEST }
@@ -46,7 +46,7 @@ layer {
   }
   convolution_param {
     num_output: 192
-    pad: 2
+    pad: 5
     kernel_size: 5
     weight_filler {
       type: "gaussian"
@@ -346,7 +346,7 @@ layer {
 	  decay_mult: 0
   }
   convolution_param {
-    num_output: 100
+    num_output: 10
     group: 1
     kernel_size: 1
     weight_filler {
@@ -378,7 +378,7 @@ layer {
 }
 layer {
 	name: "loss"
-	type: "SoftMaxWithLoss"
+	type: "SoftmaxWithLoss"
 	bottom: "pool3"
 	bottom: "label"
 	top: "loss"

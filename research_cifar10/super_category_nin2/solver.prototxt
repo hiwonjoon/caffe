@@ -11,5 +11,5 @@ stepsize: 20000
 display: 100
 max_iter: 60000
 snapshot: 10000
-snapshot_prefix: "cifar10_nin_supercategory_param3"
+snapshot_prefix: "cifar10_nin_supercategory"
 solver_mode: GPU

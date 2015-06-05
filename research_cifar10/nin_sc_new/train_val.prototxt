@@ -366,17 +366,70 @@ layer {
   top: "cccp6"
 }
 layer {
-	name: "super_category"
-	type: "SuperCategoryFM"
-	bottom: "cccp6"
-	top: "layer1"
-	top: "layer2"
-	eltwise_param {
-		operation : MIN
-	}
-	super_category_param {
-		file_name : "super_category.prototxt"
-	}
+  name: "cccp5-sup"
+  type: "Convolution" 
+  bottom: "conv3"
+  top: "cccp5-sup"
+  param {
+	  lr_mult: 1
+	  decay_mult: 1
+  }
+  param {
+	  lr_mult: 2
+	  decay_mult: 0
+  }
+  convolution_param {
+    num_output: 192
+    group: 1
+    kernel_size: 1
+    weight_filler {
+      type: "gaussian"
+      std: 0.05
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "relu_cccp5-sup"
+  type: "ReLU"
+  bottom: "cccp5-sup"
+  top: "cccp5-sup"
+}
+layer {
+  name: "cccp6-sup"
+  type: "Convolution"
+  bottom: "cccp5-sup"
+  top: "cccp6-sup"
+  param {
+	  lr_mult: 0.1
+	  decay_mult: 1
+  }
+  param {
+	  lr_mult: 0.1
+	  decay_mult: 0
+  }
+  convolution_param {
+    num_output: 5
+    group: 1
+    kernel_size: 1
+    weight_filler {
+      type: "gaussian"
+      std: 0.05
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "relu_cccp6-sup"
+  type: "ReLU"
+  bottom: "cccp6-sup"
+  top: "cccp6-sup"
 }
 layer {
 	name: "super_category_label"
@@ -394,8 +447,8 @@ layer {
 	eltwise_param {
 		operation : MINUS
 	}
-	bottom: "layer1"
-	bottom: "layer2"
+	bottom: "cccp6-sup"
+	bottom: "cccp6"
 	top: "layer11"
 	top: "layer22"
 	super_category_param {
@@ -405,7 +458,7 @@ layer {
 layer {
   name: "pool3"
   type: "Pooling" 
-  bottom: "layer1"
+  bottom: "cccp6-sup"
   top: "pool3"
   pooling_param {
     pool: AVE
@@ -416,7 +469,7 @@ layer {
 layer {
   name: "pool4"
   type: "Pooling" 
-  bottom: "layer2"
+  bottom: "cccp6"
   top: "pool4"
   pooling_param {
     pool: AVE
@@ -441,7 +494,7 @@ layer {
   bottom: "pool4"
   bottom: "label_2"
   top: "loss1"
-  loss_weight: 0.2
+  loss_weight: 0.4
 }
 layer {
   name: "loss2_supercategory"
@@ -449,7 +502,7 @@ layer {
   bottom: "pool3"
   bottom: "label_1"
   top: "loss2_supercategory"
-  loss_weight: 0.4
+  loss_weight: 0.5
 }
 layer {
   name: "loss3_diffloss"
@@ -457,17 +510,7 @@ layer {
   bottom: "pool5_diff"
   bottom: "label_2"
   top: "loss3_diffloss"
-  loss_weight: 0.4
-}
-layer {
-	name: "add"
-	type: "Eltwise"
-	eltwise_param: {
-		operation: SUM
-	}
-	bottom: "pool4"
-	bottom: "pool5_diff"
-	top: "pool_add"
+  loss_weight: 0.8
 }
 layer {
   name: "accuracy"
@@ -475,26 +518,6 @@ layer {
   bottom: "pool4"
   bottom: "label"
   top: "accuracy"
-  accuracy_param: {
-	  top_k : 1
-  }
-}
-layer {
-  name: "accuracy2"
-  type: "Accuracy"
-  bottom: "pool5_diff"
-  bottom: "label"
-  top: "accuracy2"
-  accuracy_param: {
-	  top_k : 1
-  }
-}
-layer {
-  name: "accuracy3"
-  type: "Accuracy"
-  bottom: "pool_add"
-  bottom: "label"
-  top: "accuracy3"
   accuracy_param: {
 	  top_k : 1
   }

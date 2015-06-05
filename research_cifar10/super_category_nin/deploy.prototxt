@@ -1,36 +1,9 @@
 name: "CIFAR10_nin_sc"
-layer {
-  name: "cifar"
-  type: "Data" 
-  top: "data"
-  top: "label"
-  transform_param {
-    mirror: true
-    crop_size: 26
-  }
-  data_param {
-    source: "/home/nine/datasets/cifar10/cifar_train_lmdb"
-	backend: LMDB 
-    batch_size: 128 
-  }
-  include: { phase: TRAIN }
-}
-layer {
-  name: "cifar"
-  type: "Data"
-  top: "data"
-  top: "label"
-  transform_param {
-    mirror: false
-    crop_size: 26
-  }
-  data_param {
-    source: "/home/nine/datasets/cifar10/cifar_test_lmdb"
-	backend: LMDB 
-    batch_size: 100 
-  }
-  include: { phase: TEST }
-}
+input: "data"
+input_dim: 10
+input_dim: 3
+input_dim: 26
+input_dim: 26 
 layer {
   name: "conv1"
   type: "Convolution" 
@@ -379,16 +352,6 @@ layer {
 	}
 }
 layer {
-	name: "super_category_label"
-	type: "SuperCategoryLabel"
-	bottom: "label"
-	top: "label_1"
-	top: "label_2"
-	super_category_param {
-		file_name : "super_category.prototxt"
-	}
-} 
-layer {
 	name: "SumOver"
 	type: "SuperCategoryFMPost"
 	eltwise_param {
@@ -436,78 +399,27 @@ layer {
   }
 }
 layer {
-  name: "loss1"
-  type: "SoftmaxWithLoss"
+  name: "prob"
+  type: "Softmax"
   bottom: "pool4"
-  bottom: "label_2"
-  top: "loss1"
-  loss_weight: 0.2
+  top: "prob"
 }
-layer {
-  name: "loss2_supercategory"
-  type: "SoftmaxWithLoss"
-  bottom: "pool3"
-  bottom: "label_1"
-  top: "loss2_supercategory"
-  loss_weight: 0.4
-}
-layer {
-  name: "loss3_diffloss"
-  type: "SoftmaxWithLoss"
-  bottom: "pool5_diff"
-  bottom: "label_2"
-  top: "loss3_diffloss"
-  loss_weight: 0.4
-}
-layer {
-	name: "add"
-	type: "Eltwise"
-	eltwise_param: {
-		operation: SUM
-	}
-	bottom: "pool4"
-	bottom: "pool5_diff"
-	top: "pool_add"
-}
-layer {
-  name: "accuracy"
-  type: "Accuracy"
-  bottom: "pool4"
-  bottom: "label"
-  top: "accuracy"
-  accuracy_param: {
-	  top_k : 1
-  }
-}
-layer {
-  name: "accuracy2"
-  type: "Accuracy"
-  bottom: "pool5_diff"
-  bottom: "label"
-  top: "accuracy2"
-  accuracy_param: {
-	  top_k : 1
-  }
-}
-layer {
-  name: "accuracy3"
-  type: "Accuracy"
-  bottom: "pool_add"
-  bottom: "label"
-  top: "accuracy3"
-  accuracy_param: {
-	  top_k : 1
-  }
-}
-layer {
-  name: "accuracy_supercategory"
-  type: "Accuracy"
-  bottom: "pool3"
-  bottom: "label_1"
-  top: "accuracy_supercategory"
-}
+#layer {
+#  name: "loss2_supercategory"
+#  type: "Softmax"
+#  bottom: "pool3"
+#  top: "loss2_supercategory"
+#}
+#layer {
+#  name: "loss3_diffloss"
+#  type: "Softmax"
+#  bottom: "pool5_diff"
+#  top: "loss3_diffloss"
+#}
 layer {
 	name: "silent"
 	type: "Silence"
 	bottom: "layer11"
+	bottom: "pool3"
+	bottom: "pool5_diff"
 }

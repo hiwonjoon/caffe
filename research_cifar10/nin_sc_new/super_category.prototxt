@@ -1,0 +1,40 @@
+children {
+	children {
+		label:0 #airplane
+	}
+	children {
+		label:8 #ship
+	}
+}
+children {
+	children {
+		label:4 #deer
+	}
+	children {
+		label:7 #horse
+	}
+}
+children {
+	children {
+		label:1 #automobile
+	}
+	children {
+		label:9 #truck
+	}
+}
+children {
+	children {
+		label:2 #bird
+	}
+	children {
+		label:6 #frog
+	}
+}
+children {
+	children {
+		label:3 #cat
+	}
+	children {
+		label:5 #dog
+	}
+}
