@@ -1,9 +1,38 @@
 name: "nin_imagenet"
-input: "data"
-input_dim: 10
-input_dim: 3
-input_dim : 224
-input_dim : 224
+layer {
+  top: "data"
+  top: "label"
+  name: "data"
+  type: "Data" 
+  data_param {
+    source: "/storage/datasets/mit-indoor/train_lmdb"
+    backend: LMDB
+    batch_size: 256
+  }
+  transform_param {
+    crop_size: 224
+    mirror: true
+    mean_file: "../imagenet_mean.binaryproto"
+  }
+  include: { phase: TRAIN }
+}
+layer {
+  top: "data"
+  top: "label"
+  name: "data"
+  type: "Data" 
+  data_param {
+    source: "/storage/datasets/mit-indoor/val_lmdb"
+    backend: LMDB
+    batch_size: 67 
+  }
+  transform_param {
+    crop_size: 224
+    mirror: false
+    mean_file: "../imagenet_mean.binaryproto"
+  }
+  include: { phase: TEST }
+}
 layer {
   bottom: "data"
   top: "conv1"
@@ -360,11 +389,11 @@ layer {
   name: "conv4-1024"
   type: "Convolution"
   param {
-    lr_mult: 1
+    lr_mult: 10
     decay_mult: 1
   }
   param {
-    lr_mult: 2
+    lr_mult: 20
     decay_mult: 0
   }
   convolution_param {
@@ -395,11 +424,11 @@ layer {
   name: "cccp7-1024"
   type: "Convolution"
   param {
-    lr_mult: 1
+    lr_mult: 10
     decay_mult: 1
   }
   param {
-    lr_mult: 2
+    lr_mult: 20
     decay_mult: 0
   }
   convolution_param {
@@ -429,11 +458,11 @@ layer {
   name: "cccp8-67"
   type: "Convolution"
   param {
-    lr_mult: 50
+    lr_mult: 10
     decay_mult: 1
   }
   param {
-    lr_mult: 100
+    lr_mult: 20
     decay_mult: 0
   }
   convolution_param {
@@ -458,7 +487,44 @@ layer {
   type: "ReLU"
 }
 layer {
-  bottom: "cccp8"
+	name: "super_category"
+	type: "SuperCategoryFM"
+	bottom: "cccp8"
+	top: "layer1"
+	top: "layer2"
+	eltwise_param {
+		operation : MIN
+	}
+  super_category_param{
+	  file_name : "super_category.prototxt"
+  }
+}
+layer {
+  name: "super_category_label"
+  type: "SuperCategoryLabel"
+  bottom: "label"
+  top: "label_1"
+  top: "label_2"
+  super_category_param{
+	  file_name : "super_category.prototxt"
+  }
+} 
+layer {
+	name: "DiffOver"
+	type: "SuperCategoryFMPost"
+	eltwise_param {
+		operation : MINUS
+	}
+	bottom: "layer1"
+	bottom: "layer2"
+	top: "layer1_diff"
+	top: "layer2_diff"
+	super_category_param {
+		file_name : "super_category.prototxt"
+	}
+}
+layer {
+  bottom: "layer2"
   top: "pool4"
   name: "pool4"
   type: "Pooling"
@@ -469,8 +535,79 @@ layer {
   }
 }
 layer {
+  bottom: "layer1"
+  top: "pool5"
+  name: "pool5"
+  type: "Pooling"
+  pooling_param {
+    pool: AVE
+    kernel_size: 6
+    stride: 1
+  }
+}
+layer {
+  bottom: "layer2_diff"
+  top: "pool6"
+  name: "pool6"
+  type: "Pooling"
+  pooling_param {
+    pool: AVE
+    kernel_size: 6
+    stride: 1
+  }
+}
+layer {
   bottom: "pool4"
+  bottom: "label"
   top: "loss"
   name: "loss"
-  type: "Softmax" 
+  type: "SoftmaxWithLoss" 
+  loss_weight: 0.8
+  include: { phase: TRAIN }
+}
+layer {
+  name: "loss2_supercategory"
+  type: "SoftmaxWithLoss"
+  bottom: "pool5"
+  bottom: "label_1"
+  top: "loss2_supercategory"
+  loss_weight: 0.2
+  include: { phase: TRAIN }
+}
+layer {
+  name: "loss3_diffloss"
+  type: "SoftmaxWithLoss"
+  bottom: "pool6"
+  bottom: "label_2"
+  top: "loss3_diffloss"
+  loss_weight: 0.4
+  include: { phase: TRAIN }
+}
+layer {
+  name: "accuracy"
+  type: "Accuracy"
+  bottom: "pool4"
+  bottom: "label"
+  top: "accuracy"
+  #include: { phase: TEST }
+}
+layer {
+  name: "accuracy_supercategory"
+  type: "Accuracy"
+  bottom: "pool5"
+  bottom: "label_1"
+  top: "accuracy_supercategory"
+  #include: { phase: TEST }
+}
+layer {
+	name: "silent"
+	type: "Silence"
+	bottom: "layer1_diff"
+}
+layer {
+	name: "silent2"
+	type: "Silence"
+	bottom : "pool6"
+	bottom : "label_2"
+	include: { phase : TEST }
 }
