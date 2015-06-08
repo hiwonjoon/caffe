@@ -383,6 +383,8 @@ message AccuracyParameter {
   optional int32 ignore_label = 3;
 
   optional int32 num_label = 4;
+
+  optional bool print = 5 [default = false];
 }
 
 // Message that stores parameters used by ArgMaxLayer
