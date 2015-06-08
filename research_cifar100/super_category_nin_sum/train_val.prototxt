@@ -9,10 +9,8 @@ layer {
     crop_size: 26
   }
   data_param {
-	source: "/storage/datasets/cifar-100/cifar_train_leveldb"
-	backend: LEVELDB
-    #source: "/home/nine/datasets/cifar10_temp/cifar10_train_lmdb"
-	#backend: LMDB
+    source: "/storage/datasets/cifar-100/cifar_train"
+	backend: LMDB
     batch_size: 128
   }
   include: { phase: TRAIN }
@@ -27,10 +25,8 @@ layer {
     crop_size: 26
   }
   data_param {
-	source: "/storage/datasets/cifar-100/cifar_test_leveldb"
-	backend: LEVELDB
-    #source: "/home/nine/datasets/cifar10_temp/cifar10_test_lmdb"
-	#backend: LMDB
+	source: "/storage/datasets/cifar-100/cifar_test"
+	backend: LMDB
     batch_size: 100
   }
   include: { phase: TEST }
@@ -49,7 +45,7 @@ layer {
 	  decay_mult: 0
   }
   convolution_param {
-    num_output: 576 
+    num_output: 192
     pad: 5
     kernel_size: 5
     weight_filler {
@@ -81,7 +77,7 @@ layer {
 	  decay_mult: 0
   }
   convolution_param {
-    num_output: 480
+    num_output: 160
     group: 1
     kernel_size: 1
     weight_filler {
@@ -114,7 +110,7 @@ layer {
 	  decay_mult: 0
   }
   convolution_param {
-    num_output: 288
+    num_output: 96
     group: 1
     kernel_size: 1
     weight_filler {
@@ -167,7 +163,7 @@ layer {
 	  decay_mult: 0
   }
   convolution_param {
-    num_output: 576 
+    num_output: 192
     pad: 2
     kernel_size: 5
     weight_filler {
@@ -199,7 +195,7 @@ layer {
 	  decay_mult: 0
   }
   convolution_param {
-    num_output: 576 
+    num_output: 192
     group: 1
     kernel_size: 1
     weight_filler {
@@ -232,7 +228,7 @@ layer {
 	  decay_mult: 0
   }
   convolution_param {
-    num_output: 576 
+    num_output: 192
     group: 1
     kernel_size: 1
     weight_filler {
@@ -285,7 +281,7 @@ layer {
 	  decay_mult: 0
   }
   convolution_param {
-    num_output: 576 
+    num_output: 192
     pad: 1
     kernel_size: 3
     weight_filler {
@@ -317,7 +313,7 @@ layer {
 	  decay_mult: 0
   }
   convolution_param {
-    num_output: 576
+    num_output: 192
     group: 1
     kernel_size: 1
     weight_filler {
@@ -370,10 +366,100 @@ layer {
   top: "cccp6"
 }
 layer {
-  name: "pool3"
+  name: "cccp5-sup"
+  type: "Convolution" 
+  bottom: "conv3"
+  top: "cccp5-sup"
+  param {
+	  lr_mult: 1
+	  decay_mult: 1
+  }
+  param {
+	  lr_mult: 2
+	  decay_mult: 0
+  }
+  convolution_param {
+    num_output: 192
+    group: 1
+    kernel_size: 1
+    weight_filler {
+      type: "gaussian"
+      std: 0.05
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "cccp6-sup"
+  type: "Convolution"
+  bottom: "cccp5-sup"
+  top: "cccp6-sup"
+  param {
+	  lr_mult: 0.1
+	  decay_mult: 1
+  }
+  param {
+	  lr_mult: 0.1
+	  decay_mult: 0
+  }
+  convolution_param {
+    num_output: 25
+    group: 1
+    kernel_size: 1
+    weight_filler {
+      type: "gaussian"
+      std: 0.05
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "relu_cccp6-sup"
+  type: "ReLU"
+  bottom: "cccp6-sup"
+  top: "cccp6-sup"
+}
+layer {
+	name: "DiffOver"
+	type: "SuperCategoryFMPost"
+	eltwise_param {
+		operation : MINUS
+	}
+	bottom: "cccp6-sup"
+	bottom: "cccp6"
+	top: "layer1_diff"
+	top: "layer2_diff"
+	super_category_param {
+		file_name : "super_category.prototxt"
+	}
+}
+layer {
+  name: "relu_layer2_diff"
+  type: "ReLU"
+  bottom: "layer2_diff"
+  top: "layer2_diff"
+}
+layer {
+  name: "super_category_label"
+  type: "SuperCategoryLabel"
+  bottom: "label"
+  top: "label_1"
+  top: "label_2"
+  super_category_param{
+	  file_name : "super_category.prototxt"
+  }
+} 
+layer {
+  name: "pool_fine"
   type: "Pooling" 
   bottom: "cccp6"
-  top: "pool3"
+  top: "pool_fine"
   pooling_param {
     pool: AVE
     kernel_size: 8
@@ -381,63 +467,80 @@ layer {
   }
 }
 layer {
-  name: "loss"
+  name: "pool_sup"
+  type: "Pooling" 
+  bottom: "cccp6-sup"
+  top: "pool_sup"
+  pooling_param {
+    pool: AVE
+    kernel_size: 8
+    stride: 1
+  }
+}
+layer {
+  name: "pool_diff"
+  type: "Pooling" 
+  bottom: "layer2_diff"
+  top: "pool_diff"
+  pooling_param {
+    pool: AVE
+    kernel_size: 8
+    stride: 1
+  }
+}
+layer {
+  name: "loss1"
   type: "SoftmaxWithLoss"
-  bottom: "pool3"
-  bottom: "label"
-  top: "loss"
+  bottom: "pool_fine"
+  bottom: "label_2"
+  top: "loss1"
+  loss_weight: 0.8
+}
+layer {
+  name: "loss2_supercategory"
+  type: "SoftmaxWithLoss"
+  bottom: "pool_sup"
+  bottom: "label_1"
+  top: "loss2_supercategory"
+  loss_weight: 0.2
+}
+layer {
+  name: "loss3_diffloss"
+  type: "SoftmaxWithLoss"
+  bottom: "pool_diff"
+  bottom: "label_2"
+  top: "loss3_diffloss"
+  loss_weight: 0.4
 }
 layer {
   name: "accuracy"
   type: "Accuracy"
-  bottom: "pool3"
-  bottom: "label"
+  bottom: "pool_fine"
+  bottom: "label_2"
   top: "accuracy"
-  accuracy_param : {
+  accuracy_param: {
 	  top_k : 1
   }
 }
-#layer {
-#	name: "answer"
-#	type: "TopLabel"
-#	bottom: "pool3"
-#	top: "answer"
-#}
-#layer {
-#  name: "super_category_label"
-#  type: "SuperCategoryLabel"
-#  bottom: "label"
-#  top: "label_1"
-#  top: "label_2"
-#  super_category_param{
-#	  file_name : "super_category.prototxt"
-#  }
-#} 
-#layer {
-#  name: "super_category_label"
-#  type: "SuperCategoryLabel"
-#  bottom: "answer"
-#  top: "answer_1"
-#  top: "answer_2"
-#  super_category_param{
-#	  file_name : "super_category.prototxt"
-#  }
-#} 
-#layer {
-#	name: "accuracy_super_category"
-#	type: "LabelAccuracyWithConfusion"
-#	bottom: "label_1"
-#	bottom: "answer_1"
-#	top: "accuracy_super_category"
-#	top: "confusion"
-#	accuracy_param {
-#		num_label : 25
-#	}
-#}
-#layer {
-#	name: "accuracy_"
-#	type: "LabelAccuracy"
-#	bottom: "label_2"
-#	bottom: "answer_2"
-#	top: "accuracy_"
-#}
+layer {
+  name: "accuracy_2"
+  type: "Accuracy"
+  bottom: "pool_diff"
+  bottom: "label_2"
+  top: "accuracy_2"
+  accuracy_param: {
+	  top_k : 1
+  }
+}
+layer {
+  name: "accuracy_supercategory"
+  type: "Accuracy"
+  bottom: "pool_sup"
+  bottom: "label_1"
+  top: "accuracy_supercategory"
+}
+layer {
+	name: "silence"
+	type: "Silence"
+	bottom: "layer1_diff"
+}

@@ -1,4 +1,4 @@
-name: "CIFAR100_nin"
+name: "CIFAR100_nin_triple_my_tree"
 layer {
   name: "cifar"
   type: "Data" 
@@ -9,10 +9,8 @@ layer {
     crop_size: 26
   }
   data_param {
-	source: "/storage/datasets/cifar-100/cifar_train_leveldb"
-	backend: LEVELDB
-    #source: "/home/nine/datasets/cifar10_temp/cifar10_train_lmdb"
-	#backend: LMDB
+	source: "/storage/datasets/cifar-100/cifar_train"
+	backend: LMDB
     batch_size: 128
   }
   include: { phase: TRAIN }
@@ -27,10 +25,8 @@ layer {
     crop_size: 26
   }
   data_param {
-	source: "/storage/datasets/cifar-100/cifar_test_leveldb"
-	backend: LEVELDB
-    #source: "/home/nine/datasets/cifar10_temp/cifar10_test_lmdb"
-	#backend: LMDB
+	source: "/storage/datasets/cifar-100/cifar_test"
+	backend: LMDB
     batch_size: 100
   }
   include: { phase: TEST }
@@ -370,9 +366,46 @@ layer {
   top: "cccp6"
 }
 layer {
+	name: "super_category"
+	type: "SuperCategoryFM"
+	bottom: "cccp6"
+	top: "layer1"
+	top: "layer2"
+	eltwise_param {
+		operation : MIN
+	}
+  super_category_param {
+	  file_name : "super_category.prototxt"
+  }
+}
+layer {
+  name: "super_category_label"
+  type: "SuperCategoryLabel"
+  bottom: "label"
+  top: "label_1"
+  top: "label_2"
+  super_category_param{
+	  file_name : "super_category.prototxt"
+  }
+} 
+layer {
+	name: "SumOver"
+	type: "SuperCategoryFMPost"
+	eltwise_param {
+		operation : MINUS
+	}
+	bottom: "layer1"
+	bottom: "layer2"
+	top: "layer11"
+	top: "layer22"
+	super_category_param{
+	    file_name : "super_category.prototxt"
+	}
+}
+layer {
   name: "pool3"
   type: "Pooling" 
-  bottom: "cccp6"
+  bottom: "layer1"
   top: "pool3"
   pooling_param {
     pool: AVE
@@ -381,63 +414,70 @@ layer {
   }
 }
 layer {
-  name: "loss"
+  name: "pool4"
+  type: "Pooling" 
+  bottom: "layer2"
+  top: "pool4"
+  pooling_param {
+    pool: AVE
+    kernel_size: 8
+    stride: 1
+  }
+}
+layer {
+  name: "pool5_diff"
+  type: "Pooling" 
+  bottom: "layer22"
+  top: "pool5_diff"
+  pooling_param {
+    pool: AVE
+    kernel_size: 8
+    stride: 1
+  }
+}
+layer {
+  name: "loss1"
+  type: "SoftmaxWithLoss"
+  bottom: "pool4"
+  bottom: "label_2"
+  top: "loss1"
+  loss_weight: 0.8
+}
+layer {
+  name: "loss2_supercategory"
   type: "SoftmaxWithLoss"
   bottom: "pool3"
-  bottom: "label"
-  top: "loss"
+  bottom: "label_1"
+  top: "loss2_supercategory"
+  loss_weight: 0.2
+}
+layer {
+  name: "loss3_diffloss"
+  type: "SoftmaxWithLoss"
+  bottom: "pool5_diff"
+  bottom: "label_2"
+  top: "loss3_diffloss"
+  loss_weight: 0.4
 }
 layer {
   name: "accuracy"
   type: "Accuracy"
-  bottom: "pool3"
+  bottom: "pool4"
   bottom: "label"
   top: "accuracy"
-  accuracy_param : {
+  accuracy_param: {
 	  top_k : 1
   }
 }
-#layer {
-#	name: "answer"
-#	type: "TopLabel"
-#	bottom: "pool3"
-#	top: "answer"
-#}
-#layer {
-#  name: "super_category_label"
-#  type: "SuperCategoryLabel"
-#  bottom: "label"
-#  top: "label_1"
-#  top: "label_2"
-#  super_category_param{
-#	  file_name : "super_category.prototxt"
-#  }
-#} 
-#layer {
-#  name: "super_category_label"
-#  type: "SuperCategoryLabel"
-#  bottom: "answer"
-#  top: "answer_1"
-#  top: "answer_2"
-#  super_category_param{
-#	  file_name : "super_category.prototxt"
-#  }
-#} 
-#layer {
-#	name: "accuracy_super_category"
-#	type: "LabelAccuracyWithConfusion"
-#	bottom: "label_1"
-#	bottom: "answer_1"
-#	top: "accuracy_super_category"
-#	top: "confusion"
-#	accuracy_param {
-#		num_label : 25
-#	}
-#}
-#layer {
-#	name: "accuracy_"
-#	type: "LabelAccuracy"
-#	bottom: "label_2"
-#	bottom: "answer_2"
-#	top: "accuracy_"
-#}
+layer {
+  name: "accuracy_supercategory"
+  type: "Accuracy"
+  bottom: "pool3"
+  bottom: "label_1"
+  top: "accuracy_supercategory"
+}
+layer {
+	name: "silent"
+	type: "Silence"
+	bottom: "layer11"
+}

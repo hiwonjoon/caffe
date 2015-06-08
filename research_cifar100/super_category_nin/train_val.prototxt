@@ -1,4 +1,4 @@
-name: "CIFAR100_nin"
+name: "CIFAR100_nin_sc"
 layer {
   name: "cifar"
   type: "Data" 
@@ -9,7 +9,7 @@ layer {
     crop_size: 26
   }
   data_param {
-	source: "/storage/datasets/cifar-100/cifar_train_dolphin_50"
+	source: "/storage/datasets/cifar-100/cifar_train_400"
 	backend: LMDB
     batch_size: 128
   }
@@ -25,7 +25,7 @@ layer {
     crop_size: 26
   }
   data_param {
-	source: "/storage/datasets/cifar-100/cifar_test"
+	source: "/storage/datasets/cifar-100/cifar_val"
 	backend: LMDB
     batch_size: 100
   }
@@ -441,7 +441,7 @@ layer {
   bottom: "pool4"
   bottom: "label_2"
   top: "loss1"
-  loss_weight: 0.3
+  loss_weight: 0.4
 }
 layer {
   name: "loss2_supercategory"
@@ -449,7 +449,7 @@ layer {
   bottom: "pool3"
   bottom: "label_1"
   top: "loss2_supercategory"
-  loss_weight: 0.7
+  loss_weight: 0.5
 }
 layer {
   name: "loss3_diffloss"
@@ -457,7 +457,7 @@ layer {
   bottom: "pool5_diff"
   bottom: "label_2"
   top: "loss3_diffloss"
-  loss_weight: 0.3
+  loss_weight: 0.5
 }
 layer {
   name: "accuracy"
@@ -477,7 +477,7 @@ layer {
   top: "accuracy_supercategory"
 }
 layer {
-	name: "silent"
+	name: "silence"
 	type: "Silence"
 	bottom: "layer11"
 }

@@ -9,7 +9,7 @@ layer {
     crop_size: 26
   }
   data_param {
-	source: "/storage/datasets/cifar-100/cifar_train_leveldb_2"
+	source: "/storage/datasets/cifar-100/cifar_train_leveldb_1"
 	backend: LEVELDB
     #source: "/home/nine/datasets/cifar10_temp/cifar10_train_lmdb"
 	#backend: LMDB
@@ -27,7 +27,7 @@ layer {
     crop_size: 26
   }
   data_param {
-	source: "/storage/datasets/cifar-100/cifar_test_leveldb_2"
+	source: "/storage/datasets/cifar-100/cifar_test_leveldb_1"
 	backend: LEVELDB
     #source: "/home/nine/datasets/cifar10_temp/cifar10_test_lmdb"
 	#backend: LMDB
@@ -392,20 +392,20 @@ layer {
 	  file_name : "super_category.prototxt"
   }
 } 
-layer {
-	name: "SumOver"
-	type: "SuperCategoryFMPost"
-	eltwise_param {
-		operation : MINUS
-	}
-	bottom: "layer1"
-	bottom: "layer2"
-	top: "layer11"
-	top: "layer22"
-	super_category_param{
-	    file_name : "super_category.prototxt"
-	}
-}
+#layer {
+#	name: "SumOver"
+#	type: "SuperCategoryFMPost"
+#	eltwise_param {
+#		operation : MINUS
+#	}
+#	bottom: "layer1"
+#	bottom: "layer2"
+#	top: "layer11"
+#	top: "layer22"
+#	super_category_param{
+#	    file_name : "super_category.prototxt"
+#	}
+#}
 layer {
   name: "pool3"
   type: "Pooling" 
@@ -428,24 +428,24 @@ layer {
     stride: 1
   }
 }
-layer {
-  name: "pool5_diff"
-  type: "Pooling" 
-  bottom: "layer22"
-  top: "pool5_diff"
-  pooling_param {
-    pool: AVE
-    kernel_size: 8
-    stride: 1
-  }
-}
+#layer {
+#  name: "pool5_diff"
+#  type: "Pooling" 
+#  bottom: "layer22"
+#  top: "pool5_diff"
+#  pooling_param {
+#    pool: AVE
+#    kernel_size: 8
+#    stride: 1
+#  }
+#}
 layer {
   name: "loss1"
   type: "SoftmaxWithLoss"
   bottom: "pool4"
   bottom: "label_2"
   top: "loss1"
-  loss_weight: 0.8
+  loss_weight: 0.3
 }
 layer {
   name: "loss2_supercategory"
@@ -453,16 +453,16 @@ layer {
   bottom: "pool3"
   bottom: "label_1"
   top: "loss2_supercategory"
-  loss_weight: 0.2
+  loss_weight: 0.7
 }
-layer {
-  name: "loss3_diffloss"
-  type: "SoftmaxWithLoss"
-  bottom: "pool5_diff"
-  bottom: "label_2"
-  top: "loss3_diffloss"
-  loss_weight: 0.4
-}
+#layer {
+#  name: "loss3_diffloss"
+#  type: "SoftmaxWithLoss"
+#  bottom: "pool5_diff"
+#  bottom: "label_2"
+#  top: "loss3_diffloss"
+#  loss_weight: 0.4
+#}
 layer {
   name: "accuracy"
   type: "Accuracy"
@@ -480,8 +480,8 @@ layer {
   bottom: "label_1"
   top: "accuracy_supercategory"
 }
-layer {
-	name: "silent"
-	type: "Silence"
-	bottom: "layer11"
-}
+#layer {
+#	name: "silent"
+#	type: "Silence"
+#	bottom: "layer11"
+#}

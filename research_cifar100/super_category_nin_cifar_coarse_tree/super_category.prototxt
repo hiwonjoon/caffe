@@ -1,0 +1,340 @@
+children: { #aquatic mammals 
+	children: {
+		label : 4 #beaver
+	}
+	children: {
+		label : 30 #dolphin
+	}
+	children: {
+		label : 55 #otter
+	}
+	children: {
+		label : 72 #seal
+	}
+	children: {
+		label : 95 #whale
+	}
+}
+children: { #fish 
+	children: {
+		label : 1 #aquarium fish
+	}
+	children: {
+		label : 32 #flatfish
+	}
+	children: {
+		label : 67 #ray
+	}
+	children: {
+		label : 73 #shark
+	}
+	children: {
+		label : 91 #trout
+	}
+}
+children: { #flowers 
+	children: {
+		label : 54 #orchids
+	}
+	children: {
+		label : 62 #poppies
+	}
+	children: {
+		label : 70 #roses
+	}
+	children: {
+		label : 82 #sunflowers
+	}
+	children: {
+		label : 92 #tulips
+	}
+}
+children: { #food containers 
+	children: {
+		label : 9 #bottles
+	}
+	children: {
+		label : 10 #bowls
+	}
+	children: {
+		label : 16 #cans
+	}
+	children: {
+		label : 28 #cups
+	}
+	children: {
+		label : 61 #plates
+	}
+}
+children: { #fruit and vegetables 
+	children: {
+		label : 0 #apples
+	}
+	children: {
+		label : 51 #mushrooms
+	}
+	children: {
+		label : 53 #oranges
+	}
+	children: {
+		label : 57 #pears
+	}
+	children: {
+		label : 83 #sweet peppers
+	}
+}
+children: { #household electrical devices 
+	children: {
+		label : 22 #clock
+	}
+	children: {
+		label : 39 #computer keyboard
+	}
+	children: {
+		label : 40 #lamp
+	}
+	children: {
+		label : 86 #telephone
+	}
+	children: {
+		label : 87 #television
+	}
+}
+children: { #household furniture 
+	children: {
+		label : 5 #bed
+	}
+	children: {
+		label : 20 #chair
+	}
+	children: {
+		label : 25 #couch
+	}
+	children: {
+		label : 84 #table
+	}
+	children: {
+		label : 94 #wardrobe
+	}
+}
+children: { #insects 
+	children: {
+		label : 6 #bee
+	}
+	children: {
+		label : 7 #beetle
+	}
+	children: {
+		label : 14 #butterfly
+	}
+	children: {
+		label : 18 #caterpillar
+	}
+	children: {
+		label : 24 #cockroach
+	}
+}
+children: { #large carnivores 
+	children: {
+		label : 3 #bear
+	}
+	children: {
+		label : 42 #leopard
+	}
+	children: {
+		label : 43 #lion
+	}
+	children: {
+		label : 88 #tiger
+	}
+	children: {
+		label : 97 #wolf
+	}
+}
+children: { #large man-made outdoor things 
+	children: {
+		label : 12 #bridge
+	}
+	children: {
+		label : 17 #castle
+	}
+	children: {
+		label : 37 #house
+	}
+	children: {
+		label : 68 #road
+	}
+	children: {
+		label : 76 #skyscraper
+	}
+}
+children: { #large natural outdoor scenes 
+	children: {
+		label : 23 #cloud
+	}
+	children: {
+		label : 33 #forest
+	}
+	children: {
+		label : 49 #mountain
+	}
+	children: {
+		label : 60 #plain
+	}
+	children: {
+		label : 71 #sea
+	}
+}
+children: { #large omnivores and herbivores 
+	children: {
+		label : 15 #camel
+	}
+	children: {
+		label : 19 #cattle
+	}
+	children: {
+		label : 21 #chimpanzee
+	}
+	children: {
+		label : 31 #elephant
+	}
+	children: {
+		label : 38 #kangaroo
+	}
+}
+children: { #medium-sized mammals 
+	children: {
+		label : 34 #fox
+	}
+	children: {
+		label : 63 #porcupine
+	}
+	children: {
+		label : 64 #possum
+	}
+	children: {
+		label : 66 #raccoon
+	}
+	children: {
+		label : 75 #skunk
+	}
+}
+children: { #non-insect invertebrates 
+	children: {
+		label : 26 #crab
+	}
+	children: {
+		label : 45 #lobster
+	}
+	children: {
+		label : 77 #snail
+	}
+	children: {
+		label : 79 #spider
+	}
+	children: {
+		label : 99 #worm
+	}
+}
+children: { #people 
+	children: {
+		label : 2 #baby
+	}
+	children: {
+		label : 11 #boy
+	}
+	children: {
+		label : 35 #girl
+	}
+	children: {
+		label : 46 #man
+	}
+	children: {
+		label : 98 #woman
+	}
+}
+children: { #reptiles 
+	children: {
+		label : 27 #crocodile
+	}
+	children: {
+		label : 29 #dinosaur
+	}
+	children: {
+		label : 44 #lizard
+	}
+	children: {
+		label : 78 #snake
+	}
+	children: {
+		label : 93 #turtle
+	}
+}
+children: { #small mammals 
+	children: {
+		label : 36 #hamster
+	}
+	children: {
+		label : 50 #mouse
+	}
+	children: {
+		label : 65 #rabbit
+	}
+	children: {
+		label : 74 #shrew
+	}
+	children: {
+		label : 80 #squirrel
+	}
+}
+children: { #trees 
+	children: {
+		label : 47 #maple
+	}
+	children: {
+		label : 52 #oak
+	}
+	children: {
+		label : 56 #palm
+	}
+	children: {
+		label : 59 #pine
+	}
+	children: {
+		label : 96 #willow
+	}
+}
+children: { #vehicles 1 
+	children: {
+		label : 8 #bicycle
+	}
+	children: {
+		label : 13 #bus
+	}
+	children: {
+		label : 48 #motorcycle
+	}
+	children: {
+		label : 58 #pickup truck
+	}
+	children: {
+		label : 90 #train
+	}
+}
+children: { #vehicles 2 
+	children: {
+		label : 41 #lawn-mower
+	}
+	children: {
+		label : 69 #rocket
+	}
+	children: {
+		label : 81 #streetcar
+	}
+	children: {
+		label : 85 #tank
+	}
+	children: {
+		label : 89 #tractor
+	}
+}

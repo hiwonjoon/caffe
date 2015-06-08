@@ -9,7 +9,7 @@ layer {
     crop_size: 26
   }
   data_param {
-    source: "/storage/datasets/cifar-100/cifar_train_dolphin_100"
+    source: "/storage/datasets/cifar-100/cifar_train_10"
 	backend: LMDB
     batch_size: 128
   }

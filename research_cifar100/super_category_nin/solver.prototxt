@@ -10,6 +10,6 @@ gamma: 0.1
 stepsize: 20000
 display: 100
 max_iter: 60000
-snapshot: 10000
-snapshot_prefix: "cifar100_nin"
+snapshot: 20000
+snapshot_prefix: "cifar100_nin_crossvalid_2"
 solver_mode: GPU

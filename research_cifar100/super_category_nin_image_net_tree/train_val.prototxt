@@ -1,4 +1,4 @@
-name: "CIFAR100_nin"
+name: "CIFAR100_nin_image_net_tree"
 layer {
   name: "cifar"
   type: "Data" 
@@ -9,7 +9,7 @@ layer {
     crop_size: 26
   }
   data_param {
-	source: "/storage/datasets/cifar-100/cifar_train_leveldb"
+	source: "/storage/datasets/cifar-100/cifar_train_leveldb_3"
 	backend: LEVELDB
     #source: "/home/nine/datasets/cifar10_temp/cifar10_train_lmdb"
 	#backend: LMDB
@@ -27,7 +27,7 @@ layer {
     crop_size: 26
   }
   data_param {
-	source: "/storage/datasets/cifar-100/cifar_test_leveldb"
+	source: "/storage/datasets/cifar-100/cifar_test_leveldb_3"
 	backend: LEVELDB
     #source: "/home/nine/datasets/cifar10_temp/cifar10_test_lmdb"
 	#backend: LMDB
@@ -49,7 +49,7 @@ layer {
 	  decay_mult: 0
   }
   convolution_param {
-    num_output: 576 
+    num_output: 192
     pad: 5
     kernel_size: 5
     weight_filler {
@@ -81,7 +81,7 @@ layer {
 	  decay_mult: 0
   }
   convolution_param {
-    num_output: 480
+    num_output: 160
     group: 1
     kernel_size: 1
     weight_filler {
@@ -114,7 +114,7 @@ layer {
 	  decay_mult: 0
   }
   convolution_param {
-    num_output: 288
+    num_output: 96
     group: 1
     kernel_size: 1
     weight_filler {
@@ -167,7 +167,7 @@ layer {
 	  decay_mult: 0
   }
   convolution_param {
-    num_output: 576 
+    num_output: 192
     pad: 2
     kernel_size: 5
     weight_filler {
@@ -199,7 +199,7 @@ layer {
 	  decay_mult: 0
   }
   convolution_param {
-    num_output: 576 
+    num_output: 192
     group: 1
     kernel_size: 1
     weight_filler {
@@ -232,7 +232,7 @@ layer {
 	  decay_mult: 0
   }
   convolution_param {
-    num_output: 576 
+    num_output: 192
     group: 1
     kernel_size: 1
     weight_filler {
@@ -285,7 +285,7 @@ layer {
 	  decay_mult: 0
   }
   convolution_param {
-    num_output: 576 
+    num_output: 192
     pad: 1
     kernel_size: 3
     weight_filler {
@@ -317,7 +317,7 @@ layer {
 	  decay_mult: 0
   }
   convolution_param {
-    num_output: 576
+    num_output: 192
     group: 1
     kernel_size: 1
     weight_filler {
@@ -370,10 +370,74 @@ layer {
   top: "cccp6"
 }
 layer {
-  name: "pool3"
+	name: "super_category"
+	type: "SuperCategoryFM"
+	bottom: "cccp6"
+	top: "layer1" #most coarse grained category
+	top: "layer2"
+	top: "layer3"
+	top: "layer4"
+	top: "layer5"
+	top: "layer6"
+	top: "layer7" 
+	top: "layer8" #most fine grained category
+	eltwise_param {
+		operation: MIN	
+	}
+  super_category_param{
+	  file_name : "super_category.prototxt"
+  }
+}
+layer {
+  name: "super_category_label"
+  type: "SuperCategoryLabel"
+  bottom: "label"
+  top: "label_1" #most coarse grained category
+  top: "label_2"
+  top: "label_3"
+  top: "label_4"
+  top: "label_5"
+  top: "label_6"
+  top: "label_7" 
+  top: "label_8" #same as label
+  super_category_param{
+	  file_name : "super_category.prototxt"
+  }
+}
+layer {
+	name: "DiffFromTop"
+	type: "SuperCategoryFMPost"
+	eltwise_param {
+		operation : MINUS
+	}
+	bottom: "layer1"
+	bottom: "layer2"
+	bottom: "layer3"
+	bottom: "layer4"
+	bottom: "layer5"
+	bottom: "layer6"
+	bottom: "layer7"
+	bottom: "layer8"
+	top: "layer1_diff"
+	top: "layer2_diff"
+	top: "layer3_diff"
+	top: "layer4_diff"
+	top: "layer5_diff"
+	top: "layer6_diff"
+	top: "layer7_diff"
+	top: "layer8_diff"
+	super_category_param{
+	    file_name : "super_category.prototxt"
+	}
+}
+#################################
+# Pooling Layer for Super Category
+#################################
+layer {
+  name: "pool_layer1" #most highest category
   type: "Pooling" 
-  bottom: "cccp6"
-  top: "pool3"
+  bottom: "layer1"
+  top: "pool_layer1"
   pooling_param {
     pool: AVE
     kernel_size: 8
@@ -381,63 +445,220 @@ layer {
   }
 }
 layer {
-  name: "loss"
-  type: "SoftmaxWithLoss"
-  bottom: "pool3"
-  bottom: "label"
-  top: "loss"
+  name: "pool_layer2"
+  type: "Pooling" 
+  bottom: "layer2"
+  top: "pool_layer2"
+  pooling_param {
+    pool: AVE
+    kernel_size: 8
+    stride: 1
+  }
 }
+layer {
+  name: "pool_layer3"
+  type: "Pooling" 
+  bottom: "layer3"
+  top: "pool_layer3"
+  pooling_param {
+    pool: AVE
+    kernel_size: 8
+    stride: 1
+  }
+}
+layer {
+  name: "pool_layer4"
+  type: "Pooling" 
+  bottom: "layer4"
+  top: "pool_layer4"
+  pooling_param {
+    pool: AVE
+    kernel_size: 8
+    stride: 1
+  }
+}
+layer {
+  name: "pool_layer5"
+  type: "Pooling" 
+  bottom: "layer5"
+  top: "pool_layer5"
+  pooling_param {
+    pool: AVE
+    kernel_size: 8
+    stride: 1
+  }
+}
+layer {
+  name: "pool_layer6"
+  type: "Pooling" 
+  bottom: "layer6"
+  top: "pool_layer6"
+  pooling_param {
+    pool: AVE
+    kernel_size: 8
+    stride: 1
+  }
+}
+layer {
+  name: "pool_layer7"
+  type: "Pooling" 
+  bottom: "layer7"
+  top: "pool_layer7"
+  pooling_param {
+    pool: AVE
+    kernel_size: 8
+    stride: 1
+  }
+}
+layer {  #most fine grained category
+  name: "pool_layer8"
+  type: "Pooling" 
+  bottom: "layer8"
+  top: "pool_layer8"
+  pooling_param {
+    pool: AVE
+    kernel_size: 8
+    stride: 1
+  }
+}
+#################################
+# Pooling Layer for Super Category Diff
+#################################
+layer {
+	name: "silent"
+	type: "Silence"
+	bottom: "layer1_diff"
+}
+layer {
+	name: "silent"
+	type: "Silence"
+	bottom: "layer2_diff"
+}
+layer {
+	name: "silent"
+	type: "Silence"
+	bottom: "layer3_diff"
+}
+layer {
+	name: "silent"
+	type: "Silence"
+	bottom: "layer4_diff"
+}
+layer {
+	name: "silent"
+	type: "Silence"
+	bottom: "layer5_diff"
+}
+layer {
+	name: "silent"
+	type: "Silence"
+	bottom: "layer6_diff"
+}
+layer {
+	name: "silent"
+	type: "Silence"
+	bottom: "layer7_diff"
+}
+layer {  #most fine grained category
+  name: "pool_layer8_diff"
+  type: "Pooling" 
+  bottom: "layer8_diff"
+  top: "pool_layer8_diff"
+  pooling_param {
+    pool: AVE
+    kernel_size: 8
+    stride: 1
+  }
+}
+#################################
+# Loss Layer
+#################################
+layer {
+  name: "loss1"
+  type: "SoftmaxWithLoss"
+  bottom: "pool_layer1"
+  bottom: "label_1"
+  top: "loss1"
+  loss_weight: 0.0001
+}
+layer {
+  name: "loss2"
+  type: "SoftmaxWithLoss"
+  bottom: "pool_layer2"
+  bottom: "label_2"
+  top: "loss2"
+  loss_weight: 0.0001 
+}
+layer {
+  name: "loss3"
+  type: "SoftmaxWithLoss"
+  bottom: "pool_layer3"
+  bottom: "label_3"
+  top: "loss3"
+  loss_weight: 0.0001 
+}
+layer {
+  name: "loss4"
+  type: "SoftmaxWithLoss"
+  bottom: "pool_layer4"
+  bottom: "label_4"
+  top: "loss4"
+  loss_weight: 0.01 
+}
+layer {
+  name: "loss5"
+  type: "SoftmaxWithLoss"
+  bottom: "pool_layer5"
+  bottom: "label_5"
+  top: "loss5"
+  loss_weight: 0.01 
+}
+layer {
+  name: "loss6"
+  type: "SoftmaxWithLoss"
+  bottom: "pool_layer6"
+  bottom: "label_6"
+  top: "loss6"
+  loss_weight: 0.2
+}
+layer {
+  name: "loss7"
+  type: "SoftmaxWithLoss"
+  bottom: "pool_layer7"
+  bottom: "label_7"
+  top: "loss7"
+  loss_weight: 0.3 
+}
+layer {
+  name: "loss8"
+  type: "SoftmaxWithLoss"
+  bottom: "pool_layer8"
+  bottom: "label_8"
+  top: "loss8"
+  loss_weight: 0.5 
+}
+layer {
+  name: "loss8_diff"
+  type: "SoftmaxWithLoss"
+  bottom: "pool_layer8_diff"
+  bottom: "label_8"
+  top: "loss8_diff"
+  loss_weight: 0.3 
+}
+#############################
+# Accuracy
+#############################
 layer {
   name: "accuracy"
   type: "Accuracy"
-  bottom: "pool3"
+  bottom: "pool_layer8"
   bottom: "label"
   top: "accuracy"
-  accuracy_param : {
-	  top_k : 1
-  }
 }
 #layer {
-#	name: "answer"
-#	type: "TopLabel"
-#	bottom: "pool3"
-#	top: "answer"
-#}
-#layer {
-#  name: "super_category_label"
-#  type: "SuperCategoryLabel"
-#  bottom: "label"
-#  top: "label_1"
-#  top: "label_2"
-#  super_category_param{
-#	  file_name : "super_category.prototxt"
-#  }
-#} 
-#layer {
-#  name: "super_category_label"
-#  type: "SuperCategoryLabel"
-#  bottom: "answer"
-#  top: "answer_1"
-#  top: "answer_2"
-#  super_category_param{
-#	  file_name : "super_category.prototxt"
-#  }
-#} 
-#layer {
-#	name: "accuracy_super_category"
-#	type: "LabelAccuracyWithConfusion"
-#	bottom: "label_1"
-#	bottom: "answer_1"
-#	top: "accuracy_super_category"
-#	top: "confusion"
-#	accuracy_param {
-#		num_label : 25
-#	}
-#}
-#layer {
-#	name: "accuracy_"
-#	type: "LabelAccuracy"
-#	bottom: "label_2"
-#	bottom: "answer_2"
-#	top: "accuracy_"
+#  name: "accuracy_supercategory"
+#  type: "Accuracy"
+#  bottom: "pool_layer1"
+#  bottom: "label_1"
+#  top: "accuracy_supercategory"
 #}
