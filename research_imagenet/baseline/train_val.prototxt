@@ -432,11 +432,11 @@ layer {
   bottom: "cccp"
   top: "cccp2"
   param {
-	  lr_mult: 1000
+	  lr_mult: 100
 	  decay_mult : 1
   }
   param {
-	  lr_mult: 1000
+	  lr_mult: 100
 	  decay_mult : 0
   }
   convolution_param {

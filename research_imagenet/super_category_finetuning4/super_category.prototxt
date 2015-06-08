@@ -1,0 +1,4597 @@
+children {
+	children {
+		label:25 #n01629819 European fire salamander, Salamandra salamandra
+
+	}
+	children {
+		label:26 #n01630670 common newt, Triturus vulgaris
+
+	}
+	children {
+		label:27 #n01631663 eft
+
+	}
+	children {
+		label:28 #n01632458 spotted salamander, Ambystoma maculatum
+
+	}
+	children {
+		label:327 #n02317335 starfish, sea star
+
+	}
+}
+children {
+	children {
+		label:466 #n02917067 bullet train, bullet
+
+	}
+	children {
+		label:468 #n02930766 cab, hack, taxi, taxicab
+
+	}
+	children {
+		label:581 #n03459775 grille, radiator grille
+
+	}
+	children {
+		label:817 #n04285008 sports car, sport car
+
+	}
+}
+children {
+	children {
+		label:65 #n01751748 sea snake
+
+	}
+	children {
+		label:109 #n01917289 brain coral
+
+	}
+	children {
+		label:110 #n01924916 flatworm, platyhelminth
+
+	}
+	children {
+		label:115 #n01950731 sea slug, nudibranch
+
+	}
+	children {
+		label:116 #n01955084 chiton, coat-of-mail shell, sea cradle, polyplacophore
+
+	}
+	children {
+		label:329 #n02321529 sea cucumber, holothurian
+
+	}
+	children {
+		label:390 #n02526121 eel
+
+	}
+	children {
+		label:397 #n02655020 puffer, pufferfish, blowfish, globefish
+
+	}
+}
+children {
+	children {
+		label:415 #n02776631 bakery, bakeshop, bakehouse
+
+	}
+	children {
+		label:467 #n02927161 butcher shop, meat market
+
+	}
+	children {
+		label:766 #n04111531 rotisserie
+
+	}
+}
+children {
+	children {
+		label:571 #n03425413 gas pump, gasoline pump, petrol pump, island dispenser
+
+	}
+	children {
+		label:637 #n03710193 mailbox, letter box
+
+	}
+	children {
+		label:707 #n03902125 pay-phone, pay-station
+
+	}
+	children {
+		label:800 #n04243546 slot, one-armed bandit
+
+	}
+	children {
+		label:886 #n04525305 vending machine
+
+	}
+}
+children {
+	children {
+		label:213 #n02100877 Irish setter, red setter
+
+	}
+	children {
+		label:220 #n02102480 Sussex spaniel
+
+	}
+	children {
+		label:244 #n02108551 Tibetan mastiff
+
+	}
+}
+children {
+	children {
+		label:517 #n03126707 crane
+
+	}
+	children {
+		label:576 #n03447447 gondola
+
+	}
+	children {
+		label:694 #n03874293 paddlewheel, paddle wheel
+
+	}
+	children {
+		label:807 #n04258138 solar dish, solar collector, solar furnace
+
+	}
+}
+children {
+	children {
+		label:52 #n01728572 thunder snake, worm snake, Carphophis amoenus
+
+	}
+	children {
+		label:53 #n01728920 ringneck snake, ring-necked snake, ring snake
+
+	}
+	children {
+		label:56 #n01734418 king snake, kingsnake
+
+	}
+	children {
+		label:57 #n01735189 garter snake, grass snake
+
+	}
+	children {
+		label:60 #n01740131 night snake, Hypsiglena torquata
+
+	}
+}
+children {
+	children {
+		label:443 #n02834397 bib
+
+	}
+	children {
+		label:719 #n03935335 piggy bank, penny bank
+
+	}
+}
+children {
+	children {
+		label:469 #n02939185 caldron, cauldron
+
+	}
+	children {
+		label:544 #n03259280 Dutch oven
+
+	}
+	children {
+		label:666 #n03786901 mortar
+
+	}
+	children {
+		label:739 #n03992509 potter's wheel
+
+	}
+	children {
+		label:828 #n04332243 strainer
+
+	}
+	children {
+		label:855 #n04423845 thimble
+
+	}
+	children {
+		label:960 #n07836838 chocolate sauce, chocolate syrup
+
+	}
+}
+children {
+	children {
+		label:522 #n03134739 croquet ball
+
+	}
+	children {
+		label:560 #n03379051 football helmet
+
+	}
+	children {
+		label:768 #n04118538 rugby ball
+
+	}
+	children {
+		label:805 #n04254680 soccer ball
+
+	}
+	children {
+		label:981 #n09835506 ballplayer, baseball player
+
+	}
+}
+children {
+	children {
+		label:487 #n02992529 cellular telephone, cellular phone, cellphone, cell, mobile phone
+
+	}
+	children {
+		label:592 #n03492542 hard disc, hard disk, fixed disk
+
+	}
+	children {
+		label:605 #n03584254 iPod
+
+	}
+	children {
+		label:632 #n03691459 loudspeaker, speaker, speaker unit, loudspeaker system, speaker system
+
+	}
+	children {
+		label:662 #n03777754 modem
+
+	}
+	children {
+		label:673 #n03793489 mouse, computer mouse
+
+	}
+	children {
+		label:761 #n04074963 remote control, remote
+
+	}
+	children {
+		label:811 #n04265275 space heater
+
+	}
+	children {
+		label:844 #n04372370 switch, electric switch, electrical switch
+
+	}
+}
+children {
+	children {
+		label:449 #n02859443 boathouse
+
+	}
+	children {
+		label:718 #n03933933 pier
+
+	}
+	children {
+		label:727 #n03956157 planetarium
+
+	}
+	children {
+		label:821 #n04311004 steel arch bridge
+
+	}
+	children {
+		label:839 #n04366367 suspension bridge
+
+	}
+	children {
+		label:888 #n04532670 viaduct
+
+	}
+}
+children {
+	children {
+		label:97 #n01847000 drake
+
+	}
+	children {
+		label:99 #n01855672 goose
+
+	}
+	children {
+		label:100 #n01860187 black swan, Cygnus atratus
+
+	}
+}
+children {
+	children {
+		label:453 #n02870880 bookcase
+
+	}
+	children {
+		label:495 #n03018349 china cabinet, china closet
+
+	}
+	children {
+		label:553 #n03337140 file, file cabinet, filing cabinet
+
+	}
+	children {
+		label:648 #n03742115 medicine chest, medicine cabinet
+
+	}
+	children {
+		label:760 #n04070727 refrigerator, icebox
+
+	}
+	children {
+		label:827 #n04330267 stove
+
+	}
+	children {
+		label:894 #n04550184 wardrobe, closet, press
+
+	}
+}
+children {
+	children {
+		label:936 #n07714571 head cabbage
+
+	}
+	children {
+		label:955 #n07754684 jackfruit, jak, jack
+
+	}
+	children {
+		label:956 #n07760859 custard apple
+
+	}
+}
+children {
+	children {
+		label:504 #n03063599 coffee mug
+
+	}
+	children {
+		label:551 #n03314780 face powder
+
+	}
+	children {
+		label:647 #n03733805 measuring cup
+
+	}
+	children {
+		label:712 #n03920288 Petri dish
+
+	}
+	children {
+		label:968 #n07930864 cup
+
+	}
+}
+children {
+	children {
+		label:518 #n03127747 crash helmet
+
+	}
+	children {
+		label:535 #n03208938 disk brake, disc brake
+
+	}
+	children {
+		label:545 #n03271574 electric fan, blower
+
+	}
+	children {
+		label:778 #n04141975 scale, weighing machine
+
+	}
+}
+children {
+	children {
+		label:35 #n01667114 mud turtle
+
+	}
+	children {
+		label:36 #n01667778 terrapin
+
+	}
+	children {
+		label:37 #n01669191 box turtle, box tortoise
+
+	}
+	children {
+		label:305 #n02172182 dung beetle
+
+	}
+	children {
+		label:363 #n02454379 armadillo
+
+	}
+}
+children {
+	children {
+		label:501 #n03045698 cloak
+
+	}
+	children {
+		label:568 #n03404251 fur coat
+
+	}
+	children {
+		label:652 #n03763968 military uniform
+
+	}
+	children {
+		label:982 #n10148035 groom, bridegroom
+
+	}
+}
+children {
+	children {
+		label:275 #n02116738 African hunting dog, hyena dog, Cape hunting dog, Lycaon pictus
+
+	}
+	children {
+		label:276 #n02117135 hyena, hyaena
+
+	}
+	children {
+		label:291 #n02129165 lion, king of beasts, Panthera leo
+
+	}
+	children {
+		label:294 #n02132136 brown bear, bruin, Ursus arctos
+
+	}
+	children {
+		label:341 #n02395406 hog, pig, grunter, squealer, Sus scrofa
+
+	}
+	children {
+		label:342 #n02396427 wild boar, boar, Sus scrofa
+
+	}
+	children {
+		label:343 #n02397096 warthog
+
+	}
+	children {
+		label:347 #n02410509 bison
+
+	}
+	children {
+		label:348 #n02412080 ram, tup
+
+	}
+}
+children {
+	children {
+		label:183 #n02093859 Kerry blue terrier
+
+	}
+	children {
+		label:221 #n02102973 Irish water spaniel
+
+	}
+	children {
+		label:233 #n02106382 Bouvier des Flandres, Bouviers des Flandres
+
+	}
+	children {
+		label:252 #n02110627 affenpinscher, monkey pinscher, monkey dog
+
+	}
+	children {
+		label:267 #n02113799 standard poodle
+
+	}
+}
+children {
+	children {
+		label:986 #n12057211 yellow lady's slipper, yellow lady-slipper, Cypripedium calceolus, Cypripedium parviflorum
+
+	}
+	children {
+		label:989 #n12620546 hip, rose hip, rosehip
+
+	}
+}
+children {
+	children {
+		label:940 #n07716906 spaghetti squash
+
+	}
+	children {
+		label:941 #n07717410 acorn squash
+
+	}
+	children {
+		label:942 #n07717556 butternut squash
+
+	}
+	children {
+		label:950 #n07747607 orange
+
+	}
+	children {
+		label:951 #n07749582 lemon
+
+	}
+}
+children {
+	children {
+		label:123 #n01984695 spiny lobster, langouste, rock lobster, crawfish, crayfish, sea crawfish
+
+	}
+	children {
+		label:396 #n02643566 lionfish
+
+	}
+}
+children {
+	children {
+		label:164 #n02088632 bluetick
+
+	}
+	children {
+		label:179 #n02093256 Staffordshire bullterrier, Staffordshire bull terrier
+
+	}
+	children {
+		label:180 #n02093428 American Staffordshire terrier, Staffordshire terrier, American pit bull terrier, pit bull terrier
+
+	}
+	children {
+		label:208 #n02099712 Labrador retriever
+
+	}
+	children {
+		label:209 #n02099849 Chesapeake Bay retriever
+
+	}
+	children {
+		label:210 #n02100236 German short-haired pointer
+
+	}
+	children {
+		label:242 #n02108089 boxer
+
+	}
+}
+children {
+	children {
+		label:181 #n02093647 Bedlington terrier
+
+	}
+	children {
+		label:188 #n02095314 wire-haired fox terrier
+
+	}
+	children {
+		label:189 #n02095570 Lakeland terrier
+
+	}
+	children {
+		label:190 #n02095889 Sealyham terrier, Sealyham
+
+	}
+}
+children {
+	children {
+		label:194 #n02096437 Dandie Dinmont, Dandie Dinmont terrier
+
+	}
+	children {
+		label:200 #n02097474 Tibetan terrier, chrysanthemum dog
+
+	}
+	children {
+		label:229 #n02105641 Old English sheepdog, bobtail
+
+	}
+	children {
+		label:265 #n02113624 toy poodle
+
+	}
+	children {
+		label:266 #n02113712 miniature poodle
+
+	}
+}
+children {
+	children {
+		label:165 #n02089078 black-and-tan coonhound
+
+	}
+	children {
+		label:234 #n02106550 Rottweiler
+
+	}
+	children {
+		label:238 #n02107574 Greater Swiss Mountain dog
+
+	}
+	children {
+		label:240 #n02107908 Appenzeller
+
+	}
+	children {
+		label:241 #n02108000 EntleBucher
+
+	}
+}
+children {
+	children {
+		label:178 #n02092339 Weimaraner
+
+	}
+	children {
+		label:246 #n02109047 Great Dane
+
+	}
+	children {
+		label:251 #n02110341 dalmatian, coach dog, carriage dog
+
+	}
+}
+children {
+	children {
+		label:533 #n03207743 dishrag, dishcloth
+
+	}
+	children {
+		label:539 #n03223299 doormat, welcome mat
+
+	}
+	children {
+		label:611 #n03598930 jigsaw puzzle
+
+	}
+	children {
+		label:700 #n03887697 paper towel
+
+	}
+}
+children {
+	children {
+		label:476 #n02966193 carousel, carrousel, merry-go-round, roundabout, whirligig
+
+	}
+	children {
+		label:612 #n03599486 jinrikisha, ricksha, rickshaw
+
+	}
+}
+children {
+	children {
+		label:13 #n01534433 junco, snowbird
+
+	}
+	children {
+		label:17 #n01580077 jay
+
+	}
+	children {
+		label:19 #n01592084 chickadee
+
+	}
+	children {
+		label:85 #n01806567 quail
+
+	}
+	children {
+		label:91 #n01824575 coucal
+
+	}
+}
+children {
+	children {
+		label:477 #n02966687 carpenter's kit, tool kit
+
+	}
+	children {
+		label:606 #n03584829 iron, smoothing iron
+
+	}
+	children {
+		label:613 #n03602883 joystick
+
+	}
+	children {
+		label:859 #n04442312 toaster
+
+	}
+	children {
+		label:878 #n04505470 typewriter keyboard
+
+	}
+	children {
+		label:882 #n04517823 vacuum, vacuum cleaner
+
+	}
+	children {
+		label:891 #n04542943 waffle iron
+
+	}
+}
+children {
+	children {
+		label:461 #n02895154 breastplate, aegis, egis
+
+	}
+	children {
+		label:465 #n02916936 bulletproof vest
+
+	}
+	children {
+		label:524 #n03146219 cuirass
+
+	}
+}
+children {
+	children {
+		label:322 #n02277742 ringlet, ringlet butterfly
+
+	}
+	children {
+		label:324 #n02280649 cabbage butterfly
+
+	}
+	children {
+		label:325 #n02281406 sulphur butterfly, sulfur butterfly
+
+	}
+	children {
+		label:326 #n02281787 lycaenid, lycaenid butterfly
+
+	}
+}
+children {
+	children {
+		label:407 #n02701002 ambulance
+
+	}
+	children {
+		label:555 #n03345487 fire engine, fire truck
+
+	}
+	children {
+		label:569 #n03417042 garbage truck, dustcart
+
+	}
+	children {
+		label:609 #n03594945 jeep, landrover
+
+	}
+	children {
+		label:654 #n03769881 minibus
+
+	}
+	children {
+		label:656 #n03770679 minivan
+
+	}
+	children {
+		label:675 #n03796401 moving van
+
+	}
+	children {
+		label:734 #n03977966 police van, police wagon, paddy wagon, patrol wagon, wagon, black Maria
+
+	}
+	children {
+		label:757 #n04065272 recreational vehicle, RV, R.V.
+
+	}
+	children {
+		label:864 #n04461696 tow truck, tow car, wrecker
+
+	}
+	children {
+		label:867 #n04467665 trailer truck, tractor trailer, trucking rig, rig, articulated lorry, semi
+
+	}
+}
+children {
+	children {
+		label:87 #n01817953 African grey, African gray, Psittacus erithacus
+
+	}
+	children {
+		label:89 #n01819313 sulphur-crested cockatoo, Kakatoe galerita, Cacatua galerita
+
+	}
+}
+children {
+	children {
+		label:631 #n03690938 lotion
+
+	}
+	children {
+		label:720 #n03937543 pill bottle
+
+	}
+	children {
+		label:773 #n04131690 saltshaker, salt shaker
+
+	}
+	children {
+		label:901 #n04579145 whiskey jug
+
+	}
+}
+children {
+	children {
+		label:451 #n02865351 bolo tie, bolo, bola tie, bola
+
+	}
+	children {
+		label:464 #n02910353 buckle
+
+	}
+	children {
+		label:633 #n03692522 loupe, jeweler's loupe
+
+	}
+	children {
+		label:650 #n03759954 microphone, mike
+
+	}
+	children {
+		label:818 #n04286575 spotlight, spot
+
+	}
+	children {
+		label:823 #n04317175 stethoscope
+
+	}
+	children {
+		label:902 #n04579432 whistle
+
+	}
+}
+children {
+	children {
+		label:422 #n02790996 barbell
+
+	}
+	children {
+		label:740 #n03995372 power drill
+
+	}
+	children {
+		label:746 #n04019541 puck, hockey puck
+
+	}
+	children {
+		label:758 #n04067472 reel
+
+	}
+}
+children {
+	children {
+		label:269 #n02114367 timber wolf, grey wolf, gray wolf, Canis lupus
+
+	}
+	children {
+		label:271 #n02114712 red wolf, maned wolf, Canis rufus, Canis niger
+
+	}
+	children {
+		label:272 #n02114855 coyote, prairie wolf, brush wolf, Canis latrans
+
+	}
+	children {
+		label:273 #n02115641 dingo, warrigal, warragal, Canis dingo
+
+	}
+	children {
+		label:274 #n02115913 dhole, Cuon alpinus
+
+	}
+	children {
+		label:277 #n02119022 red fox, Vulpes vulpes
+
+	}
+	children {
+		label:278 #n02119789 kit fox, Vulpes macrotis
+
+	}
+	children {
+		label:280 #n02120505 grey fox, gray fox, Urocyon cinereoargenteus
+
+	}
+}
+children {
+	children {
+		label:376 #n02489166 proboscis monkey, Nasalis larvatus
+
+	}
+	children {
+		label:377 #n02490219 marmoset
+
+	}
+	children {
+		label:380 #n02493509 titi, titi monkey
+
+	}
+	children {
+		label:382 #n02494079 squirrel monkey, Saimiri sciureus
+
+	}
+}
+children {
+	children {
+		label:281 #n02123045 tabby, tabby cat
+
+	}
+	children {
+		label:282 #n02123159 tiger cat
+
+	}
+	children {
+		label:285 #n02124075 Egyptian cat
+
+	}
+	children {
+		label:292 #n02129604 tiger, Panthera tigris
+
+	}
+}
+children {
+	children {
+		label:182 #n02093754 Border terrier
+
+	}
+	children {
+		label:185 #n02094114 Norfolk terrier
+
+	}
+	children {
+		label:186 #n02094258 Norwich terrier
+
+	}
+	children {
+		label:191 #n02096051 Airedale, Airedale terrier
+
+	}
+	children {
+		label:192 #n02096177 cairn, cairn terrier
+
+	}
+}
+children {
+	children {
+		label:105 #n01882714 koala, koala bear, kangaroo bear, native bear, Phascolarctos cinereus
+
+	}
+	children {
+		label:371 #n02486261 patas, hussar monkey, Erythrocebus patas
+
+	}
+	children {
+		label:372 #n02486410 baboon
+
+	}
+	children {
+		label:373 #n02487347 macaque
+
+	}
+}
+children {
+	children {
+		label:554 #n03344393 fireboat
+
+	}
+	children {
+		label:625 #n03662601 lifeboat
+
+	}
+	children {
+		label:814 #n04273569 speedboat
+
+	}
+}
+children {
+	children {
+		label:599 #n03530642 honeycomb
+
+	}
+	children {
+		label:987 #n12144580 corn
+
+	}
+	children {
+		label:998 #n13133613 ear, spike, capitulum
+
+	}
+}
+children {
+	children {
+		label:174 #n02091467 Norwegian elkhound, elkhound
+
+	}
+	children {
+		label:262 #n02112706 Brabancon griffon
+
+	}
+}
+children {
+	children {
+		label:538 #n03220513 dome
+
+	}
+	children {
+		label:832 #n04346328 stupa, tope
+
+	}
+}
+children {
+	children {
+		label:947 #n07734744 mushroom
+
+	}
+	children {
+		label:994 #n13040303 stinkhorn, carrion fungus
+
+	}
+	children {
+		label:995 #n13044778 earthstar
+
+	}
+	children {
+		label:997 #n13054560 bolete
+
+	}
+}
+children {
+	children {
+		label:472 #n02951358 canoe
+
+	}
+	children {
+		label:693 #n03873416 paddle, boat paddle
+
+	}
+	children {
+		label:801 #n04251144 snorkel
+
+	}
+}
+children {
+	children {
+		label:489 #n03000134 chainlink fence
+
+	}
+	children {
+		label:825 #n04326547 stone wall
+
+	}
+	children {
+		label:904 #n04589890 window screen
+
+	}
+}
+children {
+	children {
+		label:230 #n02105855 Shetland sheepdog, Shetland sheep dog, Shetland
+
+	}
+	children {
+		label:231 #n02106030 collie
+
+	}
+	children {
+		label:260 #n02112137 chow, chow chow
+
+	}
+}
+children {
+	children {
+		label:404 #n02690373 airliner
+
+	}
+	children {
+		label:405 #n02692877 airship, dirigible
+
+	}
+	children {
+		label:895 #n04552348 warplane, military plane
+
+	}
+}
+children {
+	children {
+		label:435 #n02808440 bathtub, bathing tub, bath, tub
+
+	}
+	children {
+		label:861 #n04447861 toilet seat
+
+	}
+	children {
+		label:876 #n04493381 tub, vat
+
+	}
+	children {
+		label:896 #n04553703 washbasin, handbasin, washbowl, lavabo, wash-hand basin
+
+	}
+	children {
+		label:999 #n15075141 toilet tissue, toilet paper, bathroom tissue
+
+	}
+}
+children {
+	children {
+		label:508 #n03085013 computer keyboard, keypad
+
+	}
+	children {
+		label:620 #n03642806 laptop, laptop computer
+
+	}
+	children {
+		label:681 #n03832673 notebook, notebook computer
+
+	}
+	children {
+		label:810 #n04264628 space bar
+
+	}
+}
+children {
+	children {
+		label:944 #n07718747 artichoke, globe artichoke
+
+	}
+	children {
+		label:953 #n07753275 pineapple, ananas
+
+	}
+	children {
+		label:988 #n12267677 acorn
+
+	}
+	children {
+		label:990 #n12768682 buckeye, horse chestnut, conker
+
+	}
+}
+children {
+	children {
+		label:755 #n04044716 radio telescope, radio reflector
+
+	}
+	children {
+		label:900 #n04562935 water tower
+
+	}
+}
+children {
+	children {
+		label:207 #n02099601 golden retriever
+
+	}
+	children {
+		label:212 #n02100735 English setter
+
+	}
+	children {
+		label:216 #n02101556 clumber, clumber spaniel
+
+	}
+	children {
+		label:217 #n02102040 English springer, English springer spaniel
+
+	}
+	children {
+		label:219 #n02102318 cocker spaniel, English cocker spaniel, cocker
+
+	}
+}
+children {
+	children {
+		label:458 #n02892201 brass, memorial tablet, plaque
+
+	}
+	children {
+		label:741 #n03998194 prayer rug, prayer mat
+
+	}
+	children {
+		label:918 #n06785654 crossword puzzle, crossword
+
+	}
+	children {
+		label:922 #n07565083 menu
+
+	}
+}
+children {
+	children {
+		label:566 #n03394916 French horn, horn
+
+	}
+	children {
+		label:577 #n03447721 gong, tam-tam
+
+	}
+	children {
+		label:787 #n04192698 shield, buckler
+
+	}
+}
+children {
+	children {
+		label:2 #n01484850 great white shark, white shark, man-eater, man-eating shark, Carcharodon carcharias
+
+	}
+	children {
+		label:3 #n01491361 tiger shark, Galeocerdo cuvieri
+
+	}
+	children {
+		label:4 #n01494475 hammerhead, hammerhead shark
+
+	}
+	children {
+		label:5 #n01496331 electric ray, crampfish, numbfish, torpedo
+
+	}
+	children {
+		label:6 #n01498041 stingray
+
+	}
+	children {
+		label:149 #n02074367 dugong, Dugong dugon
+
+	}
+	children {
+		label:983 #n10565667 scuba diver
+
+	}
+}
+children {
+	children {
+		label:456 #n02879718 bow
+
+	}
+	children {
+		label:514 #n03124043 cowboy boot
+
+	}
+	children {
+		label:594 #n03495258 harp
+
+	}
+	children {
+		label:840 #n04367480 swab, swob, mop
+
+	}
+}
+children {
+	children {
+		label:411 #n02730930 apron
+
+	}
+	children {
+		label:610 #n03595614 jersey, T-shirt, tee shirt
+
+	}
+	children {
+		label:697 #n03877472 pajama, pyjama, pj's, jammies
+
+	}
+	children {
+		label:841 #n04370456 sweatshirt
+
+	}
+}
+children {
+	children {
+		label:437 #n02814860 beacon, lighthouse, beacon light, pharos
+
+	}
+	children {
+		label:442 #n02825657 bell cote, bell cot
+
+	}
+	children {
+		label:497 #n03028079 church, church building
+
+	}
+	children {
+		label:663 #n03781244 monastery
+
+	}
+	children {
+		label:668 #n03788195 mosque
+
+	}
+	children {
+		label:698 #n03877845 palace
+
+	}
+}
+children {
+	children {
+		label:335 #n02356798 fox squirrel, eastern fox squirrel, Sciurus niger
+
+	}
+	children {
+		label:387 #n02509815 lesser panda, red panda, panda, bear cat, cat bear, Ailurus fulgens
+
+	}
+}
+children {
+	children {
+		label:438 #n02815834 beaker
+
+	}
+	children {
+		label:441 #n02823750 beer glass
+
+	}
+	children {
+		label:572 #n03443371 goblet
+
+	}
+	children {
+		label:604 #n03544143 hourglass
+
+	}
+	children {
+		label:966 #n07892512 red wine
+
+	}
+}
+children {
+	children {
+		label:31 #n01644373 tree frog, tree-frog
+
+	}
+	children {
+		label:46 #n01693334 green lizard, Lacerta viridis
+
+	}
+	children {
+		label:47 #n01694178 African chameleon, Chamaeleo chamaeleon
+
+	}
+	children {
+		label:55 #n01729977 green snake, grass snake
+
+	}
+	children {
+		label:59 #n01739381 vine snake
+
+	}
+	children {
+		label:64 #n01749939 green mamba
+
+	}
+}
+children {
+	children {
+		label:258 #n02111889 Samoyed, Samoyede
+
+	}
+	children {
+		label:279 #n02120079 Arctic fox, white fox, Alopex lagopus
+
+	}
+	children {
+		label:296 #n02134084 ice bear, polar bear, Ursus Maritimus, Thalarctos maritimus
+
+	}
+}
+children {
+	children {
+		label:345 #n02403003 ox
+
+	}
+	children {
+		label:346 #n02408429 water buffalo, water ox, Asiatic buffalo, Bubalus bubalis
+
+	}
+	children {
+		label:354 #n02437312 Arabian camel, dromedary, Camelus dromedarius
+
+	}
+	children {
+		label:355 #n02437616 llama
+
+	}
+}
+children {
+	children {
+		label:659 #n03775546 mixing bowl
+
+	}
+	children {
+		label:809 #n04263257 soup bowl
+
+	}
+	children {
+		label:909 #n04596742 wok
+
+	}
+	children {
+		label:925 #n07584110 consomme
+
+	}
+	children {
+		label:926 #n07590611 hot pot, hotpot
+
+	}
+}
+children {
+	children {
+		label:457 #n02883205 bow tie, bow-tie, bowtie
+
+	}
+	children {
+		label:678 #n03814639 neck brace
+
+	}
+	children {
+		label:796 #n04229816 ski mask
+
+	}
+	children {
+		label:836 #n04355933 sunglass
+
+	}
+	children {
+		label:837 #n04356056 sunglasses, dark glasses, shades
+
+	}
+	children {
+		label:906 #n04591157 Windsor tie
+
+	}
+}
+children {
+	children {
+		label:448 #n02843684 birdhouse
+
+	}
+	children {
+		label:863 #n04458633 totem pole
+
+	}
+}
+children {
+	children {
+		label:416 #n02777292 balance beam, beam
+
+	}
+	children {
+		label:430 #n02802426 basketball
+
+	}
+	children {
+		label:602 #n03535780 horizontal bar, high bar
+
+	}
+	children {
+		label:702 #n03888605 parallel bars, bars
+
+	}
+	children {
+		label:752 #n04039381 racket, racquet
+
+	}
+	children {
+		label:890 #n04540053 volleyball
+
+	}
+}
+children {
+	children {
+		label:516 #n03125729 cradle
+
+	}
+	children {
+		label:669 #n03788365 mosquito net
+
+	}
+	children {
+		label:750 #n04033995 quilt, comforter, comfort, puff
+
+	}
+	children {
+		label:831 #n04344873 studio couch, day bed
+
+	}
+}
+children {
+	children {
+		label:434 #n02808304 bath towel
+
+	}
+	children {
+		label:529 #n03188531 diaper, nappy, napkin
+
+	}
+	children {
+		label:591 #n03485794 handkerchief, hankie, hanky, hankey
+
+	}
+	children {
+		label:721 #n03938244 pillow
+
+	}
+}
+children {
+	children {
+		label:298 #n02137549 mongoose
+
+	}
+	children {
+		label:356 #n02441942 weasel
+
+	}
+	children {
+		label:361 #n02445715 skunk, polecat, wood pussy
+
+	}
+	children {
+		label:362 #n02447366 badger
+
+	}
+}
+children {
+	children {
+		label:646 #n03733281 maze, labyrinth
+
+	}
+	children {
+		label:703 #n03891251 park bench
+
+	}
+	children {
+		label:791 #n04204347 shopping cart
+
+	}
+	children {
+		label:858 #n04435653 tile roof
+
+	}
+}
+children {
+	children {
+		label:433 #n02807133 bathing cap, swimming cap
+
+	}
+	children {
+		label:445 #n02837789 bikini, two-piece
+
+	}
+	children {
+		label:638 #n03710637 maillot
+
+	}
+	children {
+		label:639 #n03710721 maillot, tank suit
+
+	}
+	children {
+		label:655 #n03770439 miniskirt, mini
+
+	}
+	children {
+		label:775 #n04136333 sarong
+
+	}
+	children {
+		label:842 #n04371430 swimming trunks, bathing trunks
+
+	}
+}
+children {
+	children {
+		label:503 #n03062245 cocktail shaker
+
+	}
+	children {
+		label:505 #n03063689 coffeepot
+
+	}
+	children {
+		label:653 #n03764736 milk can
+
+	}
+	children {
+		label:711 #n03916031 perfume, essence
+
+	}
+	children {
+		label:804 #n04254120 soap dispenser
+
+	}
+}
+children {
+	children {
+		label:482 #n02979186 cassette player
+
+	}
+	children {
+		label:485 #n02988304 CD player
+
+	}
+	children {
+		label:732 #n03976467 Polaroid camera, Polaroid Land camera
+
+	}
+	children {
+		label:745 #n04009552 projector
+
+	}
+	children {
+		label:897 #n04554684 washer, automatic washer, washing machine
+
+	}
+}
+children {
+	children {
+		label:11 #n01531178 goldfinch, Carduelis carduelis
+
+	}
+	children {
+		label:92 #n01828970 bee eater
+
+	}
+	children {
+		label:94 #n01833805 hummingbird
+
+	}
+}
+children {
+	children {
+		label:723 #n03944341 pinwheel
+
+	}
+	children {
+		label:738 #n03991062 pot, flowerpot
+
+	}
+}
+children {
+	children {
+		label:82 #n01797886 ruffed grouse, partridge, Bonasa umbellus
+
+	}
+	children {
+		label:83 #n01798484 prairie chicken, prairie grouse, prairie fowl
+
+	}
+	children {
+		label:86 #n01807496 partridge
+
+	}
+}
+children {
+	children {
+		label:991 #n12985857 coral fungus
+
+	}
+	children {
+		label:996 #n13052670 hen-of-the-woods, hen of the woods, Polyporus frondosus, Grifola frondosa
+
+	}
+}
+children {
+	children {
+		label:499 #n03041632 cleaver, meat cleaver, chopper
+
+	}
+	children {
+		label:563 #n03388183 fountain pen
+
+	}
+	children {
+		label:587 #n03481172 hammer
+
+	}
+	children {
+		label:593 #n03494278 harmonica, mouth organ, harp, mouth harp
+
+	}
+	children {
+		label:626 #n03666591 lighter, light, igniter, ignitor
+
+	}
+	children {
+		label:767 #n04116512 rubber eraser, rubber, pencil eraser
+
+	}
+	children {
+		label:784 #n04154565 screwdriver
+
+	}
+	children {
+		label:813 #n04270147 spatula
+
+	}
+}
+children {
+	children {
+		label:520 #n03131574 crib, cot
+
+	}
+	children {
+		label:564 #n03388549 four-poster
+
+	}
+	children {
+		label:729 #n03961711 plate rack
+
+	}
+}
+children {
+	children {
+		label:18 #n01582220 magpie
+
+	}
+	children {
+		label:80 #n01795545 black grouse
+
+	}
+	children {
+		label:136 #n02017213 European gallinule, Porphyrio porphyrio
+
+	}
+}
+children {
+	children {
+		label:184 #n02093991 Irish terrier
+
+	}
+	children {
+		label:196 #n02097047 miniature schnauzer
+
+	}
+	children {
+		label:202 #n02098105 soft-coated wheaten terrier
+
+	}
+	children {
+		label:203 #n02098286 West Highland white terrier
+
+	}
+}
+children {
+	children {
+		label:140 #n02027492 red-backed sandpiper, dunlin, Erolia alpina
+
+	}
+	children {
+		label:141 #n02028035 redshank, Tringa totanus
+
+	}
+	children {
+		label:142 #n02033041 dowitcher
+
+	}
+}
+children {
+	children {
+		label:309 #n02206856 bee
+
+	}
+	children {
+		label:321 #n02276258 admiral
+
+	}
+}
+children {
+	children {
+		label:509 #n03089624 confectionery, confectionary, candy store
+
+	}
+	children {
+		label:582 #n03461385 grocery store, grocery, food market, market
+
+	}
+	children {
+		label:788 #n04200800 shoe shop, shoe-shop, shoe store
+
+	}
+	children {
+		label:865 #n04462240 toyshop
+
+	}
+	children {
+		label:917 #n06596364 comic book
+
+	}
+}
+children {
+	children {
+		label:38 #n01675722 banded gecko
+
+	}
+	children {
+		label:41 #n01685808 whiptail, whiptail lizard
+
+	}
+	children {
+		label:42 #n01687978 agama
+
+	}
+	children {
+		label:44 #n01689811 alligator lizard
+
+	}
+	children {
+		label:45 #n01692333 Gila monster, Heloderma suspectum
+
+	}
+	children {
+		label:54 #n01729322 hognose snake, puff adder, sand viper
+
+	}
+	children {
+		label:58 #n01737021 water snake
+
+	}
+}
+children {
+	children {
+		label:547 #n03272562 electric locomotive
+
+	}
+	children {
+		label:660 #n03776460 mobile home, manufactured home
+
+	}
+	children {
+		label:705 #n03895866 passenger car, coach, carriage
+
+	}
+}
+children {
+	children {
+		label:795 #n04228054 ski
+
+	}
+	children {
+		label:843 #n04371774 swing
+
+	}
+	children {
+		label:879 #n04507155 umbrella
+
+	}
+	children {
+		label:880 #n04509417 unicycle, monocycle
+
+	}
+}
+children {
+	children {
+		label:550 #n03297495 espresso maker
+
+	}
+	children {
+		label:759 #n04069434 reflex camera
+
+	}
+}
+children {
+	children {
+		label:588 #n03482405 hamper
+
+	}
+	children {
+		label:790 #n04204238 shopping basket
+
+	}
+}
+children {
+	children {
+		label:79 #n01784675 centipede
+
+	}
+	children {
+		label:113 #n01944390 snail
+
+	}
+	children {
+		label:114 #n01945685 slug
+
+	}
+	children {
+		label:125 #n01986214 hermit crab
+
+	}
+	children {
+		label:126 #n01990800 isopod
+
+	}
+}
+children {
+	children {
+		label:480 #n02977058 cash machine, cash dispenser, automated teller machine, automatic teller machine, automated teller, automatic teller, ATM
+
+	}
+	children {
+		label:527 #n03180011 desktop computer
+
+	}
+	children {
+		label:664 #n03782006 monitor
+
+	}
+	children {
+		label:688 #n03857828 oscilloscope, scope, cathode-ray oscilloscope, CRO
+
+	}
+	children {
+		label:771 #n04125021 safe
+
+	}
+	children {
+		label:782 #n04152593 screen, CRT screen
+
+	}
+	children {
+		label:851 #n04404412 television, television system
+
+	}
+}
+children {
+	children {
+		label:428 #n02797295 barrow, garden cart, lawn cart, wheelbarrow
+
+	}
+	children {
+		label:730 #n03967562 plow, plough
+
+	}
+	children {
+		label:912 #n04604644 worm fence, snake fence, snake-rail fence, Virginia fence
+
+	}
+}
+children {
+	children {
+		label:170 #n02090721 Irish wolfhound
+
+	}
+	children {
+		label:177 #n02092002 Scottish deerhound, deerhound
+
+	}
+	children {
+		label:197 #n02097130 giant schnauzer
+
+	}
+	children {
+		label:205 #n02099267 flat-coated retriever
+
+	}
+	children {
+		label:214 #n02101006 Gordon setter
+
+	}
+	children {
+		label:224 #n02105056 groenendael
+
+	}
+	children {
+		label:256 #n02111277 Newfoundland, Newfoundland dog
+
+	}
+}
+children {
+	children {
+		label:392 #n02606052 rock beauty, Holocanthus tricolor
+
+	}
+	children {
+		label:393 #n02607072 anemone fish
+
+	}
+}
+children {
+	children {
+		label:579 #n03452741 grand piano, grand
+
+	}
+	children {
+		label:642 #n03721384 marimba, xylophone
+
+	}
+	children {
+		label:736 #n03982430 pool table, billiard table, snooker table
+
+	}
+	children {
+		label:762 #n04081281 restaurant, eating house, eating place, eatery
+
+	}
+}
+children {
+	children {
+		label:506 #n03065424 coil, spiral, volute, whorl, helix
+
+	}
+	children {
+		label:640 #n03717622 manhole cover
+
+	}
+	children {
+		label:835 #n04355338 sundial
+
+	}
+}
+children {
+	children {
+		label:779 #n04146614 school bus
+
+	}
+	children {
+		label:829 #n04335435 streetcar, tram, tramcar, trolley, trolley car
+
+	}
+	children {
+		label:874 #n04487081 trolleybus, trolley coach, trackless trolley
+
+	}
+}
+children {
+	children {
+		label:423 #n02791124 barber chair
+
+	}
+	children {
+		label:786 #n04179913 sewing machine
+
+	}
+}
+children {
+	children {
+		label:169 #n02090622 borzoi, Russian wolfhound
+
+	}
+	children {
+		label:255 #n02111129 Leonberg
+
+	}
+}
+children {
+	children {
+		label:20 #n01601694 water ouzel, dipper
+
+	}
+	children {
+		label:81 #n01796340 ptarmigan
+
+	}
+	children {
+		label:139 #n02025239 ruddy turnstone, Arenaria interpres
+
+	}
+}
+children {
+	children {
+		label:401 #n02672831 accordion, piano accordion, squeeze box
+
+	}
+	children {
+		label:439 #n02817516 bearskin, busby, shako
+
+	}
+	children {
+		label:541 #n03249569 drum, membranophone, tympan
+
+	}
+	children {
+		label:819 #n04296562 stage
+
+	}
+	children {
+		label:822 #n04311174 steel drum
+
+	}
+	children {
+		label:862 #n04456115 torch
+
+	}
+}
+children {
+	children {
+		label:657 #n03773504 missile
+
+	}
+	children {
+		label:744 #n04008634 projectile, missile
+
+	}
+	children {
+		label:812 #n04266014 space shuttle
+
+	}
+}
+children {
+	children {
+		label:364 #n02457408 three-toed sloth, ai, Bradypus tridactylus
+
+	}
+	children {
+		label:378 #n02492035 capuchin, ringtail, Cebus capucinus
+
+	}
+	children {
+		label:379 #n02492660 howler monkey, howler
+
+	}
+	children {
+		label:381 #n02493793 spider monkey, Ateles geoffroyi
+
+	}
+	children {
+		label:384 #n02500267 indri, indris, Indri indri, Indri brevicaudatus
+
+	}
+}
+children {
+	children {
+		label:0 #n01440764 tench, Tinca tinca
+
+	}
+	children {
+		label:389 #n02514041 barracouta, snoek
+
+	}
+}
+children {
+	children {
+		label:299 #n02138441 meerkat, mierkat
+
+	}
+	children {
+		label:336 #n02361337 marmot
+
+	}
+	children {
+		label:357 #n02442845 mink
+
+	}
+	children {
+		label:360 #n02444819 otter
+
+	}
+}
+children {
+	children {
+		label:481 #n02978881 cassette
+
+	}
+	children {
+		label:530 #n03196217 digital clock
+
+	}
+	children {
+		label:754 #n04041544 radio, wireless
+
+	}
+	children {
+		label:848 #n04392985 tape player
+
+	}
+}
+children {
+	children {
+		label:924 #n07583066 guacamole
+
+	}
+	children {
+		label:935 #n07711569 mashed potato
+
+	}
+	children {
+		label:962 #n07871810 meat loaf, meatloaf
+
+	}
+	children {
+		label:963 #n07873807 pizza, pizza pie
+
+	}
+}
+children {
+	children {
+		label:69 #n01768244 trilobite
+
+	}
+	children {
+		label:112 #n01943899 conch
+
+	}
+	children {
+		label:117 #n01968897 chambered nautilus, pearly nautilus, nautilus
+
+	}
+}
+children {
+	children {
+		label:33 #n01664065 loggerhead, loggerhead turtle, Caretta caretta
+
+	}
+	children {
+		label:34 #n01665541 leatherback turtle, leatherback, leathery turtle, Dermochelys coriacea
+
+	}
+	children {
+		label:103 #n01873310 platypus, duckbill, duckbilled platypus, duck-billed platypus, Ornithorhynchus anatinus
+
+	}
+}
+children {
+	children {
+		label:365 #n02480495 orangutan, orang, orangutang, Pongo pygmaeus
+
+	}
+	children {
+		label:366 #n02480855 gorilla, Gorilla gorilla
+
+	}
+	children {
+		label:367 #n02481823 chimpanzee, chimp, Pan troglodytes
+
+	}
+}
+children {
+	children {
+		label:406 #n02699494 altar
+
+	}
+	children {
+		label:687 #n03854065 organ, pipe organ
+
+	}
+	children {
+		label:857 #n04429376 throne
+
+	}
+	children {
+		label:884 #n04523525 vault
+
+	}
+}
+children {
+	children {
+		label:500 #n03042490 cliff dwelling
+
+	}
+	children {
+		label:649 #n03743016 megalith, megalithic structure
+
+	}
+	children {
+		label:958 #n07802026 hay
+
+	}
+}
+children {
+	children {
+		label:512 #n03109150 corkscrew, bottle screw
+
+	}
+	children {
+		label:726 #n03954731 plane, carpenter's plane, woodworking plane
+
+	}
+	children {
+		label:763 #n04086273 revolver, six-gun, six-shooter
+
+	}
+}
+children {
+	children {
+		label:310 #n02219486 ant, emmet, pismire
+
+	}
+	children {
+		label:311 #n02226429 grasshopper, hopper
+
+	}
+	children {
+		label:312 #n02229544 cricket
+
+	}
+	children {
+		label:315 #n02236044 mantis, mantid
+
+	}
+	children {
+		label:317 #n02259212 leafhopper
+
+	}
+	children {
+		label:318 #n02264363 lacewing, lacewing fly
+
+	}
+}
+children {
+	children {
+		label:330 #n02325366 wood rabbit, cottontail, cottontail rabbit
+
+	}
+	children {
+		label:331 #n02326432 hare
+
+	}
+}
+children {
+	children {
+		label:674 #n03794056 mousetrap
+
+	}
+	children {
+		label:709 #n03908618 pencil box, pencil case
+
+	}
+	children {
+		label:748 #n04026417 purse
+
+	}
+	children {
+		label:868 #n04476259 tray
+
+	}
+	children {
+		label:893 #n04548362 wallet, billfold, notecase, pocketbook
+
+	}
+}
+children {
+	children {
+		label:470 #n02948072 candle, taper, wax light
+
+	}
+	children {
+		label:618 #n03633091 ladle
+
+	}
+	children {
+		label:722 #n03942813 ping-pong ball
+
+	}
+	children {
+		label:910 #n04597913 wooden spoon
+
+	}
+	children {
+		label:971 #n09229709 bubble
+
+	}
+}
+children {
+	children {
+		label:474 #n02963159 cardigan
+
+	}
+	children {
+		label:490 #n03000247 chain mail, ring mail, mail, chain armor, chain armour, ring armor, ring armour
+
+	}
+	children {
+		label:658 #n03775071 mitten
+
+	}
+	children {
+		label:735 #n03980874 poncho
+
+	}
+	children {
+		label:824 #n04325704 stole
+
+	}
+	children {
+		label:911 #n04599235 wool, woolen, woollen
+
+	}
+}
+children {
+	children {
+		label:450 #n02860847 bobsled, bobsleigh, bob
+
+	}
+	children {
+		label:573 #n03444034 go-kart
+
+	}
+	children {
+		label:802 #n04252077 snowmobile
+
+	}
+}
+children {
+	children {
+		label:48 #n01695060 Komodo dragon, Komodo lizard, dragon lizard, giant lizard, Varanus komodoensis
+
+	}
+	children {
+		label:49 #n01697457 African crocodile, Nile crocodile, Crocodylus niloticus
+
+	}
+	children {
+		label:50 #n01698640 American alligator, Alligator mississipiensis
+
+	}
+}
+children {
+	children {
+		label:431 #n02804414 bassinet
+
+	}
+	children {
+		label:728 #n03958227 plastic bag
+
+	}
+}
+children {
+	children {
+		label:561 #n03384352 forklift
+
+	}
+	children {
+		label:575 #n03445924 golfcart, golf cart
+
+	}
+	children {
+		label:661 #n03777568 Model T
+
+	}
+}
+children {
+	children {
+		label:608 #n03594734 jean, blue jean, denim
+
+	}
+	children {
+		label:797 #n04235860 sleeping bag
+
+	}
+	children {
+		label:885 #n04525038 velvet
+
+	}
+}
+children {
+	children {
+		label:70 #n01770081 harvestman, daddy longlegs, Phalangium opilio
+
+	}
+	children {
+		label:72 #n01773157 black and gold garden spider, Argiope aurantia
+
+	}
+	children {
+		label:73 #n01773549 barn spider, Araneus cavaticus
+
+	}
+	children {
+		label:74 #n01773797 garden spider, Aranea diademata
+
+	}
+	children {
+		label:75 #n01774384 black widow, Latrodectus mactans
+
+	}
+	children {
+		label:77 #n01775062 wolf spider, hunting spider
+
+	}
+	children {
+		label:307 #n02177972 weevil
+
+	}
+}
+children {
+	children {
+		label:421 #n02788148 bannister, banister, balustrade, balusters, handrail
+
+	}
+	children {
+		label:583 #n03467068 guillotine
+
+	}
+	children {
+		label:877 #n04501370 turnstile
+
+	}
+}
+children {
+	children {
+		label:167 #n02089973 English foxhound
+
+	}
+	children {
+		label:176 #n02091831 Saluki, gazelle hound
+
+	}
+}
+children {
+	children {
+		label:10 #n01530575 brambling, Fringilla montifringilla
+
+	}
+	children {
+		label:12 #n01532829 house finch, linnet, Carpodacus mexicanus
+
+	}
+	children {
+		label:14 #n01537544 indigo bunting, indigo finch, indigo bird, Passerina cyanea
+
+	}
+	children {
+		label:15 #n01558993 robin, American robin, Turdus migratorius
+
+	}
+}
+children {
+	children {
+		label:420 #n02787622 banjo
+
+	}
+	children {
+		label:432 #n02804610 bassoon
+
+	}
+	children {
+		label:486 #n02992211 cello, violoncello
+
+	}
+	children {
+		label:558 #n03372029 flute, transverse flute
+
+	}
+	children {
+		label:683 #n03838899 oboe, hautboy, hautbois
+
+	}
+	children {
+		label:776 #n04141076 sax, saxophone
+
+	}
+	children {
+		label:889 #n04536866 violin, fiddle
+
+	}
+}
+children {
+	children {
+		label:455 #n02877765 bottlecap
+
+	}
+	children {
+		label:622 #n03657121 lens cap, lens cover
+
+	}
+	children {
+		label:714 #n03929660 pick, plectrum, plectron
+
+	}
+	children {
+		label:892 #n04548280 wall clock
+
+	}
+}
+children {
+	children {
+		label:937 #n07714990 broccoli
+
+	}
+	children {
+		label:938 #n07715103 cauliflower
+
+	}
+}
+children {
+	children {
+		label:118 #n01978287 Dungeness crab, Cancer magister
+
+	}
+	children {
+		label:121 #n01981276 king crab, Alaska crab, Alaskan king crab, Alaska king crab, Paralithodes camtschatica
+
+	}
+	children {
+		label:122 #n01983481 American lobster, Northern lobster, Maine lobster, Homarus americanus
+
+	}
+	children {
+		label:124 #n01985128 crayfish, crawfish, crawdad, crawdaddy
+
+	}
+}
+children {
+	children {
+		label:930 #n07684084 French loaf
+
+	}
+	children {
+		label:931 #n07693725 bagel, beigel
+
+	}
+	children {
+		label:961 #n07860988 dough
+
+	}
+}
+children {
+	children {
+		label:970 #n09193705 alp
+
+	}
+	children {
+		label:972 #n09246464 cliff, drop, drop-off
+
+	}
+	children {
+		label:974 #n09288635 geyser
+
+	}
+	children {
+		label:976 #n09399592 promontory, headland, head, foreland
+
+	}
+	children {
+		label:979 #n09468604 valley, vale
+
+	}
+	children {
+		label:980 #n09472597 volcano
+
+	}
+}
+children {
+	children {
+		label:159 #n02087394 Rhodesian ridgeback
+
+	}
+	children {
+		label:163 #n02088466 bloodhound, sleuthhound
+
+	}
+	children {
+		label:168 #n02090379 redbone
+
+	}
+	children {
+		label:211 #n02100583 vizsla, Hungarian pointer
+
+	}
+	children {
+		label:243 #n02108422 bull mastiff
+
+	}
+}
+children {
+	children {
+		label:399 #n02667093 abaya
+
+	}
+	children {
+		label:400 #n02669723 academic gown, academic robe, judge's robe
+
+	}
+	children {
+		label:614 #n03617480 kimono
+
+	}
+	children {
+		label:667 #n03787032 mortarboard
+
+	}
+	children {
+		label:887 #n04532106 vestment
+
+	}
+}
+children {
+	children {
+		label:927 #n07613480 trifle
+
+	}
+}
+children {
+	children {
+		label:288 #n02128385 leopard, Panthera pardus
+
+	}
+	children {
+		label:289 #n02128757 snow leopard, ounce, Panthera uncia
+
+	}
+	children {
+		label:290 #n02128925 jaguar, panther, Panthera onca, Felis onca
+
+	}
+	children {
+		label:293 #n02130308 cheetah, chetah, Acinonyx jubatus
+
+	}
+}
+children {
+	children {
+		label:333 #n02342885 hamster
+
+	}
+	children {
+		label:850 #n04399382 teddy, teddy bear
+
+	}
+}
+children {
+	children {
+		label:502 #n03047690 clog, geta, patten, sabot
+
+	}
+	children {
+		label:630 #n03680355 Loafer
+
+	}
+	children {
+		label:770 #n04120489 running shoe
+
+	}
+	children {
+		label:774 #n04133789 sandal
+
+	}
+}
+children {
+	children {
+		label:923 #n07579787 plate
+
+	}
+	children {
+		label:928 #n07614500 ice cream, icecream
+
+	}
+	children {
+		label:934 #n07697537 hotdog, hot dog, red hot
+
+	}
+	children {
+		label:965 #n07880968 burrito
+
+	}
+}
+children {
+	children {
+		label:259 #n02112018 Pomeranian
+
+	}
+	children {
+		label:283 #n02123394 Persian cat
+
+	}
+	children {
+		label:332 #n02328150 Angora, Angora rabbit
+
+	}
+	children {
+		label:338 #n02364673 guinea pig, Cavia cobaya
+
+	}
+}
+children {
+	children {
+		label:160 #n02088094 Afghan hound, Afghan
+
+	}
+	children {
+		label:226 #n02105251 briard
+
+	}
+}
+children {
+	children {
+		label:462 #n02906734 broom
+
+	}
+	children {
+		label:523 #n03141823 crutch
+
+	}
+	children {
+		label:733 #n03976657 pole
+
+	}
+	children {
+		label:792 #n04208210 shovel
+
+	}
+	children {
+		label:872 #n04485082 tripod
+
+	}
+}
+children {
+	children {
+		label:127 #n02002556 white stork, Ciconia ciconia
+
+	}
+	children {
+		label:128 #n02002724 black stork, Ciconia nigra
+
+	}
+	children {
+		label:131 #n02009229 little blue heron, Egretta caerulea
+
+	}
+	children {
+		label:134 #n02012849 crane
+
+	}
+}
+children {
+	children {
+		label:933 #n07697313 cheeseburger
+
+	}
+	children {
+		label:964 #n07875152 potpie
+
+	}
+}
+children {
+	children {
+		label:596 #n03498962 hatchet
+
+	}
+	children {
+		label:600 #n03532672 hook, claw
+
+	}
+	children {
+		label:695 #n03874599 padlock
+
+	}
+	children {
+		label:783 #n04153751 screw
+
+	}
+}
+children {
+	children {
+		label:494 #n03017168 chime, bell, gong
+
+	}
+	children {
+		label:619 #n03637318 lampshade, lamp shade
+
+	}
+	children {
+		label:708 #n03903868 pedestal, plinth, footstall
+
+	}
+	children {
+		label:846 #n04380533 table lamp
+
+	}
+}
+children {
+	children {
+		label:398 #n02666196 abacus
+
+	}
+	children {
+		label:419 #n02786058 Band Aid
+
+	}
+	children {
+		label:692 #n03871628 packet
+
+	}
+	children {
+		label:838 #n04357314 sunscreen, sunblock, sun blocker
+
+	}
+	children {
+		label:921 #n07248320 book jacket, dust cover, dust jacket, dust wrapper
+
+	}
+}
+children {
+	children {
+		label:248 #n02109961 Eskimo dog, husky
+
+	}
+	children {
+		label:249 #n02110063 malamute, malemute, Alaskan malamute
+
+	}
+	children {
+		label:250 #n02110185 Siberian husky
+
+	}
+}
+children {
+	children {
+		label:340 #n02391049 zebra
+
+	}
+}
+children {
+	children {
+		label:985 #n11939491 daisy
+
+	}
+}
+children {
+	children {
+		label:147 #n02066245 grey whale, gray whale, devilfish, Eschrichtius gibbosus, Eschrichtius robustus
+
+	}
+	children {
+		label:148 #n02071294 killer whale, killer, orca, grampus, sea wolf, Orcinus orca
+
+	}
+}
+children {
+	children {
+		label:484 #n02981792 catamaran
+
+	}
+	children {
+		label:780 #n04147183 schooner
+
+	}
+	children {
+		label:871 #n04483307 trimaran
+
+	}
+	children {
+		label:914 #n04612504 yawl
+
+	}
+}
+children {
+	children {
+		label:61 #n01742172 boa constrictor, Constrictor constrictor
+
+	}
+	children {
+		label:62 #n01744401 rock python, rock snake, Python sebae
+
+	}
+	children {
+		label:63 #n01748264 Indian cobra, Naja naja
+
+	}
+}
+children {
+	children {
+		label:562 #n03388043 fountain
+
+	}
+	children {
+		label:580 #n03457902 greenhouse, nursery, glasshouse
+
+	}
+	children {
+		label:634 #n03697007 lumbermill, sawmill
+
+	}
+	children {
+		label:706 #n03899768 patio, terrace
+
+	}
+	children {
+		label:716 #n03930313 picket fence, paling
+
+	}
+	children {
+		label:743 #n04005630 prison, prison house
+
+	}
+}
+children {
+	children {
+		label:408 #n02704792 amphibian, amphibious vehicle
+
+	}
+	children {
+		label:586 #n03478589 half track
+
+	}
+	children {
+		label:803 #n04252225 snowplow, snowplough
+
+	}
+	children {
+		label:820 #n04310018 steam locomotive
+
+	}
+	children {
+		label:847 #n04389033 tank, army tank, armored combat vehicle, armoured combat vehicle
+
+	}
+}
+children {
+	children {
+		label:585 #n03476991 hair spray
+
+	}
+	children {
+		label:629 #n03676483 lipstick, lip rouge
+
+	}
+	children {
+		label:680 #n03825788 nipple
+
+	}
+}
+children {
+	children {
+		label:129 #n02006656 spoonbill
+
+	}
+	children {
+		label:132 #n02009912 American egret, great white heron, Egretta albus
+
+	}
+	children {
+		label:144 #n02051845 pelican
+
+	}
+}
+children {
+	children {
+		label:992 #n12998815 agaric
+
+	}
+}
+children {
+	children {
+		label:339 #n02389026 sorrel
+
+	}
+}
+children {
+	children {
+		label:412 #n02747177 ashcan, trash can, garbage can, wastebin, ash bin, ash-bin, ashbin, dustbin, trash barrel, trash bin
+
+	}
+	children {
+		label:427 #n02795169 barrel, cask
+
+	}
+	children {
+		label:463 #n02909870 bucket, pail
+
+	}
+	children {
+		label:756 #n04049303 rain barrel
+
+	}
+}
+children {
+	children {
+		label:425 #n02793495 barn
+
+	}
+	children {
+		label:672 #n03792972 mountain tent
+
+	}
+	children {
+		label:853 #n04417672 thatch, thatched roof
+
+	}
+	children {
+		label:915 #n04613696 yurt
+
+	}
+}
+children {
+	children {
+		label:51 #n01704323 triceratops
+
+	}
+	children {
+		label:223 #n02104365 schipperke
+
+	}
+}
+children {
+	children {
+		label:175 #n02091635 otterhound, otter hound
+
+	}
+}
+children {
+	children {
+		label:302 #n02167151 ground beetle, carabid beetle
+
+	}
+	children {
+		label:306 #n02174001 rhinoceros beetle
+
+	}
+}
+children {
+	children {
+		label:552 #n03325584 feather boa, boa
+
+	}
+	children {
+		label:903 #n04584207 wig
+
+	}
+	children {
+		label:929 #n07615774 ice lolly, lolly, lollipop, popsicle
+
+	}
+}
+children {
+	children {
+		label:492 #n03014705 chest
+
+	}
+	children {
+		label:519 #n03127925 crate
+
+	}
+	children {
+		label:556 #n03347037 fire screen, fireguard
+
+	}
+	children {
+		label:753 #n04040759 radiator
+
+	}
+	children {
+		label:881 #n04515003 upright, upright piano
+
+	}
+}
+children {
+	children {
+		label:417 #n02782093 balloon
+
+	}
+	children {
+		label:701 #n03888257 parachute, chute
+
+	}
+}
+children {
+	children {
+		label:607 #n03590841 jack-o'-lantern
+
+	}
+}
+children {
+	children {
+		label:916 #n06359193 web site, website, internet site, site
+
+	}
+}
+children {
+	children {
+		label:679 #n03814906 necklace
+
+	}
+}
+children {
+	children {
+		label:526 #n03179701 desk
+
+	}
+	children {
+		label:532 #n03201208 dining table, board
+
+	}
+	children {
+		label:534 #n03207941 dishwasher, dish washer, dishwashing machine
+
+	}
+}
+children {
+	children {
+		label:460 #n02894605 breakwater, groin, groyne, mole, bulwark, seawall, jetty
+
+	}
+	children {
+		label:525 #n03160309 dam, dike, dyke
+
+	}
+	children {
+		label:913 #n04606251 wreck
+
+	}
+	children {
+		label:975 #n09332890 lakeside, lakeshore
+
+	}
+	children {
+		label:977 #n09421951 sandbar, sand bar
+
+	}
+	children {
+		label:978 #n09428293 seashore, coast, seacoast, sea-coast
+
+	}
+}
+children {
+	children {
+		label:222 #n02104029 kuvasz
+
+	}
+	children {
+		label:257 #n02111500 Great Pyrenees
+
+	}
+}
+children {
+	children {
+		label:537 #n03218198 dogsled, dog sled, dog sleigh
+
+	}
+}
+children {
+	children {
+		label:104 #n01877812 wallaby, brush kangaroo
+
+	}
+	children {
+		label:286 #n02125311 cougar, puma, catamount, mountain lion, painter, panther, Felis concolor
+
+	}
+	children {
+		label:287 #n02127052 lynx, catamount
+
+	}
+}
+children {
+	children {
+		label:133 #n02011460 bittern
+
+	}
+	children {
+		label:135 #n02013706 limpkin, Aramus pictus
+
+	}
+	children {
+		label:138 #n02018795 bustard
+
+	}
+}
+children {
+	children {
+		label:645 #n03733131 maypole
+
+	}
+}
+children {
+	children {
+		label:447 #n02841315 binoculars, field glasses, opera glasses
+
+	}
+	children {
+		label:570 #n03424325 gasmask, respirator, gas helmet
+
+	}
+	children {
+		label:597 #n03527444 holster
+
+	}
+	children {
+		label:615 #n03623198 knee pad
+
+	}
+	children {
+		label:641 #n03720891 maraca
+
+	}
+	children {
+		label:691 #n03868863 oxygen mask
+
+	}
+}
+children {
+	children {
+		label:78 #n01776313 tick
+
+	}
+	children {
+		label:303 #n02168699 long-horned beetle, longicorn, longicorn beetle
+
+	}
+	children {
+		label:308 #n02190166 fly
+
+	}
+	children {
+		label:314 #n02233338 cockroach, roach
+
+	}
+	children {
+		label:316 #n02256656 cicada, cicala
+
+	}
+}
+children {
+	children {
+		label:1 #n01443537 goldfish, Carassius auratus
+
+	}
+	children {
+		label:29 #n01632777 axolotl, mud puppy, Ambystoma mexicanum
+
+	}
+}
+children {
+	children {
+		label:300 #n02165105 tiger beetle
+
+	}
+}
+children {
+	children {
+		label:725 #n03950228 pitcher, ewer
+
+	}
+	children {
+		label:849 #n04398044 teapot
+
+	}
+	children {
+		label:883 #n04522168 vase
+
+	}
+	children {
+		label:899 #n04560804 water jug
+
+	}
+}
+children {
+	children {
+		label:939 #n07716358 zucchini, courgette
+
+	}
+	children {
+		label:943 #n07718472 cucumber, cuke
+
+	}
+	children {
+		label:945 #n07720875 bell pepper
+
+	}
+	children {
+		label:948 #n07742313 Granny Smith
+
+	}
+	children {
+		label:954 #n07753592 banana
+
+	}
+}
+children {
+	children {
+		label:232 #n02106166 Border collie
+
+	}
+	children {
+		label:239 #n02107683 Bernese mountain dog
+
+	}
+	children {
+		label:247 #n02109525 Saint Bernard, St Bernard
+
+	}
+}
+children {
+	children {
+		label:30 #n01641577 bullfrog, Rana catesbeiana
+
+	}
+	children {
+		label:32 #n01644900 tailed frog, bell toad, ribbed toad, tailed toad, Ascaphus trui
+
+	}
+}
+children {
+	children {
+		label:409 #n02708093 analog clock
+
+	}
+	children {
+		label:426 #n02794156 barometer
+
+	}
+	children {
+		label:635 #n03706229 magnetic compass
+
+	}
+}
+children {
+	children {
+		label:173 #n02091244 Ibizan hound, Ibizan Podenco
+
+	}
+	children {
+		label:253 #n02110806 basenji
+
+	}
+}
+children {
+	children {
+		label:108 #n01914609 sea anemone, anemone
+
+	}
+	children {
+		label:328 #n02319095 sea urchin
+
+	}
+	children {
+		label:973 #n09256479 coral reef
+
+	}
+}
+children {
+	children {
+		label:946 #n07730033 cardoon
+
+	}
+}
+children {
+	children {
+		label:984 #n11879895 rapeseed
+
+	}
+}
+children {
+	children {
+		label:24 #n01622779 great grey owl, great gray owl, Strix nebulosa
+
+	}
+}
+children {
+	children {
+		label:715 #n03929855 pickelhaube
+
+	}
+}
+children {
+	children {
+		label:150 #n02077923 sea lion
+
+	}
+	children {
+		label:344 #n02398521 hippopotamus, hippo, river horse, Hippopotamus amphibius
+
+	}
+}
+children {
+	children {
+		label:187 #n02094433 Yorkshire terrier
+
+	}
+	children {
+		label:193 #n02096294 Australian terrier
+
+	}
+	children {
+		label:201 #n02097658 silky terrier, Sydney silky
+
+	}
+}
+children {
+	children {
+		label:88 #n01818515 macaw
+
+	}
+	children {
+		label:90 #n01820546 lorikeet
+
+	}
+}
+children {
+	children {
+		label:111 #n01930112 nematode, nematode worm, roundworm
+
+	}
+	children {
+		label:488 #n02999410 chain
+
+	}
+	children {
+		label:677 #n03804744 nail
+
+	}
+}
+children {
+	children {
+		label:368 #n02483362 gibbon, Hylobates lar
+
+	}
+	children {
+		label:369 #n02483708 siamang, Hylobates syndactylus, Symphalangus syndactylus
+
+	}
+	children {
+		label:370 #n02484975 guenon, guenon monkey
+
+	}
+	children {
+		label:374 #n02488291 langur
+
+	}
+	children {
+		label:375 #n02488702 colobus, colobus monkey
+
+	}
+	children {
+		label:383 #n02497673 Madagascar cat, ring-tailed lemur, Lemur catta
+
+	}
+}
+children {
+	children {
+		label:794 #n04209239 shower curtain
+
+	}
+	children {
+		label:854 #n04418357 theater curtain, theatre curtain
+
+	}
+}
+children {
+	children {
+		label:403 #n02687172 aircraft carrier, carrier, flattop, attack aircraft carrier
+
+	}
+	children {
+		label:510 #n03095699 container ship, containership, container vessel
+
+	}
+	children {
+		label:536 #n03216828 dock, dockage, docking facility
+
+	}
+	children {
+		label:628 #n03673027 liner, ocean liner
+
+	}
+	children {
+		label:833 #n04347754 submarine, pigboat, sub, U-boat
+
+	}
+}
+children {
+	children {
+		label:391 #n02536864 coho, cohoe, coho salmon, blue jack, silver salmon, Oncorhynchus kisutch
+
+	}
+	children {
+		label:394 #n02640242 sturgeon
+
+	}
+	children {
+		label:395 #n02641379 gar, garfish, garpike, billfish, Lepisosteus osseus
+
+	}
+}
+children {
+	children {
+		label:84 #n01806143 peacock
+
+	}
+}
+children {
+	children {
+		label:949 #n07745940 strawberry
+
+	}
+	children {
+		label:952 #n07753113 fig
+
+	}
+	children {
+		label:957 #n07768694 pomegranate
+
+	}
+}
+children {
+	children {
+		label:153 #n02085936 Maltese dog, Maltese terrier, Maltese
+
+	}
+	children {
+		label:154 #n02086079 Pekinese, Pekingese, Peke
+
+	}
+	children {
+		label:155 #n02086240 Shih-Tzu
+
+	}
+	children {
+		label:204 #n02098413 Lhasa, Lhasa apso
+
+	}
+}
+children {
+	children {
+		label:7 #n01514668 cock
+
+	}
+	children {
+		label:8 #n01514859 hen
+
+	}
+}
+children {
+	children {
+		label:475 #n02965783 car mirror
+
+	}
+	children {
+		label:479 #n02974003 car wheel
+
+	}
+}
+children {
+	children {
+		label:161 #n02088238 basset, basset hound
+
+	}
+	children {
+		label:162 #n02088364 beagle
+
+	}
+	children {
+		label:166 #n02089867 Walker hound, Walker foxhound
+
+	}
+}
+children {
+	children {
+		label:446 #n02840245 binder, ring-binder
+
+	}
+	children {
+		label:478 #n02971356 carton
+
+	}
+	children {
+		label:549 #n03291819 envelope
+
+	}
+}
+children {
+	children {
+		label:595 #n03496892 harvester, reaper
+
+	}
+	children {
+		label:856 #n04428191 thresher, thrasher, threshing machine
+
+	}
+	children {
+		label:866 #n04465501 tractor
+
+	}
+}
+children {
+	children {
+		label:665 #n03785016 moped
+
+	}
+	children {
+		label:670 #n03791053 motor scooter, scooter
+
+	}
+	children {
+		label:870 #n04482393 tricycle, trike, velocipede
+
+	}
+}
+children {
+	children {
+		label:452 #n02869837 bonnet, poke bonnet
+
+	}
+	children {
+		label:515 #n03124170 cowboy hat, ten-gallon hat
+
+	}
+	children {
+		label:643 #n03724870 mask
+
+	}
+	children {
+		label:793 #n04209133 shower cap
+
+	}
+	children {
+		label:808 #n04259630 sombrero
+
+	}
+}
+children {
+	children {
+		label:145 #n02056570 king penguin, Aptenodytes patagonica
+
+	}
+}
+children {
+	children {
+		label:130 #n02007558 flamingo
+
+	}
+}
+children {
+	children {
+		label:98 #n01855032 red-breasted merganser, Mergus serrator
+
+	}
+	children {
+		label:137 #n02018207 American coot, marsh hen, mud hen, water hen, Fulica americana
+
+	}
+	children {
+		label:146 #n02058221 albatross, mollymawk
+
+	}
+}
+children {
+	children {
+		label:440 #n02823428 beer bottle
+
+	}
+	children {
+		label:737 #n03983396 pop bottle, soda bottle
+
+	}
+	children {
+		label:898 #n04557648 water bottle
+
+	}
+	children {
+		label:907 #n04591713 wine bottle
+
+	}
+}
+children {
+	children {
+		label:313 #n02231487 walking stick, walkingstick, stick insect
+
+	}
+	children {
+		label:319 #n02268443 dragonfly, darning needle, devil's darning needle, sewing needle, snake feeder, snake doctor, mosquito hawk, skeeter hawk
+
+	}
+	children {
+		label:320 #n02268853 damselfly
+
+	}
+}
+children {
+	children {
+		label:932 #n07695742 pretzel
+
+	}
+}
+children {
+	children {
+		label:967 #n07920052 espresso
+
+	}
+	children {
+		label:969 #n07932039 eggnog
+
+	}
+}
+children {
+	children {
+		label:76 #n01774750 tarantula
+
+	}
+	children {
+		label:815 #n04275548 spider web, spider's web
+
+	}
+}
+children {
+	children {
+		label:195 #n02096585 Boston bull, Boston terrier
+
+	}
+	children {
+		label:237 #n02107312 miniature pinscher
+
+	}
+	children {
+		label:245 #n02108915 French bulldog
+
+	}
+	children {
+		label:254 #n02110958 pug, pug-dog
+
+	}
+}
+children {
+	children {
+		label:323 #n02279972 monarch, monarch butterfly, milkweed butterfly, Danaus plexippus
+
+	}
+}
+children {
+	children {
+		label:102 #n01872401 echidna, spiny anteater, anteater
+
+	}
+	children {
+		label:334 #n02346627 porcupine, hedgehog
+
+	}
+	children {
+		label:337 #n02363005 beaver
+
+	}
+}
+children {
+	children {
+		label:603 #n03538406 horse cart, horse-cart
+
+	}
+	children {
+		label:690 #n03868242 oxcart
+
+	}
+}
+children {
+	children {
+		label:151 #n02085620 Chihuahua
+
+	}
+	children {
+		label:158 #n02087046 toy terrier
+
+	}
+	children {
+		label:263 #n02113023 Pembroke, Pembroke Welsh corgi
+
+	}
+	children {
+		label:264 #n02113186 Cardigan, Cardigan Welsh corgi
+
+	}
+}
+children {
+	children {
+		label:66 #n01753488 horned viper, cerastes, sand viper, horned asp, Cerastes cornutus
+
+	}
+	children {
+		label:67 #n01755581 diamondback, diamondback rattlesnake, Crotalus adamanteus
+
+	}
+	children {
+		label:68 #n01756291 sidewinder, horned rattlesnake, Crotalus cerastes
+
+	}
+}
+children {
+	children {
+		label:685 #n03841143 odometer, hodometer, mileometer, milometer
+
+	}
+}
+children {
+	children {
+		label:71 #n01770393 scorpion
+
+	}
+	children {
+		label:119 #n01978455 rock crab, Cancer irroratus
+
+	}
+	children {
+		label:120 #n01980166 fiddler crab
+
+	}
+}
+children {
+	children {
+		label:444 #n02835271 bicycle-built-for-two, tandem bicycle, tandem
+
+	}
+	children {
+		label:671 #n03792782 mountain bike, all-terrain bike, off-roader
+
+	}
+}
+children {
+	children {
+		label:713 #n03924679 photocopier
+
+	}
+	children {
+		label:742 #n04004767 printer
+
+	}
+}
+children {
+	children {
+		label:436 #n02814533 beach wagon, station wagon, wagon, estate car, beach waggon, station waggon, waggon
+
+	}
+	children {
+		label:511 #n03100240 convertible
+
+	}
+	children {
+		label:627 #n03670208 limousine, limo
+
+	}
+	children {
+		label:717 #n03930630 pickup, pickup truck
+
+	}
+	children {
+		label:751 #n04037443 racer, race car, racing car
+
+	}
+}
+children {
+	children {
+		label:521 #n03133878 Crock Pot
+
+	}
+	children {
+		label:567 #n03400231 frying pan, frypan, skillet
+
+	}
+}
+children {
+	children {
+		label:93 #n01829413 hornbill
+
+	}
+	children {
+		label:96 #n01843383 toucan
+
+	}
+}
+children {
+	children {
+		label:557 #n03355925 flagpole, flagstaff
+
+	}
+	children {
+		label:908 #n04592741 wing
+
+	}
+}
+children {
+	children {
+		label:424 #n02791270 barbershop
+
+	}
+	children {
+		label:454 #n02871525 bookshop, bookstore, bookstall
+
+	}
+	children {
+		label:624 #n03661043 library
+
+	}
+	children {
+		label:860 #n04443257 tobacco shop, tobacconist shop, tobacconist
+
+	}
+}
+children {
+	children {
+		label:414 #n02769748 backpack, back pack, knapsack, packsack, rucksack, haversack
+
+	}
+	children {
+		label:636 #n03709823 mailbag, postbag
+
+	}
+}
+children {
+	children {
+		label:40 #n01682714 American chameleon, anole, Anolis carolinensis
+
+	}
+}
+children {
+	children {
+		label:9 #n01518878 ostrich, Struthio camelus
+
+	}
+}
+children {
+	children {
+		label:459 #n02892767 brassiere, bra, bandeau
+
+	}
+}
+children {
+	children {
+		label:95 #n01843065 jacamar
+
+	}
+}
+children {
+	children {
+		label:413 #n02749479 assault rifle, assault gun
+
+	}
+	children {
+		label:764 #n04090263 rifle
+
+	}
+}
+children {
+	children {
+		label:699 #n03884397 panpipe, pandean pipe, syrinx
+
+	}
+}
+children {
+	children {
+		label:198 #n02097209 standard schnauzer
+
+	}
+	children {
+		label:199 #n02097298 Scotch terrier, Scottish terrier, Scottie
+
+	}
+}
+children {
+	children {
+		label:206 #n02099429 curly-coated retriever
+
+	}
+}
+children {
+	children {
+		label:483 #n02980441 castle
+
+	}
+	children {
+		label:682 #n03837869 obelisk
+
+	}
+}
+children {
+	children {
+		label:225 #n02105162 malinois
+
+	}
+	children {
+		label:227 #n02105412 kelpie
+
+	}
+	children {
+		label:235 #n02106662 German shepherd, German shepherd dog, German police dog, alsatian
+
+	}
+	children {
+		label:236 #n02107142 Doberman, Doberman pinscher
+
+	}
+}
+children {
+	children {
+		label:261 #n02112350 keeshond
+
+	}
+}
+children {
+	children {
+		label:402 #n02676566 acoustic guitar
+
+	}
+	children {
+		label:546 #n03272010 electric guitar
+
+	}
+}
+children {
+	children {
+		label:358 #n02443114 polecat, fitch, foulmart, foumart, Mustela putorius
+
+	}
+	children {
+		label:359 #n02443484 black-footed ferret, ferret, Mustela nigripes
+
+	}
+}
+children {
+	children {
+		label:540 #n03240683 drilling platform, offshore rig
+
+	}
+	children {
+		label:724 #n03947888 pirate, pirate ship
+
+	}
+}
+children {
+	children {
+		label:498 #n03032252 cinema, movie theater, movie theatre, movie house, picture palace
+
+	}
+	children {
+		label:565 #n03393912 freight car
+
+	}
+	children {
+		label:781 #n04149813 scoreboard
+
+	}
+	children {
+		label:919 #n06794110 street sign
+
+	}
+}
+children {
+	children {
+		label:39 #n01677366 common iguana, iguana, Iguana iguana
+
+	}
+	children {
+		label:43 #n01688243 frilled lizard, Chlamydosaurus kingi
+
+	}
+}
+children {
+	children {
+		label:543 #n03255030 dumbbell
+
+	}
+	children {
+		label:589 #n03483316 hand blower, blow dryer, blow drier, hair dryer, hair drier
+
+	}
+	children {
+		label:731 #n03970156 plunger, plumber's helper
+
+	}
+	children {
+		label:747 #n04023962 punching bag, punch bag, punching ball, punchball
+
+	}
+	children {
+		label:785 #n04162706 seat belt, seatbelt
+
+	}
+}
+children {
+	children {
+		label:418 #n02783161 ballpoint, ballpoint pen, ballpen, Biro
+
+	}
+	children {
+		label:623 #n03658185 letter opener, paper knife, paperknife
+
+	}
+	children {
+		label:777 #n04141327 scabbard
+
+	}
+}
+children {
+	children {
+		label:559 #n03376595 folding chair
+
+	}
+	children {
+		label:765 #n04099969 rocking chair, rocker
+
+	}
+}
+children {
+	children {
+		label:351 #n02422106 hartebeest
+
+	}
+	children {
+		label:352 #n02422699 impala, Aepyceros melampus
+
+	}
+	children {
+		label:353 #n02423022 gazelle
+
+	}
+}
+children {
+	children {
+		label:769 #n04118776 rule, ruler
+
+	}
+	children {
+		label:798 #n04238763 slide rule, slipstick
+
+	}
+}
+children {
+	children {
+		label:616 #n03627232 knot
+
+	}
+	children {
+		label:816 #n04277352 spindle
+
+	}
+}
+children {
+	children {
+		label:473 #n02951585 can opener, tin opener
+
+	}
+	children {
+		label:507 #n03075370 combination lock
+
+	}
+	children {
+		label:528 #n03187595 dial telephone, dial phone
+
+	}
+	children {
+		label:686 #n03843555 oil filter
+
+	}
+	children {
+		label:710 #n03908714 pencil sharpener
+
+	}
+}
+children {
+	children {
+		label:578 #n03450230 gown
+
+	}
+	children {
+		label:601 #n03534580 hoopskirt, crinoline
+
+	}
+	children {
+		label:689 #n03866082 overskirt
+
+	}
+}
+children {
+	children {
+		label:106 #n01883070 wombat
+
+	}
+	children {
+		label:295 #n02133161 American black bear, black bear, Ursus americanus, Euarctos americanus
+
+	}
+	children {
+		label:297 #n02134418 sloth bear, Melursus ursinus, Ursus ursinus
+
+	}
+}
+children {
+	children {
+		label:349 #n02415577 bighorn, bighorn sheep, cimarron, Rocky Mountain bighorn, Rocky Mountain sheep, Ovis canadensis
+
+	}
+	children {
+		label:350 #n02417914 ibex, Capra ibex
+
+	}
+}
+children {
+	children {
+		label:152 #n02085782 Japanese spaniel
+
+	}
+	children {
+		label:157 #n02086910 papillon
+
+	}
+}
+children {
+	children {
+		label:429 #n02799071 baseball
+
+	}
+	children {
+		label:574 #n03445777 golf ball
+
+	}
+	children {
+		label:852 #n04409515 tennis ball
+
+	}
+}
+children {
+	children {
+		label:21 #n01608432 kite
+
+	}
+	children {
+		label:22 #n01614925 bald eagle, American eagle, Haliaeetus leucocephalus
+
+	}
+	children {
+		label:23 #n01616318 vulture
+
+	}
+}
+children {
+	children {
+		label:16 #n01560419 bulbul
+
+	}
+}
+children {
+	children {
+		label:542 #n03250847 drumstick
+
+	}
+	children {
+		label:644 #n03729826 matchstick
+
+	}
+	children {
+		label:696 #n03876231 paintbrush
+
+	}
+	children {
+		label:749 #n04033901 quill, quill pen
+
+	}
+	children {
+		label:772 #n04127249 safety pin
+
+	}
+	children {
+		label:845 #n04376876 syringe
+
+	}
+}
+children {
+	children {
+		label:410 #n02727426 apiary, bee house
+
+	}
+	children {
+		label:471 #n02950826 cannon
+
+	}
+	children {
+		label:491 #n03000684 chain saw, chainsaw
+
+	}
+	children {
+		label:621 #n03649909 lawn mower, mower
+
+	}
+	children {
+		label:830 #n04336792 stretcher
+
+	}
+}
+children {
+	children {
+		label:156 #n02086646 Blenheim spaniel
+
+	}
+	children {
+		label:215 #n02101388 Brittany spaniel
+
+	}
+	children {
+		label:218 #n02102177 Welsh springer spaniel
+
+	}
+}
+children {
+	children {
+		label:101 #n01871265 tusker
+
+	}
+	children {
+		label:385 #n02504013 Indian elephant, Elephas maximus
+
+	}
+	children {
+		label:386 #n02504458 African elephant, Loxodonta africana
+
+	}
+}
+children {
+	children {
+		label:548 #n03290653 entertainment center
+
+	}
+	children {
+		label:598 #n03529860 home theater, home theatre
+
+	}
+	children {
+		label:651 #n03761084 microwave, microwave oven
+
+	}
+}
+children {
+	children {
+		label:617 #n03630383 lab coat, laboratory coat
+
+	}
+	children {
+		label:834 #n04350905 suit, suit of clothes
+
+	}
+	children {
+		label:869 #n04479046 trench coat
+
+	}
+}
+children {
+	children {
+		label:270 #n02114548 white wolf, Arctic wolf, Canis lupus tundrarum
+
+	}
+}
+children {
+	children {
+		label:284 #n02123597 Siamese cat, Siamese
+
+	}
+}
+children {
+	children {
+		label:873 #n04486054 triumphal arch
+
+	}
+}
+children {
+	children {
+		label:228 #n02105505 komondor
+
+	}
+}
+children {
+	children {
+		label:496 #n03026506 Christmas stocking
+
+	}
+	children {
+		label:806 #n04254777 sock
+
+	}
+}
+children {
+	children {
+		label:590 #n03485407 hand-held computer, hand-held microcomputer
+
+	}
+}
+children {
+	children {
+		label:704 #n03891332 parking meter
+
+	}
+	children {
+		label:920 #n06874185 traffic light, traffic signal, stoplight
+
+	}
+}
+children {
+	children {
+		label:959 #n07831146 carbonara
+
+	}
+}
+children {
+	children {
+		label:143 #n02037110 oystercatcher, oyster catcher
+
+	}
+}
+children {
+	children {
+		label:388 #n02510455 giant panda, panda, panda bear, coon bear, Ailuropoda melanoleuca
+
+	}
+}
+children {
+	children {
+		label:493 #n03016953 chiffonier, commode
+
+	}
+}
+children {
+	children {
+		label:789 #n04201297 shoji
+
+	}
+	children {
+		label:799 #n04239074 sliding door
+
+	}
+	children {
+		label:905 #n04590129 window shade
+
+	}
+}
+children {
+	children {
+		label:676 #n03803284 muzzle
+
+	}
+}
+children {
+	children {
+		label:584 #n03476684 hair slide
+
+	}
+	children {
+		label:684 #n03840681 ocarina, sweet potato
+
+	}
+}
+children {
+	children {
+		label:301 #n02165456 ladybug, ladybeetle, lady beetle, ladybird, ladybird beetle
+
+	}
+	children {
+		label:304 #n02169497 leaf beetle, chrysomelid
+
+	}
+}
+children {
+	children {
+		label:107 #n01910747 jellyfish
+
+	}
+}
+children {
+	children {
+		label:513 #n03110669 cornet, horn, trumpet, trump
+
+	}
+	children {
+		label:875 #n04487394 trombone
+
+	}
+}
+children {
+	children {
+		label:171 #n02091032 Italian greyhound
+
+	}
+	children {
+		label:172 #n02091134 whippet
+
+	}
+	children {
+		label:268 #n02113978 Mexican hairless
+
+	}
+}
+children {
+	children {
+		label:531 #n03197337 digital watch
+	}
+	children {
+		label:826 #n04328186 stopwatch, stop watch
+	}
+}
+children {
+	children {
+		label:993 #n13037406 gyromitra
+	}
+}
