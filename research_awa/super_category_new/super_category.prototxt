@@ -1,0 +1,180 @@
+children {
+	children {
+		label :  5 # hamster
+	}
+	children {
+		label :  12 # rat
+	}
+	children {
+		label :  30 # mouse
+	}
+	children {
+		label :  39 # rabbit
+	}
+}
+children {
+	children {
+		label :  9 # raccoon
+	}
+	children {
+		label :  13 # squirrel
+	}
+	children {
+		label :  32 # weasel
+	}
+}
+children {
+	children {
+		label :  20 # skunk
+	}
+	children {
+		label :  21 # pig
+	}
+	children {
+		label :  27 # otter
+	}
+	children {
+		label :  36 # beaver
+	}
+	children {
+		label :  42 # bat
+	}
+	children {
+		label :  46 # mole
+	}
+}
+children {
+	children {
+		label :  11 # german+shepherd
+	}
+	children {
+		label :  23 # collie
+	}
+}
+children {
+	children {
+		label :  17 # wolf
+	}
+	children {
+		label :  38 # bobcat
+	}
+	children {
+		label :  48 # fox
+	}
+}
+children {
+	children {
+		label :  28 # horse
+	}
+	children {
+		label :  34 # ox
+	}
+	children {
+		label :  35 # sheep
+	}
+	children {
+		label :  49 # cow
+	}
+}
+children {
+	children {
+		label :  26 # antelope
+	}
+	children {
+		label :  29 # moose
+	}
+	children {
+		label :  45 # deer
+	}
+}
+children {
+	children {
+		label :  18 # gorilla
+	}
+	children {
+		label :  22 # spider+monkey
+	}
+	children {
+		label :  43 # chimpanzee
+	}
+}
+children {
+	children {
+		label :  0 # siamese+cat
+	}
+	children {
+		label :  40 # chihuahua
+	}
+}
+children {
+	children {
+		label :  7 # polar+bear
+	}
+	children {
+		label :  15 # grizzly+bear
+	}
+}
+children {
+	children {
+		label :  33 # zebra
+	}
+	children {
+		label :  2 # giant+panda
+	}
+	children {
+		label :  3 # dalmatian
+	}
+	children {
+		label :  44 # giraffe
+	}
+}
+children {
+	children {
+		label :  4 # walrus
+	}
+	children {
+		label :  19 # hippopotamus
+	}
+	children {
+		label :  41 # seal
+	}
+}
+children {
+	children {
+		label :  1 # killer+whale
+	}
+	children {
+		label :  8 # dolphin
+	}
+	children {
+		label :  16 # blue+whale
+	}
+	children {
+		label :  31 # humpback+whale
+	}
+}
+children {
+	children {
+		label :  47 # tiger
+	}
+	children {
+		label :  25 # leopard
+	}
+	children {
+		label :  37 # persian+cat
+	}
+	children {
+		label :  14 # lion
+	}
+}
+children {
+	children {
+		label :  6 # elephant
+	}
+	children {
+		label :  10 # rhinoceros
+	}
+	children {
+		label :  24 # buffalo
+	}
+}

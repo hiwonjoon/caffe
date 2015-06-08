@@ -1,0 +1,203 @@
+children:{
+   	children:{
+   		children:{
+   			children:{
+   				children:{
+   					label : 26#antelope
+   				}
+   				children:{
+   					children:{
+   						label : 34#ox
+   					}
+   					children:{
+   						label : 49#cow
+   					}
+   				}
+   				children:{
+   					label : 35#sheep
+   				}
+   				children:{
+   					label : 24#buffalo
+   				}
+   			}
+   			children:{
+   				children:{
+   					label : 29#moose
+   				}
+   				children:{
+   					label : 45#deer
+   				}
+   			}
+   			children:{
+   				label : 44#giraffe
+   			}
+   		}
+   		children:{
+   			label : 19#hippopotamus
+   		}
+   		children:{
+   			label : 21#pig
+   		}
+   	}
+   	children:{
+   		children:{
+   			children:{
+   				label : 28#horse
+   			}
+   			children:{
+   				label : 33#zebra
+   			}
+   		}
+   		children:{
+   			label : 10#rhinoceros
+   		}
+   	}
+}
+children:{
+   	children:{
+   		children:{
+   			label : 7#polar bear
+   		}
+   		children:{
+   			label : 15#grizzly bear
+   		}
+   	}
+   	children:{
+   		children:{
+   			children:{
+   				label : 3#dalmatian
+   			}
+   			children:{
+   				label : 40#Chihuahua
+   			}
+   			children:{
+   				children:{
+   					label : 11#German shepherd
+   				}
+   				children:{
+   					label : 23#collie
+   				}
+   			}
+   		}
+   		children:{
+   			label : 48#fox
+   		}
+   		children:{
+   			label : 17#wolf
+   		}
+   	}
+   	children:{
+   		children:{
+   			children:{
+   				children:{
+   					label : 37#Persian cat
+   				}
+   				children:{
+   					label : 0#Siamese cat
+   				}
+   			}
+   			children:{
+   				label : 38#bobcat
+   			}
+   		}
+   		children:{
+   			children:{
+   				label : 47#tiger
+   			}
+   			children:{
+   				label : 25#leopard
+   			}
+   			children:{
+   				label : 14#lion
+   			}
+   		}
+   	}
+   	children:{
+   		children:{
+   			label : 20#skunk
+   		}
+   		children:{
+   			label : 32#weasel
+   		}
+   		children:{
+   			label : 27#otter
+   		}
+   	}
+   	children:{
+   		children:{
+   			label : 2#giant panda
+   		}
+   		children:{
+   			label : 9#raccoon
+   		}
+   	}
+}
+children:{
+   	children:{
+   		children:{
+   			label : 41#seal
+   		}
+   		children:{
+   			label : 4#walrus
+   		}
+   	}
+   	children:{
+   		children:{
+   			children:{
+   				label : 16#blue whale
+   			}
+   			children:{
+   				label : 31#humpback whale
+   			}
+   		}
+   		children:{
+   			label : 1#killer whale
+   		}
+   		children:{
+   			label : 8#dolphin
+   		}
+   	}
+}
+children:{
+   	children:{
+   		label : 36#beaver
+   	}
+   	children:{
+   		label : 5#hamster
+   	}
+   	children:{
+   		label : 13#squirrel
+   	}
+   	children:{
+   		label : 12#rat
+   	}
+   	children:{
+   		label : 30#mouse
+   	}
+}
+children:{
+   	children:{
+   		label : 22#spider monkey
+   	}
+   	children:{
+   		children:{
+   			label : 18#gorilla
+   		}
+   		children:{
+   			label : 43#chimpanzee
+   		}
+   	}
+}
+children:{
+	label : 42#bat
+}
+children:{
+	label : 46#mole
+}
+children:{
+	label : 6#elephant
+}
+children:{
+	label : 39#rabbit
+}
+
