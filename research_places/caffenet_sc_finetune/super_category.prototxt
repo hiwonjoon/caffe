@@ -1,0 +1,715 @@
+children {
+	children {
+		label :  38 # campsite
+	}
+	children {
+		label :  42 # cemetery
+	}
+	children {
+		label :  67 # driveway
+	}
+	children {
+		label :  73 # excavation
+	}
+	children {
+		label :  86 # garbage_dump
+	}
+	children {
+		label :  142 # playground
+	}
+	children {
+		label :  172 # slum
+	}
+	children {
+		label :  187 # trench
+	}
+}
+children {
+	children {
+		label :  19 # baseball_field
+	}
+	children {
+		label :  146 # racecourse
+	}
+	children {
+		label :  177 # stadium_baseball
+	}
+	children {
+		label :  178 # stadium_football
+	}
+	children {
+		label :  190 # track_outdoor
+	}
+}
+children {
+	children {
+		label :  148 # railroad_track
+	}
+	children {
+		label :  185 # train_railway
+	}
+	children {
+		label :  191 # train_station_platform
+	}
+}
+children {
+	children {
+		label :  10 # assembly_line
+	}
+	children {
+		label :  18 # bar
+	}
+	children {
+		label :  29 # bowling_alley
+	}
+	children {
+		label :  48 # cockpit
+	}
+	children {
+		label :  72 # engine_room
+	}
+	children {
+		label :  126 # museum_indoor
+	}
+	children {
+		label :  182 # television_studio
+	}
+}
+children {
+	children {
+		label :  27 # bookstore
+	}
+	children {
+		label :  44 # classroom
+	}
+	children {
+		label :  77 # food_court
+	}
+	children {
+		label :  88 # gift_shop
+	}
+	children {
+		label :  107 # kindergarden_classroom
+	}
+}
+children {
+	children {
+		label :  104 # inn_outdoor
+	}
+	children {
+		label :  138 # patio
+	}
+	children {
+		label :  139 # pavilion
+	}
+	children {
+		label :  181 # swimming_pool_outdoor
+	}
+}
+children {
+	children {
+		label :  17 # banquet_hall
+	}
+	children {
+		label :  37 # cafeteria
+	}
+	children {
+		label :  49 # coffee_shop
+	}
+	children {
+		label :  113 # lobby
+	}
+	children {
+		label :  152 # restaurant
+	}
+	children {
+		label :  153 # restaurant_kitchen
+	}
+}
+children {
+	children {
+		label :  24 # bedroom
+	}
+	children {
+		label :  64 # dining_room
+	}
+	children {
+		label :  70 # dinette_home
+	}
+	children {
+		label :  97 # hotel_room
+	}
+	children {
+		label :  112 # living_room
+	}
+	children {
+		label :  136 # parlor
+	}
+}
+children {
+	children {
+		label :  26 # boat_deck
+	}
+	children {
+		label :  65 # dock
+	}
+	children {
+		label :  90 # harbor
+	}
+}
+children {
+	children {
+		label :  12 # auditorium
+	}
+	children {
+		label :  15 # ballroom
+	}
+	children {
+		label :  50 # conference_center
+	}
+	children {
+		label :  123 # music_studio
+	}
+	children {
+		label :  179 # stage_indoor
+	}
+}
+children {
+	children {
+		label :  59 # crevasse
+	}
+	children {
+		label :  101 # igloo
+	}
+	children {
+		label :  122 # mountain_snowy
+	}
+	children {
+		label :  168 # ski_resort
+	}
+	children {
+		label :  169 # ski_slope
+	}
+	children {
+		label :  173 # snowfield
+	}
+}
+children {
+	children {
+		label :  2 # alley
+	}
+	children {
+		label :  71 # doorway_outdoor
+	}
+	children {
+		label :  75 # fire_escape
+	}
+	children {
+		label :  119 # medina
+	}
+}
+children {
+	children {
+		label :  3 # amphitheater
+	}
+	children {
+		label :  6 # aqueduct
+	}
+	children {
+		label :  41 # castle
+	}
+	children {
+		label :  106 # kasbah
+	}
+	children {
+		label :  159 # ruin
+	}
+}
+children {
+	children {
+		label :  154 # restaurant_patio
+	}
+	children {
+		label :  195 # veranda
+	}
+}
+children {
+	children {
+		label :  4 # amusement_park
+	}
+	children {
+		label :  7 # arch
+	}
+	children {
+		label :  52 # construction_site
+	}
+	children {
+		label :  81 # fountain
+	}
+}
+children {
+	children {
+		label :  9 # art_studio
+	}
+	children {
+		label :  23 # beauty_salon
+	}
+	children {
+		label :  45 # closet
+	}
+	children {
+		label :  66 # dorm_room
+	}
+	children {
+		label :  85 # game_room
+	}
+	children {
+		label :  95 # hospital_room
+	}
+	children {
+		label :  110 # laundromat
+	}
+	children {
+		label :  127 # nursery
+	}
+}
+children {
+	children {
+		label :  39 # candy_store
+	}
+	children {
+		label :  124 # market_outdoor
+	}
+	children {
+		label :  175 # supermarket
+	}
+}
+children {
+	children {
+		label :  76 # fire_station
+	}
+	children {
+		label :  87 # gas_station
+	}
+	children {
+		label :  140 # phone_booth
+	}
+}
+children {
+	children {
+		label :  84 # galley
+	}
+	children {
+		label :  93 # home_office
+	}
+	children {
+		label :  108 # kitchen
+	}
+	children {
+		label :  109 # kitchenette
+	}
+	children {
+		label :  129 # office
+	}
+}
+children {
+	children {
+		label :  60 # crosswalk
+	}
+	children {
+		label :  103 # ice_skating_rink_outdoor
+	}
+	children {
+		label :  135 # parking_lot
+	}
+}
+children {
+	children {
+		label :  22 # bayou
+	}
+	children {
+		label :  63 # dam
+	}
+	children {
+		label :  96 # hot_spring
+	}
+	children {
+		label :  116 # marsh
+	}
+	children {
+		label :  144 # pond
+	}
+	children {
+		label :  156 # river
+	}
+	children {
+		label :  200 # watering_hole
+	}
+}
+children {
+	children {
+		label :  53 # corn_field
+	}
+	children {
+		label :  82 # field_cultivated
+	}
+	children {
+		label :  83 # field_wild
+	}
+	children {
+		label :  137 # pasture
+	}
+	children {
+		label :  155 # rice_paddy
+	}
+	children {
+		label :  186 # tree_farm
+	}
+	children {
+		label :  201 # wheat_field
+	}
+}
+children {
+	children {
+		label :  111 # lighthouse
+	}
+	children {
+		label :  171 # skyscraper
+	}
+	children {
+		label :  184 # tower
+	}
+	children {
+		label :  199 # water_tower
+	}
+	children {
+		label :  203 # windmill
+	}
+}
+children {
+	children {
+		label :  14 # badlands
+	}
+	children {
+		label :  35 # butte
+	}
+	children {
+		label :  40 # canyon
+	}
+	children {
+		label :  157 # rock_arch
+	}
+}
+children {
+	children {
+		label :  47 # coast
+	}
+	children {
+		label :  100 # iceberg
+	}
+	children {
+		label :  102 # islet
+	}
+	children {
+		label :  128 # ocean
+	}
+	children {
+		label :  161 # sandbar
+	}
+	children {
+		label :  163 # sea_cliff
+	}
+}
+children {
+	children {
+		label :  56 # courthouse
+	}
+	children {
+		label :  115 # mansion
+	}
+	children {
+		label :  151 # residential_neighborhood
+	}
+}
+children {
+	children {
+		label :  13 # apartment_building_outdoor
+	}
+	children {
+		label :  32 # building_facade
+	}
+	children {
+		label :  57 # courtyard
+	}
+	children {
+		label :  94 # hospital
+	}
+	children {
+		label :  98 # hotel_outdoor
+	}
+	children {
+		label :  120 # motel
+	}
+	children {
+		label :  130 # office_building
+	}
+	children {
+		label :  143 # plaza
+	}
+}
+children {
+	children {
+		label :  34 # butchers_shop
+	}
+	children {
+		label :  36 # bakery_shop
+	}
+	children {
+		label :  46 # clothing_store
+	}
+	children {
+		label :  99 # ice_cream_parlor
+	}
+	children {
+		label :  165 # shoe_shop
+	}
+}
+children {
+	children {
+		label :  147 # raft
+	}
+}
+children {
+	children {
+		label :  74 # fairway
+	}
+	children {
+		label :  89 # golf_course
+	}
+}
+children {
+	children {
+		label :  68 # desert_sand
+	}
+	children {
+		label :  69 # desert_vegetation
+	}
+	children {
+		label :  121 # mountain
+	}
+	children {
+		label :  193 # valley
+	}
+	children {
+		label :  197 # volcano
+	}
+}
+children {
+	children {
+		label :  25 # boardwalk
+	}
+	children {
+		label :  31 # bridge
+	}
+	children {
+		label :  158 # rope_bridge
+	}
+	children {
+		label :  196 # viaduct
+	}
+}
+children {
+	children {
+		label :  170 # sky
+	}
+	children {
+		label :  202 # wind_farm
+	}
+}
+children {
+	children {
+		label :  0 # abbey
+	}
+	children {
+		label :  21 # basilica
+	}
+	children {
+		label :  61 # cathedral_outdoor
+	}
+	children {
+		label :  62 # church_outdoor
+	}
+	children {
+		label :  118 # mausoleum
+	}
+	children {
+		label :  125 # monastery_outdoor
+	}
+	children {
+		label :  133 # palace
+	}
+}
+children {
+	children {
+		label :  54 # corridor
+	}
+	children {
+		label :  105 # jail_cell
+	}
+	children {
+		label :  174 # staircase
+	}
+}
+children {
+	children {
+		label :  16 # bamboo_forest
+	}
+	children {
+		label :  58 # creek
+	}
+	children {
+		label :  78 # forest_path
+	}
+	children {
+		label :  79 # forest_road
+	}
+	children {
+		label :  149 # rainforest
+	}
+	children {
+		label :  176 # swamp
+	}
+}
+children {
+	children {
+		label :  8 # art_gallery
+	}
+	children {
+		label :  11 # attic
+	}
+	children {
+		label :  20 # basement
+	}
+	children {
+		label :  114 # locker_room
+	}
+	children {
+		label :  167 # shower
+	}
+}
+children {
+	children {
+		label :  80 # formal_garden
+	}
+	children {
+		label :  141 # picnic_area
+	}
+	children {
+		label :  183 # topiary_garden
+	}
+	children {
+		label :  204 # yard
+	}
+}
+children {
+	children {
+		label :  43 # chalet
+	}
+	children {
+		label :  162 # schoolhouse
+	}
+	children {
+		label :  164 # shed
+	}
+}
+children {
+	children {
+		label :  5 # aquarium
+	}
+	children {
+		label :  192 # underwater_coral_reef
+	}
+}
+children {
+	children {
+		label :  30 # boxing_ring
+	}
+	children {
+		label :  117 # martial_arts_gym
+	}
+}
+children {
+	children {
+		label :  33 # bus_interior
+	}
+}
+children {
+	children {
+		label :  92 # highway
+	}
+	children {
+		label :  160 # runway
+	}
+}
+children {
+	children {
+		label :  166 # shopfront
+	}
+}
+children {
+	children {
+		label :  134 # pantry
+	}
+}
+children {
+	children {
+		label :  51 # conference_room
+	}
+	children {
+		label :  150 # reception
+	}
+	children {
+		label :  198 # waiting_room
+	}
+}
+children {
+	children {
+		label :  1 # airport_terminal
+	}
+	children {
+		label :  180 # subway_station_platform
+	}
+}
+children {
+	children {
+		label :  132 # pagoda
+	}
+	children {
+		label :  188 # temple_east_asia
+	}
+	children {
+		label :  189 # temple_south_asia
+	}
+}
+children {
+	children {
+		label :  28 # botanical_garden
+	}
+	children {
+		label :  55 # cottage_garden
+	}
+	children {
+		label :  91 # herb_garden
+	}
+	children {
+		label :  131 # orchard
+	}
+	children {
+		label :  194 # vegetable_garden
+	}
+}
+children {
+	children {
+		label :  145 # pulpit
+	}
+}
