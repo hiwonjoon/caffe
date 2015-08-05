@@ -1,7 +1,8 @@
 name: "CaffeNet"
 layer {
   name: "data"
-  type: "ImageData"
+ # type: "ImageData"
+  type: "Data"
   top: "data"
   top: "label"
   include {
@@ -12,15 +13,21 @@ layer {
     crop_size: 227
     mean_file: "../places205CNN_mean.binaryproto"
   }
-  image_data_param {
-    source: "../data/trainvalsplit_places205/train_places205.txt"
+ # image_data_param {
+ #   source: "../data/trainvalsplit_places205/train_places205.txt"
+ #   batch_size: 256
+ # shuffle: true
+ # }
+  data_param {
+    source: "../data/train_lmdb"
     batch_size: 256
-	shuffle: true
+    backend: LMDB
   }
 }
 layer {
   name: "data"
-  type: "ImageData"
+ # type: "ImageData"
+  type: "Data"
   top: "data"
   top: "label"
   include {
@@ -31,11 +38,16 @@ layer {
     crop_size: 227
     mean_file: "../places205CNN_mean.binaryproto"
   }
-  image_data_param {
-    source: "../data/trainvalsplit_places205/val_places205.txt"
-    batch_size: 201
-	shuffle: false
-  }
+ # image_data_param {
+ #   source: "../data/trainvalsplit_places205/val_places205.txt"
+ #   batch_size: 201
+ # shuffle: false
+ # }
+ data_param {
+   source: "../data/val_lmdb"
+   batch_size: 205
+   backend: LMDB
+ }
 }
 layer {
   name: "super_category_label"
@@ -297,6 +309,12 @@ layer {
       value: 1
     }
   }
+}
+layer {
+  name: "relu6_conv6"
+  type: "ReLU"
+  bottom: "conv6"
+  top: "conv6"
 }
 layer {
 	name: "super_category"

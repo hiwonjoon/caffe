@@ -1,5 +1,5 @@
 net: "./train_val.prototxt"
-test_iter: 500
+test_iter: 100
 test_interval: 1000
 base_lr: 0.01
 lr_policy: "step"

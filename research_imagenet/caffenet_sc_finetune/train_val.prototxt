@@ -299,6 +299,12 @@ layer {
   }
 }
 layer {
+  name: "relu6_conv6"
+  type: "ReLU"
+  bottom: "conv6"
+  top: "conv6"
+}
+layer {
 	name: "super_category"
 	type: "SuperCategoryFM"
 	bottom: "conv6"
