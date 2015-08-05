@@ -51,8 +51,8 @@ layers {
     pad: 1
     kernel_size: 3
   }
-  blobs_lr: 0
-  blobs_lr: 0
+  blobs_lr: 1
+  blobs_lr: 2
 }
 layers {
   bottom: "conv1_1"
@@ -70,8 +70,8 @@ layers {
     pad: 1
     kernel_size: 3
   }
-  blobs_lr: 0
-  blobs_lr: 0
+  blobs_lr: 1
+  blobs_lr: 2
 }
 layers {
   bottom: "conv1_2"
@@ -100,8 +100,8 @@ layers {
     pad: 1
     kernel_size: 3
   }
-  blobs_lr: 0
-  blobs_lr: 0
+  blobs_lr: 1
+  blobs_lr: 2
 }
 layers {
   bottom: "conv2_1"
@@ -119,8 +119,8 @@ layers {
     pad: 1
     kernel_size: 3
   }
-  blobs_lr: 0
-  blobs_lr: 0
+  blobs_lr: 1
+  blobs_lr: 2
 }
 layers {
   bottom: "conv2_2"
@@ -149,8 +149,8 @@ layers {
     pad: 1
     kernel_size: 3
   }
-  blobs_lr: 0
-  blobs_lr: 0
+  blobs_lr: 1
+  blobs_lr: 2
 }
 layers {
   bottom: "conv3_1"
@@ -168,8 +168,8 @@ layers {
     pad: 1
     kernel_size: 3
   }
-  blobs_lr: 0
-  blobs_lr: 0
+  blobs_lr: 1
+  blobs_lr: 2
 }
 layers {
   bottom: "conv3_2"
@@ -187,8 +187,8 @@ layers {
     pad: 1
     kernel_size: 3
   }
-  blobs_lr: 0
-  blobs_lr: 0
+  blobs_lr: 1
+  blobs_lr: 2
 }
 layers {
   bottom: "conv3_3"
@@ -217,8 +217,8 @@ layers {
     pad: 1
     kernel_size: 3
   }
-  blobs_lr: 0
-  blobs_lr: 0
+  blobs_lr: 1
+  blobs_lr: 2
 }
 layers {
   bottom: "conv4_1"
@@ -236,8 +236,8 @@ layers {
     pad: 1
     kernel_size: 3
   }
-  blobs_lr: 0
-  blobs_lr: 0
+  blobs_lr: 1
+  blobs_lr: 2
 }
 layers {
   bottom: "conv4_2"
@@ -255,8 +255,8 @@ layers {
     pad: 1
     kernel_size: 3
   }
-  blobs_lr: 0
-  blobs_lr: 0
+  blobs_lr: 1
+  blobs_lr: 2
 }
 layers {
   bottom: "conv4_3"
@@ -285,8 +285,8 @@ layers {
     pad: 1
     kernel_size: 3
   }
-  blobs_lr: 0
-  blobs_lr: 0
+  blobs_lr: 1
+  blobs_lr: 2
 }
 layers {
   bottom: "conv5_1"
@@ -304,8 +304,8 @@ layers {
     pad: 1
     kernel_size: 3
   }
-  blobs_lr: 0
-  blobs_lr: 0
+  blobs_lr: 1
+  blobs_lr: 2
 }
 layers {
   bottom: "conv5_2"
@@ -323,8 +323,8 @@ layers {
     pad: 1
     kernel_size: 3
   }
-  blobs_lr: 0
-  blobs_lr: 0
+  blobs_lr: 1
+  blobs_lr: 2
 }
 layers {
   bottom: "conv5_3"
@@ -351,8 +351,8 @@ layers {
   inner_product_param {
     num_output: 4096
   }
-  blobs_lr: 0
-  blobs_lr: 0
+  blobs_lr: 1
+  blobs_lr: 2
 }
 layers {
   bottom: "fc6"
@@ -377,8 +377,8 @@ layers {
   inner_product_param {
     num_output: 4096
   }
-  blobs_lr: 0
-  blobs_lr: 0
+  blobs_lr: 1
+  blobs_lr: 2
 }
 layers {
   bottom: "fc7"
@@ -403,8 +403,8 @@ layers {
   inner_product_param {
     num_output: 1000
   }
-  blobs_lr: 0
-  blobs_lr: 0
+  blobs_lr: 1
+  blobs_lr: 2
 }
 layers {
   name: "loss"
