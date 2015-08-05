@@ -52,6 +52,7 @@ void SuperCategoryFMLayer<Dtype>::Reshape(const vector<Blob<Dtype>*>& bottom,
 		}
 	}
 
+
 	for( int i = 0; i < depth_; ++i) {
 		std::vector<int> shape;
 		shape.push_back(M_);
@@ -60,6 +61,8 @@ void SuperCategoryFMLayer<Dtype>::Reshape(const vector<Blob<Dtype>*>& bottom,
 		shape.push_back(W_);
 		top[i]->Reshape(shape); // Top for output data
 	}
+
+	CHECK_EQ(top[depth_-1]->count(), bottom[0]->count());
 }
 
 template <typename Dtype>
@@ -143,7 +146,7 @@ void SuperCategoryFMLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom
 
 					Dtype * top_data = &tops->mutable_cpu_data()[tops->offset(m,node->GetLabel())];
 					int * mark_data = &marks->mutable_cpu_data()[marks->offset(m,node->GetLabel())];
-					caffe_set(H_*W_,std::numeric_limits<Dtype>::min(), top_data);
+					caffe_set(H_*W_,std::numeric_limits<Dtype>::lowest(), top_data);
 					caffe_set(H_*W_,-1,mark_data);
 
 					for(auto it = children->cbegin(); it != children->cend(); ++it) {
