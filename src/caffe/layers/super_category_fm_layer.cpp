@@ -39,7 +39,8 @@ void SuperCategoryFMLayer<Dtype>::Reshape(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top) {
 	CHECK_EQ(top.size(), depth_);
 
-	if( op_ == EltwiseParameter_EltwiseOp_MIN ) {
+	if( op_ == EltwiseParameter_EltwiseOp_MIN ||
+      op_ == EltwiseParameter_EltwiseOp_MAX ) {
 		mark_.resize(depth_);
 		for( int i = 0; i < depth_; ++i) {
 			std::vector<int> shape;
@@ -127,9 +128,41 @@ void SuperCategoryFMLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom
 				}
 			}
 		}
-
 	break;
 	case EltwiseParameter_EltwiseOp_MAX :
+		for(int m = 0; m < M_; ++m) {
+			for( int i = depth_-2; i >= 0; --i ) {
+				Blob<Dtype> * tops = top[i];
+				Blob<int> * marks = mark_[i].get();
+				Blob<Dtype> * bottoms = top[i+1];
+
+				int base_idx = base_index_per_level_[i];
+				for(int j = 0; j < node_num_per_level_[i]; ++j) {
+					Tree * node = serialized_tree_[base_idx + j];
+					const std::vector<shared_ptr<Tree> >* children = node->GetChildren();
+
+					Dtype * top_data = &tops->mutable_cpu_data()[tops->offset(m,node->GetLabel())];
+					int * mark_data = &marks->mutable_cpu_data()[marks->offset(m,node->GetLabel())];
+					caffe_set(H_*W_,std::numeric_limits<Dtype>::min(), top_data);
+					caffe_set(H_*W_,-1,mark_data);
+
+					for(auto it = children->cbegin(); it != children->cend(); ++it) {
+						int offset = bottoms->offset(m,(*it)->GetLabel());
+						const Dtype * bottom_data = &bottoms->cpu_data()[offset];
+						for(int h = 0; h < H_; ++h) {
+							for(int w = 0; w < W_; ++w) {
+								int idx = h*W_+w;
+								if( bottom_data[idx] > top_data[idx] ) {
+									top_data[idx] = bottom_data[idx];
+									mark_data[idx] = (*it)->GetLabel();
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	break;
 	default:
         LOG(FATAL) << "Unknown elementwise operation.";
 	}
@@ -193,6 +226,30 @@ void SuperCategoryFMLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
 		caffe_copy(bottom[0]->count(), top[depth_-1]->cpu_diff(), bottom[0]->mutable_cpu_diff());
 		break;
 	case EltwiseParameter_EltwiseOp_MAX :
+		for(int m = 0; m < M_; ++m) {
+			for( int i = 0; i < depth_-1; ++i ) {
+				Blob<Dtype> * tops = top[i];
+				Blob<int> * marks = mark_[i].get();
+				Blob<Dtype> * bottoms = top[i+1];
+
+				int base_idx = base_index_per_level_[i];
+				for(int j = 0; j < node_num_per_level_[i]; ++j) {
+					Tree * node = serialized_tree_[base_idx + j];
+					const Dtype * top_diff = &tops->cpu_diff()[tops->offset(m,node->GetLabel())];
+					const int * mark_data = &marks->cpu_data()[marks->offset(m,node->GetLabel())];
+					for(int h = 0; h < H_; ++h) {
+						for(int w = 0; w < W_; ++w) {
+							int idx = h*W_ + w;
+							int label = mark_data[idx];
+							int offset = bottoms->offset(m,label);
+							bottoms->mutable_cpu_diff()[offset+idx] += top_diff[idx];
+						}
+					}
+				}
+			}
+		}
+		caffe_copy(bottom[0]->count(), top[depth_-1]->cpu_diff(), bottom[0]->mutable_cpu_diff());
+		break;
 	default:
         LOG(FATAL) << "Unknown elementwise operation.";
 	}

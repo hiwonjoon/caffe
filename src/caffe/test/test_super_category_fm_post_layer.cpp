@@ -314,5 +314,54 @@ TYPED_TEST(SuperCategoryFMPostLayerTest, TestGradient_Hard_MINUS) {
     LOG(ERROR) << "Skipping test due to old architecture.";
   }
 }
+TYPED_TEST(SuperCategoryFMPostLayerTest, TestGradient_MINUS_REVERSE) {
+  typedef typename TypeParam::Dtype Dtype;
+  bool IS_VALID_CUDA = false;
+#ifndef CPU_ONLY
+  IS_VALID_CUDA = CAFFE_TEST_CUDA_PROP.major >= 2;
+#endif
+  if (Caffe::mode() == Caffe::CPU ||
+      sizeof(Dtype) == 4 || IS_VALID_CUDA) {
+
+	LayerParameter layer_param;
+	layer_param.mutable_eltwise_param()->set_operation(EltwiseParameter_EltwiseOp_MINUS_REVERSE);
+	this->SetSuperCategoryParam(layer_param.mutable_super_category_param());
+
+	SuperCategoryFMPostLayer<Dtype> * layer = new SuperCategoryFMPostLayer<Dtype>(layer_param);
+
+    GradientChecker<Dtype> checker(1e-4, 1e-2);
+    checker.CheckGradientExhaustive(layer, this->blob_bottom_vec_,
+        this->blob_top_vec_);
+
+	delete layer;
+  } else {
+    LOG(ERROR) << "Skipping test due to old architecture.";
+  }
+}
+
+TYPED_TEST(SuperCategoryFMPostLayerTest, TestGradient_Hard_MINUS_REVERSE) {
+  typedef typename TypeParam::Dtype Dtype;
+  bool IS_VALID_CUDA = false;
+#ifndef CPU_ONLY
+  IS_VALID_CUDA = CAFFE_TEST_CUDA_PROP.major >= 2;
+#endif
+  if (Caffe::mode() == Caffe::CPU ||
+      sizeof(Dtype) == 4 || IS_VALID_CUDA) {
+
+	LayerParameter layer_param;
+	layer_param.mutable_eltwise_param()->set_operation(EltwiseParameter_EltwiseOp_MINUS_REVERSE);
+	this->SetSuperCategoryParam_Hard(layer_param.mutable_super_category_param());
+
+	SuperCategoryFMPostLayer<Dtype> * layer = new SuperCategoryFMPostLayer<Dtype>(layer_param);
+
+    GradientChecker<Dtype> checker(1e-4, 1e-2);
+    checker.CheckGradientExhaustive(layer, this->blob_bottom_vec_hard_,
+        this->blob_top_vec_hard_);
+
+	delete layer;
+  } else {
+    LOG(ERROR) << "Skipping test due to old architecture.";
+  }
+}
 }  // namespace caffe
 
