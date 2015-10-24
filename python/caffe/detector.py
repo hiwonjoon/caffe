@@ -18,6 +18,14 @@ import os
 
 import caffe
 
+from multiprocessing import Pool
+from functools import partial
+def crop(window,im) :
+    # Crop window from the image.
+    return im[window[0]:window[2], window[1]:window[3]]
+def preprocess(window,im,in_,transformer) :
+    crop = im[window[0]:window[2], window[1]:window[3]]
+    return transformer.preprocess(in_, crop)
 
 class Detector(caffe.Net):
     """
@@ -52,6 +60,7 @@ class Detector(caffe.Net):
             self.transformer.set_channel_swap(in_, channel_swap)
 
         self.configure_crop(context_pad)
+        self.p = Pool(16)
 
     def detect_windows(self, images_windows):
         """
@@ -70,20 +79,23 @@ class Detector(caffe.Net):
         """
         # Extract windows.
         window_inputs = []
+ 
+        
+        in_ = self.inputs[0]
         for image_fname, windows in images_windows:
             image = caffe.io.load_image(image_fname).astype(np.float32)
-            for window in windows:
-                window_inputs.append(self.crop(image, window))
+            preprocess_partial = partial(preprocess,im=image,in_=in_,transformer=self.transformer)
+            window_inputs.extend( self.p.map( preprocess_partial, windows) )
+                #window_inputs.append(self.crop(image, window))
 
         # Run through the net (warping windows to input dimensions).
-        in_ = self.inputs[0]
-        caffe_in = np.zeros((len(window_inputs), window_inputs[0].shape[2])
+        caffe_in = np.zeros((len(window_inputs), window_inputs[0].shape[0])
                             + self.blobs[in_].data.shape[2:],
                             dtype=np.float32)
         for ix, window_in in enumerate(window_inputs):
-            caffe_in[ix] = self.transformer.preprocess(in_, window_in)
+            caffe_in[ix] = window_in #self.transformer.preprocess(in_, window_in)
         out = self.forward_all(**{in_: caffe_in})
-        predictions = out[self.outputs[0]].squeeze(axis=(2, 3))
+        predictions = out[self.outputs[0]] #.squeeze(axis=(2, 3))
 
         # Package predictions with images and windows.
         detections = []
