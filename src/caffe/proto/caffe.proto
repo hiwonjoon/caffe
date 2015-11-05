@@ -306,7 +306,7 @@ message ParamSpec {
 // NOTE
 // Update the next available ID when you add a new LayerParameter field.
 //
-// LayerParameter next available layer-specific ID: 140 (last added: batch_norm_param)
+// LayerParameter next available layer-specific ID: 141 (last added: super_category_param)
 message LayerParameter {
   optional string name = 1; // the layer name
   optional string type = 2; // the layer type
@@ -391,6 +391,7 @@ message LayerParameter {
   optional ThresholdParameter threshold_param = 128;
   optional TileParameter tile_param = 138;
   optional WindowDataParameter window_data_param = 129;
+  optional SuperCategoryParameter super_category_param = 140;
 }
 
 // Message that stores parameters used to apply transformation
@@ -602,6 +603,9 @@ message EltwiseParameter {
     PROD = 0;
     SUM = 1;
     MAX = 2;
+	MIN = 3;
+	AVG = 4;
+	MINUS = 5;
   }
   optional EltwiseOp operation = 1 [default = SUM]; // element-wise operation
   repeated float coeff = 2; // blob-wise coefficient for SUM operation
@@ -1232,3 +1236,20 @@ message PReLUParameter {
   // Whether or not slope paramters are shared across channels.
   optional bool channel_shared = 2 [default = false];
 }
+
+message SuperCategoryParameter {
+  message TreeScheme {
+         optional int32 label = 1 [default = -1];
+         repeated TreeScheme children = 3;
+  }
+  optional string file_name = 4; 
+  optional TreeScheme root = 1;
+  optional FillerParameter weight_filler = 2; // The filler for the weight
+  enum Engine {
+    DEFAULT = 0;
+    CAFFE = 1;
+    CUDNN = 2;
+  }
+  optional Engine engine = 3 [default = DEFAULT];
+}
+

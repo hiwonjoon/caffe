@@ -8,6 +8,8 @@
 #include "caffe/layer.hpp"
 #include "caffe/proto/caffe.pb.h"
 
+#include "caffe/tree.hpp"
+
 namespace caffe {
 
 /**
@@ -809,6 +811,135 @@ class TileLayer : public Layer<Dtype> {
       const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
 
   unsigned int axis_, tiles_, outer_dim_, inner_dim_;
+};
+
+/**
+ * @brief Super Category Label Layer.
+ */
+template <typename Dtype>
+class SuperCategoryLabelLayer : public Layer<Dtype> {
+ public:
+  explicit SuperCategoryLabelLayer(const LayerParameter& param)
+      : Layer<Dtype>(param) {}
+  virtual void LayerSetUp(
+      const vector<Blob<Dtype>*>& bottom, const vector<Blob<Dtype>*>& top);
+  virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+
+  virtual inline int ExactNumBottomBlobs() const { return 1; }
+  virtual inline const char* type() const { return "SuperCategoryLabel"; }
+
+ protected:
+  virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+  virtual void Backward_cpu(const vector<Blob<Dtype>*>& top,
+      const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom){}
+
+  int N_;	//Batch Size
+
+  Tree root_;
+  int depth_;
+  std::vector<int> node_num_per_level_;
+  std::vector<int> base_index_per_level_;
+  std::vector<int> label_to_index_;
+  std::vector<Tree *> serialized_tree_;
+};
+
+/**
+ * @brief SuperCategory Feature Map Layer.
+ */
+template <typename Dtype>
+class SuperCategoryFMLayer : public Layer<Dtype> {
+ public:
+  explicit SuperCategoryFMLayer(const LayerParameter& param)
+      : Layer<Dtype>(param) {}
+  virtual void LayerSetUp(
+      const vector<Blob<Dtype>*>& bottom, const vector<Blob<Dtype>*>& top);
+  virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+
+  virtual inline int ExactNumBottomBlobs() const { return 1; }
+  virtual inline const char* type() const { return "SuperCategoryFM"; }
+
+ protected:
+  virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+  virtual void Forward_gpu(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top)
+  {
+	return Forward_cpu(bottom,top);
+  }
+  virtual void Backward_cpu(const vector<Blob<Dtype>*>& top,
+      const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
+  virtual void Backward_gpu(const vector<Blob<Dtype>*>& top,
+      const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom)
+  {
+	return Backward_cpu(top,propagate_down,bottom);
+  }
+
+  int M_; //Batch Size
+  int N_; //Filter Size(# of category)
+  int H_; //height of feature map size
+  int W_; //width of feature map size
+
+  Tree root_;
+  int depth_;
+  std::vector<int> node_num_per_level_;
+  std::vector<int> base_index_per_level_;
+  std::vector<int> label_to_index_;
+  std::vector<Tree *> serialized_tree_;
+
+  EltwiseParameter_EltwiseOp op_;
+  std::vector<shared_ptr<Blob<int> > > mark_;
+};
+
+/**
+ * @brief SuperCategory Feature Map Diff Pooling Layer.
+ */
+template <typename Dtype>
+class SuperCategoryFMPostLayer : public Layer<Dtype> {
+ public:
+  explicit SuperCategoryFMPostLayer(const LayerParameter& param)
+      : Layer<Dtype>(param) {}
+  virtual void LayerSetUp(
+      const vector<Blob<Dtype>*>& bottom, const vector<Blob<Dtype>*>& top);
+  virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+
+  virtual inline int MinBottomBlobs() const { return 2; }
+  virtual inline int MinTopBlobs() const { return 2; }
+  virtual inline const char* type() const { return "SuperCategoryFMPost"; }
+
+ protected:
+  virtual void Forward_cpu(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top);
+  virtual void Forward_gpu(const vector<Blob<Dtype>*>& bottom,
+      const vector<Blob<Dtype>*>& top)
+  {
+	return Forward_cpu(bottom,top);
+  }
+  virtual void Backward_cpu(const vector<Blob<Dtype>*>& top,
+      const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
+  virtual void Backward_gpu(const vector<Blob<Dtype>*>& top,
+      const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom)
+  {
+	return Backward_cpu(top,propagate_down,bottom);
+  }
+
+  int M_; //Batch Size
+  int N_; //Filter Size(# of category)
+  int H_; //height of feature map size
+  int W_; //width of feature map size
+
+  Tree root_;
+  int depth_;
+  std::vector<int> node_num_per_level_;
+  std::vector<int> base_index_per_level_;
+  std::vector<int> label_to_index_;
+  std::vector<Tree *> serialized_tree_;
+
+  EltwiseParameter_EltwiseOp op_;
+  //std::vector<shared_ptr<Blob<int> > > mark_;
 };
 
 }  // namespace caffe
